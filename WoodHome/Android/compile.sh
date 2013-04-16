@@ -1,0 +1,1 @@
+cd /cygdrive/e/WoodHome/Graphic/Android && /cygdrive/D/adt-bundle-windows/AndroidNDK/ndk-build

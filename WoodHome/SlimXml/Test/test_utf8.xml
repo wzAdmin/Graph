@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" ?>
+<!--中文注释，测试用-->
+<Model>
+	<Skeleton>model.skl</Skeleton>
+	<Part Slot="body" Filename="body.prt"/>
+	<Part Slot="shadow" Filename="shadow.prt"/>
+	<Animation Slot="stand" Filename="stand.ani">
+		<Event Time="1.5" Type="sound">
+			<Param>breath.wav</Param>
+			<Param></Param>
+		</Event>
+		<Event>
+		</Event>
+	</Animation>
+	<Animation>
+	</Animation>
+	<Light>
+		<Position>0,0,0</Position>
+		<Bone>head</Bone>
+		<Range>5.0</Range>
+		<Color>1.0,1.0,1.0</Color>
+		<AttenConst>0.0</AttenConst>
+		<AttenLinear>2.0</AttenLinear>
+		<AttenQuad>0.0</AttenQuad>
+	</Light>
+	<Light>
+	</Light>
+	<Window Type="Page" Name="Test">
+		<Property Name="Caption" Value="test window"/>
+		<Property Name="Color" Value="0,0,0"/>
+		<Window Type="Button" Name="click me!"/>
+		<Window Type="CheckBox" Name="check me"/>
+	</Window>
+</Model>

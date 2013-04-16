@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SlimXml", "SlimXml\SlimXml.vcproj", "{1201FB93-5F9A-48BC-8E32-5420881715A7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlTool", "XmlTool\XmlTool.vcproj", "{106C3A82-959D-439A-AA1D-B3305F323EA7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1201FB93-5F9A-48BC-8E32-5420881715A7} = {1201FB93-5F9A-48BC-8E32-5420881715A7}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcproj", "{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1201FB93-5F9A-48BC-8E32-5420881715A7} = {1201FB93-5F9A-48BC-8E32-5420881715A7}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_MultiByte|Win32 = Debug_MultiByte|Win32
+		Debug_Unicode|Win32 = Debug_Unicode|Win32
+		Release_MultiByte|Win32 = Release_MultiByte|Win32
+		Release_Unicode|Win32 = Release_Unicode|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Debug_MultiByte|Win32.ActiveCfg = Debug_MultiByte|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Debug_MultiByte|Win32.Build.0 = Debug_MultiByte|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Debug_Unicode|Win32.ActiveCfg = Debug_Unicode|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Debug_Unicode|Win32.Build.0 = Debug_Unicode|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Release_MultiByte|Win32.ActiveCfg = Release_MultiByte|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Release_MultiByte|Win32.Build.0 = Release_MultiByte|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Release_Unicode|Win32.ActiveCfg = Release_Unicode|Win32
+		{1201FB93-5F9A-48BC-8E32-5420881715A7}.Release_Unicode|Win32.Build.0 = Release_Unicode|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Debug_MultiByte|Win32.ActiveCfg = Debug_MultiByte|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Debug_MultiByte|Win32.Build.0 = Debug_MultiByte|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Debug_Unicode|Win32.ActiveCfg = Debug_Unicode|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Debug_Unicode|Win32.Build.0 = Debug_Unicode|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Release_MultiByte|Win32.ActiveCfg = Release_MultiByte|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Release_MultiByte|Win32.Build.0 = Release_MultiByte|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Release_Unicode|Win32.ActiveCfg = Release_Unicode|Win32
+		{106C3A82-959D-439A-AA1D-B3305F323EA7}.Release_Unicode|Win32.Build.0 = Release_Unicode|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Debug_MultiByte|Win32.ActiveCfg = Debug_MultiByte|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Debug_MultiByte|Win32.Build.0 = Debug_MultiByte|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Debug_Unicode|Win32.ActiveCfg = Debug_Unicode|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Debug_Unicode|Win32.Build.0 = Debug_Unicode|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Release_MultiByte|Win32.ActiveCfg = Release_MultiByte|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Release_MultiByte|Win32.Build.0 = Release_MultiByte|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Release_Unicode|Win32.ActiveCfg = Release_Unicode|Win32
+		{2D9BCA92-4A2A-4107-9C8F-38CE82EA0306}.Release_Unicode|Win32.Build.0 = Release_Unicode|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
