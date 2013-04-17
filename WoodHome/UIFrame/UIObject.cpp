@@ -69,3 +69,9 @@ CPosition CUIObject::ParentToSelf( int x ,int y )
 {
 	return CPosition(x - mBound.Left() , y - mBound.Top());
 }
+
+void CUIObject::DrawToWindow()
+{
+	if(mParent)
+		mParent->DrawToWindow();
+}

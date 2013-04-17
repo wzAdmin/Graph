@@ -13,6 +13,7 @@ public:
 	void StartWindow(Style_Window id);
 	void EndWindow(WindID id);
 	CUIWindow* GetWindow(WindID id);
+	void DestroyWnd(CUIWindow* pWnd);
 private:
 	CUIObjectFactory* mObjFactory;
 	typedef std::map<WindID,CUIWindow*>::iterator WinIterator;

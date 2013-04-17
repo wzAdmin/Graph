@@ -2,6 +2,8 @@
 #include "Wind_win32.h"
 #include "UIObjectFactory.h"
 #include "FileSystem.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 CUIFrame::CUIFrame(void):mValidID(0)
 {
@@ -14,7 +16,11 @@ CUIFrame::~CUIFrame(void)
 {
 	WinIterator it = mWinds.begin();
 	for( ; mWinds.end() != it ; it++)
-		delete it->second;
+	{
+		CUIWindow* pWnd = it->second;
+		mWinds.erase(it);
+		delete pWnd;
+	}
 	delete mObjFactory;
 }
 
@@ -29,16 +35,17 @@ void CUIFrame::EndWindow( WindID id )
 	WinIterator it = mWinds.find(id);
 	if(mWinds.end() != it)
 	{
-		delete it->second;
+		CUIWindow* pWnd = it->second;
 		mWinds.erase(it);
+		delete pWnd;
 	}
 }
 
 void CUIFrame::StartWindow( Style_Window id )
 {
 #ifdef WIN32
-	CWind_win32* pWind = new CWind_win32(id);
-	mWinds.insert(std::pair<WindID,CUIWindow*>(pWind->GetWindID(),pWind));
+	CUIWindow* pWind = new CWind_win32(id);
+	mWinds.insert(std::pair<WindID,CUIWindow*>(pWind->GetID(),pWind));
 	((CUIWindow*)pWind)->Run();
 #else
 	error("not implement");
@@ -51,4 +58,10 @@ CUIWindow* CUIFrame::GetWindow( WindID id )
 	if(mWinds.end() != it)
 		return it->second;
 	return NULL;
+}
+
+void CUIFrame::DestroyWnd( CUIWindow* pWnd )
+{
+	if(pWnd)
+		EndWindow(pWnd->GetID());
 }

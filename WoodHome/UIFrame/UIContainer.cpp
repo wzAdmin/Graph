@@ -18,8 +18,8 @@ void CUIContainer::Draw( CGraphics* pGraphic )
 	DrawSelf(pGraphic);
 	for (unsigned int i = mChilds.size(); i ; i--)
 	{
-		if(mChilds[i]->Visible())
-			mChilds[i]->Draw(pGraphic);
+		if(mChilds[i-1]->Visible())
+			mChilds[i-1]->Draw(pGraphic);
 	}
 }
 
@@ -29,12 +29,15 @@ void CUIContainer::AddChild( CUIObject* child )
 	child->Parent(this);
 	mChilds.push_back(child);
 	unsigned int i = mChilds.size() - 1;
-	for ( ; i;i--)
+	while (i)
 	{
 		if(child->Order() < mChilds[i-1]->Order())
 		{
 			mChilds[i] = mChilds[i-1];
+			i--;
 		}
+		else
+			break;
 	}
 	mChilds[i] = child;
 }
@@ -77,7 +80,7 @@ bool CUIContainer::OnLBtnDown( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnLBtnDown(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnLBtnDown(pt.X() , pt.Y()))
 			return true;
 	}
 	return false;
@@ -88,7 +91,7 @@ bool CUIContainer::OnLBtnUp( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnLBtnUp(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnLBtnUp(pt.X() , pt.Y()))
 			return true;
 	}
 	return false;
@@ -99,7 +102,7 @@ bool CUIContainer::OnMouseMove( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnMouseMove(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnMouseMove(pt.X() , pt.Y()))
 			return true;
 	}
 	return false;
@@ -110,7 +113,7 @@ bool CUIContainer::OnRBtnDown( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnRBtnDown(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnRBtnDown(pt.X() , pt.Y()))
 			return true;
 	}
 	return false;
@@ -121,7 +124,7 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnRBtnUp(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnRBtnUp(pt.X() , pt.Y()))
 			return true;
 	}
 	return false;

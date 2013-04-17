@@ -9,7 +9,7 @@ struct BITHEADER : BITMAPINFOHEADER
 	unsigned int mask[256];
 };
 
-CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
+CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id),mbDestroyed(false)
 {
 	mInputCount = 0;
 	WNDCLASSEX wcex;
@@ -28,14 +28,16 @@ CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
 	wcex.hIconSm		= NULL;//LoadIcon(wcex.hInstance, L"_2_1.png");
 	wcex.lpszMenuName   = NULL;
 	RegisterClassEx(&wcex);
-	mhWnd = CreateWindow(L"window", L"UI", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, mWidth, mHeight, NULL, NULL, NULL, NULL);
+	int y =GetSystemMetrics(SM_CYCAPTION);
+	mhWnd = CreateWindow(L"window", L"UI",
+		WS_OVERLAPPEDWINDOW,
+		0,0, mWidth, mHeight, NULL, NULL, NULL, NULL);
 }
 
 
 CWind_win32::~CWind_win32(void)
 {
-	if(mhWnd)
+	if(mhWnd && !mbDestroyed)
 		::DestroyWindow(mhWnd);
 }
 
@@ -69,7 +71,7 @@ void CWind_win32::SetPostion( int x , int y )
 void CWind_win32::DrawToWindow()
 {
 	mSceneManager->GetCurScene()->Draw(mGraphic);
-	HDC hdc= GetWindowDC(mhWnd);
+	HDC hdc= GetDC(mhWnd);
 	BITHEADER header;
 	header.mask[0] = 0xf800;
 	header.mask[1] = 0x07e0;
@@ -119,7 +121,13 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 		}
 		break;
 	case WM_DESTROY:
+		if(pwnd)
+		{
+			pwnd->mbDestroyed = true;
+			sUIFrame.DestroyWnd(pwnd);
+		}
 		PostQuitMessage(0);
+		break;
 	case WM_MOUSEMOVE:
 		mss.msg = MouseMove;
 		mss.lParam = LOWORD(lParam);
@@ -131,15 +139,12 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 		mss.lParam = LOWORD(lParam);
 		mss.wParam = HIWORD(lParam);
 		pwnd->DispatchSysMessage(mss);
-		pwnd->GetSceneMgr()->Back();
 		break;
 	case WM_LBUTTONDOWN:
 		mss.msg = LBtnDown;
 		mss.lParam = LOWORD(lParam);
 		mss.wParam = HIWORD(lParam);
 		pwnd->DispatchSysMessage(mss);
-		pwnd->GetSceneMgr()->GoTo(SCENE_Test);
-		sUIFrame.StartWindow(Window_Main);
 		break;
 	case WM_RBUTTONUP:
 		mss.msg = RBtnUp;

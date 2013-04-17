@@ -20,6 +20,7 @@ public:
 	virtual bool OnRBtnUp(int x ,int y){return false;}
 	virtual bool OnRBtnDown(int x ,int y){return false;}
 	virtual bool OnInputChar(const wchar_t* wcs,int len){return false;}
+	virtual void DrawToWindow();
 	void Bound(const CBound& bd){mBound =bd;}
 	const CBound& Bound() const {return mBound;}
 	bool InputMode() const {return mIsInputMode;}

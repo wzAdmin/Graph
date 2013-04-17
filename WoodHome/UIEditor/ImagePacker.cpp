@@ -6,7 +6,7 @@
 #include <vector>
 #include <Windows.h>
 
-#define ImageXML "Image.xml"
+#define ImageXML "Source/Image.xml"
 #define ImageFolder "Image"
 
 /*
@@ -165,7 +165,8 @@ void CImagePacker::PackFile()
 	for(int index = 0 ; child ; child = root->getNextChild(nodeit),index++)
 	{
 		CUIFile file;
-		std::string filename = child->readAttributeAsString("name");
+		std::string filename = "Source\\";
+		filename += child->readAttributeAsString("name");
 		std::string strfm = child->readAttributeAsString("Format");
 		if(strfm.size())
 		{

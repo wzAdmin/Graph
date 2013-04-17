@@ -13,7 +13,7 @@ public:
 	virtual void Draw(CGraphics* pGraphic);
 	void SetWind(CUIWindow* Wnd){mWind = Wnd;}
 	void Goto(SourceID toScene);
-	void DrawToWindow();
+	virtual void DrawToWindow();
 private:
 	CUIWindow* mWind;
 };

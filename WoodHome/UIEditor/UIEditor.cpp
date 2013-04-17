@@ -32,9 +32,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
  	// TODO: 在此放置代码。
 	MSG msg;
 	HACCEL hAccelTable;
-// 	CImagePacker pk;
-// 	pk.AddFolder(".");
-// 	pk.Pack();
+ 	CImagePacker pk;
+ 	pk.AddFolder("Source");
+ 	pk.Pack();
 	// 初始化全局字符串
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_UIEDITOR, szWindowClass, MAX_LOADSTRING);
@@ -138,9 +138,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 #include "Graphics.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	int wmId, wmEvent;
-	PAINTSTRUCT ps;
-	HDC hdc;
+ 	int wmId, wmEvent;
+// 	PAINTSTRUCT ps;
+//	HDC hdc;
 
 	switch (message)
 	{
@@ -162,16 +162,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		{
-			hdc = BeginPaint(hWnd, &ps);
-			// TODO: 在此添加任意绘图代码...
-			sFilesystem.Open("Out\\Image");
-			CImageBuffer* pimage = sImageResource.GetImage(IMG_qq);
-			CGraphics g(pimage);
-			Font ft;
-			ft.color = CRGB(255,100,0);
-			ft.width=20;
-			ft.height=14; 
-			g.DrawTextW(L"WoodHome",0,14,ft);
 		}
 		break;
 	case WM_DESTROY:

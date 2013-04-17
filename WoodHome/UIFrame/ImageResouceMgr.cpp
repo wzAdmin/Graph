@@ -11,6 +11,11 @@ CImageResouceMgr::CImageResouceMgr(void)
 
 CImageResouceMgr::~CImageResouceMgr(void)
 {
+	std::map<SourceID,CImageBuffer*>::iterator it = mImages.begin();
+	for ( ; mImages.end() != it; it++)
+	{
+		delete it->second;
+	}
 }
 
 CImageResouceMgr& CImageResouceMgr::Instance()
@@ -20,6 +25,18 @@ CImageResouceMgr& CImageResouceMgr::Instance()
 }
 
 CImageBuffer* CImageResouceMgr::GetImage( SourceID id )
+{
+	std::map<SourceID,CImageBuffer*>::iterator it = mImages.find(id);
+	if(mImages.end()==it)
+	{
+		CImageBuffer* p = LoadFormFile(id);
+		Add(id,p);
+		return p ;
+	}
+	return it->second;
+}
+
+CImageBuffer* CImageResouceMgr::LoadFormFile( SourceID id )
 {
 	Sourceitem it = sFilesystem.GetSource(id);
 	char* data = new char[it.length];
@@ -39,4 +56,9 @@ CImageBuffer* CImageResouceMgr::GetImage( SourceID id )
 	pImage->LoadFromMem(data,it.length);
 	delete[] data;
 	return pImage;
+}
+
+void CImageResouceMgr::Add( SourceID id ,CImageBuffer* pImage )
+{
+	mImages.insert(std::pair<SourceID,CImageBuffer*>(id,pImage));
 }

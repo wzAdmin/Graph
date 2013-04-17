@@ -7,7 +7,7 @@
 CUIWindow::CUIWindow(Style_Window id)
 {
 	mSceneManager = new CSceneManager(this);
-	mHeight = 1024;
+	mHeight = 700;
 	mWidth = 1024;
 	mStartSceneID = SCENE_Start;
 	mFramebuffer = new CImageBuffer;

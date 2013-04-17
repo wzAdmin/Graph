@@ -103,3 +103,5 @@ inline unsigned short ConstructRGB(unsigned  char r,unsigned char g,unsigned cha
 	b>>=3;
 	return ((unsigned short)r << 11) | ((unsigned short)g << 5) | (unsigned short)b ;
 }
+
+

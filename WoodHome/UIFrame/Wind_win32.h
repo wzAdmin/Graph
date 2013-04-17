@@ -8,7 +8,6 @@ class CWind_win32 :
 public:
 	CWind_win32(Style_Window id);
 	~CWind_win32(void);
-	int GetWindID(){return int(mhWnd);}
 private:
 	virtual void MessageTo(WindID windowId,const SystemMessage& msg );
 	virtual void ShowWindow();
@@ -17,10 +16,12 @@ private:
 	virtual void SetPostion(int x , int y);
 	virtual void DrawToWindow();
 	virtual void Run();
+	virtual WindID GetID(){return int(mhWnd);}
 	void DrawWin32(HDC hdc);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 private:
 	HWND mhWnd;
+	bool mbDestroyed;
 	wchar_t mInputChar[MAX_INPUT_WORDS];
 	int mInputCount;
 };

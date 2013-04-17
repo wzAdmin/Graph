@@ -12,6 +12,11 @@ CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd)
 
 CSceneManager::~CSceneManager(void)
 {
+	SceneMapItor it = mScenes.begin();
+	for ( ; mScenes.end() != it ; it++)
+	{
+		delete it->second;
+	}
 }
 
 void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ )
@@ -33,6 +38,7 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ )
 		return ;
 	}
 	CScene* pScene = CreatScene(toid);
+	mScenes.insert(std::pair<SourceID,CScene*>(toid,pScene));
 	pScene->Visible(true);
 	mSceneStack.push_back(pScene);
 	pScene->DrawToWindow();
