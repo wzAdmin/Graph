@@ -10,7 +10,8 @@ struct BITHEADER : BITMAPINFOHEADER
 };
 
 CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
-{	
+{
+	mInputCount = 0;
 	WNDCLASSEX wcex;
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
@@ -28,7 +29,7 @@ CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
 	wcex.lpszMenuName   = NULL;
 	RegisterClassEx(&wcex);
 	mhWnd = CreateWindow(L"window", L"UI", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, NULL, NULL);
+		CW_USEDEFAULT, 0, mWidth, mHeight, NULL, NULL, NULL, NULL);
 }
 
 
@@ -91,14 +92,15 @@ void CWind_win32::DrawToWindow()
 void CWind_win32::Run()
 {
 	MSG msg;
-	ShowWindow();
 	mSceneManager->GoTo(mStartSceneID);
+	ShowWindow();
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+	printf("ex");
 }
 
 LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
@@ -106,6 +108,7 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 	CWind_win32* pwnd = (CWind_win32*)sUIFrame.GetWindow(WindID(hWnd));
 	PAINTSTRUCT ps;
 	HDC hdc;
+	SystemMessage mss;
 	switch (message)
 	{
 	case WM_PAINT:
@@ -118,9 +121,50 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 	case WM_DESTROY:
 		PostQuitMessage(0);
 	case WM_MOUSEMOVE:
+		mss.msg = MouseMove;
+		mss.lParam = LOWORD(lParam);
+		mss.wParam = HIWORD(lParam);
+		pwnd->DispatchSysMessage(mss);
+		break;
+	case WM_LBUTTONUP:
+		mss.msg = LBtnUp;
+		mss.lParam = LOWORD(lParam);
+		mss.wParam = HIWORD(lParam);
+		pwnd->DispatchSysMessage(mss);
+		pwnd->GetSceneMgr()->Back();
+		break;
+	case WM_LBUTTONDOWN:
+		mss.msg = LBtnDown;
+		mss.lParam = LOWORD(lParam);
+		mss.wParam = HIWORD(lParam);
+		pwnd->DispatchSysMessage(mss);
+		pwnd->GetSceneMgr()->GoTo(SCENE_Test);
+		sUIFrame.StartWindow(Window_Main);
+		break;
+	case WM_RBUTTONUP:
+		mss.msg = RBtnUp;
+		mss.lParam = LOWORD(lParam);
+		mss.wParam = HIWORD(lParam);
+		pwnd->DispatchSysMessage(mss);
+		break;
+	case WM_RBUTTONDOWN:
+		mss.msg = RBtnDown;
+		mss.lParam = LOWORD(lParam);
+		mss.wParam = HIWORD(lParam);
+		pwnd->DispatchSysMessage(mss);
 		break;
 	case WM_IME_CHAR:
+		pwnd->mInputChar[pwnd->mInputCount++] = wchar_t(wParam&0xffff);
+		break;
 	case WM_IME_ENDCOMPOSITION:
+		{
+			mss.msg = CharInput;
+			mss.wParam = pwnd->mInputCount;
+			mss.lParam = int(pwnd->mInputChar);
+			pwnd->DispatchSysMessage(mss);
+			pwnd->mInputCount = 0;
+		}
+		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}

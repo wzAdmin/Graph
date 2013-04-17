@@ -1,8 +1,11 @@
 #include "UIObjectFactory.h"
-
+#include "Scene.h"
+#include "UILayer.h"
 
 CUIObjectFactory::CUIObjectFactory(void)
 {
+	Register("Scene",CScene::Create);
+	Register("Layer",CUILayer::Create);
 }
 
 
@@ -21,6 +24,6 @@ CUIObject* CUIObjectFactory::CreateObject( const char* name )
 void CUIObjectFactory::Register( const char* name , ObjCreatFun func )
 {
 	FunctionIterator it = mCreatFuns.find(name);
-	if(mCreatFuns.end() != it)
+	if(mCreatFuns.end() == it)
 		mCreatFuns.insert(FunctionPair(name,func));
 }

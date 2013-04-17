@@ -23,47 +23,6 @@ void CUIContainer::Draw( CGraphics* pGraphic )
 	}
 }
 
-bool CUIContainer::DealMessage( const SystemMessage& message )
-{
-	switch(message.msg)
-	{
-	case MouseDown:
-	case MouseMove:
-	case MouseUp:
-		{
-			int x = message.wParam , y = message.lParam;
-			for (unsigned int i = 0 ; i < mChilds.size() ; i++)
-			{
-				if(mChilds[i]->Visible())
-				{
-					const CBound& bd = mChilds[i]->Bound();
-					if(bd.Contain(x,y))
-					{
-						SystemMessage ms = message;
-						ms.wParam -= bd.Left();
-						ms.lParam -= bd.Top();
-						if(mChilds[i]->DealMessage(ms))
-							return true;
-					}
-				}
-			}
-		}
-		break;
-	case KeyDown:
-	case KeyUp:
-	case Char:
-		for (unsigned int i = 0 ; i < mChilds.size() ; i++)
-		{
-				if(mChilds[i]->Visible()&&mChilds[i]->DealMessage(message))
-					return true;
-		}
-		break;
-	default:
-		return false;
-	}
-	return false;
-}
-
 void CUIContainer::AddChild( CUIObject* child )
 {
 	assert(NULL == child->Parent());
@@ -101,4 +60,69 @@ void CUIContainer::Load( const slim::XmlNode* node )
 			obj->Load(child);
 		}
 	}
+}
+
+bool CUIContainer::OnInputChar( const wchar_t* wcs,int len )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		if(mChilds[i]->OnInputChar(wcs,len))
+			return true;
+	}
+	return false;
+}
+
+bool CUIContainer::OnLBtnDown( int x ,int y )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		CPosition pt = mChilds[i]->ParentToSelf(x,y);
+		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnLBtnDown(pt.X() , pt.Y()))
+			return true;
+	}
+	return false;
+}
+
+bool CUIContainer::OnLBtnUp( int x ,int y )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		CPosition pt = mChilds[i]->ParentToSelf(x,y);
+		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnLBtnUp(pt.X() , pt.Y()))
+			return true;
+	}
+	return false;
+}
+
+bool CUIContainer::OnMouseMove( int x ,int y )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		CPosition pt = mChilds[i]->ParentToSelf(x,y);
+		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnMouseMove(pt.X() , pt.Y()))
+			return true;
+	}
+	return false;
+}
+
+bool CUIContainer::OnRBtnDown( int x ,int y )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		CPosition pt = mChilds[i]->ParentToSelf(x,y);
+		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnRBtnDown(pt.X() , pt.Y()))
+			return true;
+	}
+	return false;
+}
+
+bool CUIContainer::OnRBtnUp( int x ,int y )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		CPosition pt = mChilds[i]->ParentToSelf(x,y);
+		if(mChilds[i]->Bound().Contain(x,y) && mChilds[i]->OnRBtnUp(pt.X() , pt.Y()))
+			return true;
+	}
+	return false;
 }

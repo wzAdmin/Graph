@@ -1,6 +1,7 @@
 #pragma once
 #include "uiwindow.h"
 #include <Windows.h>
+#define MAX_INPUT_WORDS 256
 class CWind_win32 :
 	public CUIWindow
 {
@@ -16,10 +17,11 @@ private:
 	virtual void SetPostion(int x , int y);
 	virtual void DrawToWindow();
 	virtual void Run();
-
 	void DrawWin32(HDC hdc);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 private:
 	HWND mhWnd;
+	wchar_t mInputChar[MAX_INPUT_WORDS];
+	int mInputCount;
 };
 

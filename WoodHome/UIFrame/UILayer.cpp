@@ -35,8 +35,14 @@ void CUILayer::LoadSelf( const slim::XmlNode* node )
 
 void CUILayer::Load( const slim::XmlNode* node )
 {
-	LoadSelf(node);
-	LoadFromFile(SourceID(node->readAttributeAsInt("Source")));
+	SourceID id = (SourceID)node->readAttributeAsInt("Source");
+	if(id)
+	{
+		LoadSelf(node);
+		LoadFromFile(id);
+	}
+	else
+		CUIContainer::Load(node);
 }
 
 void CUILayer::DrawSelf( CGraphics* pGraphic )
@@ -49,6 +55,6 @@ void CUILayer::DrawSelf( CGraphics* pGraphic )
 		CBound bd = Bound();
 		ParentToSelf(bd);
 		Absolute(bd);
-		pGraphic->DrawImage_Repeat(pImage,CBound(0,pImage->Width() - 1,0 ,pImage->Height() - 1),bd);
+		pGraphic->DrawImage_Scale(pImage,CBound(0,pImage->Width() - 1,0 ,pImage->Height() - 1),bd);
 	}
 }

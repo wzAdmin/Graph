@@ -42,12 +42,30 @@ void CUIObject::Absolute(CBound& bound)
 		mParent->Absolute(bound);
 }
 
+CPosition CUIObject::Absolute( int x ,int y )
+{
+	CPosition pt = SelfToParent(x,y);
+	if(mParent)
+		return mParent->SelfToParent(pt.X() , pt.Y());
+	return pt;
+}
+
 void CUIObject::SelfToParent( CBound& bound )
 {
 	bound.Move(mBound.Left() + bound.Left() , mBound.Top() + bound.Top());
 }
 
+CPosition CUIObject::SelfToParent( int x ,int y )
+{
+	return CPosition(x + mBound.Left() , y + mBound.Top());
+}
+
 void CUIObject::ParentToSelf( CBound& bound )
 {
 	bound.Move(bound.Left() - mBound.Left() ,bound.Top() - mBound.Top());
+}
+
+CPosition CUIObject::ParentToSelf( int x ,int y )
+{
+	return CPosition(x - mBound.Left() , y - mBound.Top());
 }

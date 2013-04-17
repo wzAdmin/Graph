@@ -14,7 +14,12 @@ public:
 public:
 	virtual void Load(const slim::XmlNode* node) ;
 	virtual void Draw(CGraphics* pGraphic) = 0;
-	virtual bool DealMessage(const SystemMessage& message){return false;}
+	virtual bool OnMouseMove(int x ,int y){return false;}
+	virtual bool OnLBtnDown(int x ,int y){return false;}
+	virtual bool OnLBtnUp(int x ,int y){return false;}
+	virtual bool OnRBtnUp(int x ,int y){return false;}
+	virtual bool OnRBtnDown(int x ,int y){return false;}
+	virtual bool OnInputChar(const wchar_t* wcs,int len){return false;}
 	void Bound(const CBound& bd){mBound =bd;}
 	const CBound& Bound() const {return mBound;}
 	bool InputMode() const {return mIsInputMode;}
@@ -28,6 +33,9 @@ public:
 	void Absolute(CBound& bound);
 	void ParentToSelf(CBound& bound);
 	void SelfToParent(CBound& bound);
+	CPosition ParentToSelf(int x ,int y);
+	CPosition SelfToParent(int x ,int y);
+	CPosition Absolute(int x ,int y);
 private:
 	int mOrder;
 	CUIObject* mParent;

@@ -6,12 +6,14 @@
 #endif
 
 enum MessageID{
-	MouseDown,
-	MouseUp,
+	LBtnDown,
+	LBtnUp,
+	RBtnDown,
+	RBtnUp,
 	MouseMove,
 	KeyDown,
 	KeyUp,
-	Char,
+	CharInput,
 };
 typedef struct _SystemMessage
 {

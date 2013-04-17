@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "UIWindow.h"
-CScene::CScene(CUIWindow* wnd /*= NULL*/):mWind(wnd)
+#include "SceneManager.h"
+CScene::CScene()
 {
 }
 
@@ -17,4 +18,9 @@ void CScene::Draw( CGraphics* pGraphic )
 void CScene::DrawToWindow()
 {
 	mWind->DrawToWindow();
+}
+
+void CScene::Goto( SourceID toScene )
+{
+	mWind->GetSceneMgr()->GoTo(toScene ,this);
 }

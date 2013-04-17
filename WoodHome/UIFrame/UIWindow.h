@@ -18,6 +18,7 @@ public:
 	virtual void SetPostion(int x , int y) = 0;
 	virtual void DrawToWindow() = 0;
 	virtual void Run() = 0;
+	void DispatchSysMessage(const SystemMessage& msg);
 public:
 	CSceneManager* GetSceneMgr(){return mSceneManager;}
 protected:

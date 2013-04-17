@@ -2,5 +2,7 @@ debug/
 release/
 obj/
 objs/
+ipch/
 *.sdf
 *.opensdf
+*.suo

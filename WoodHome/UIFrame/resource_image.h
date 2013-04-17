@@ -10,4 +10,6 @@ enum SourceID
 	IMG_gril00 = 5,
 	IMG_gril01 = 6,
 	SCENE_Start = 7,
+	USER_Image = 8,
+	SCENE_Test = 9,
 };
