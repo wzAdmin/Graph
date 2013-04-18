@@ -33,10 +33,10 @@ void CFontConfig::Load()
 	doc.loadFromMemory(data,item.length);
 	delete[] data;
 
-	mFonts = new Font[mFontCount];
 	slim::NodeIterator nodeit;
 	slim::XmlNode* root = doc.getFirstChild(nodeit);
 	mFontCount = root->readAttributeAsInt("Count");
+	mFonts = new Font[mFontCount];
 	slim::XmlNode* child = root->getFirstChild(nodeit);
 	while (child)
 	{
@@ -50,7 +50,7 @@ void CFontConfig::Load()
 	}
 }
 
-const Font* CFontConfig::GetFont( int id )
+ const Font* CFontConfig::GetFont( int id )
 {
 	assert(mFonts|| DebugTrace("mFonts is null in CFontConfig::GetFont"));
 	assert((id <= mFontCount && id > 0) || DebugTrace("id out of range in CFontConfig::GetFont"));

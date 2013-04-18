@@ -9,7 +9,7 @@ private:
 public:
 	static CFontConfig& Instance();
 public:
-	const Font* GetFont(int id);
+	 const Font* GetFont(int id);
 private:
 	Font* mFonts;
 	int mFontCount;
