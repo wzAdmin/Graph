@@ -5,12 +5,13 @@
 #include "resource_image.h"
 #include "FileSystem.h"
 
+// the font config is like this
 //<Fonts Count = "4">
 //<Font ID = "1" Name = "Black1616" Width = "16" Height = "16" Color = "000000"/>
 //	<Font ID = "2" Name = "White1616" Width = "16" Height = "16" Color = "ffffff"/>
 //	<Font ID = "3" Name = "Green1616" Width = "16" Height = "16" Color = "00ff00"/>
 //	<Font ID = "4" Name = "Bule1616" Width = "16" Height = "16" Color = "0000ff"/>
-//	</Font>
+//</Font>
 
 CFontConfig::CFontConfig(void):mFonts(NULL),mFontCount(0)
 {

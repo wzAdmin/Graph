@@ -12,7 +12,7 @@ public:
 	~CSceneManager(void);
 public:
 	CScene* GetCurScene();
-	void GoTo(SourceID toid ,CScene* from = 0);
+	void GoTo(SourceID toid ,CScene* from = 0,void* data = NULL);
 	void Back();
 private:
 	CScene* CreatScene(SourceID sceneid);

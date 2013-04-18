@@ -19,14 +19,19 @@ CSceneManager::~CSceneManager(void)
 	}
 }
 
-void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ )
+void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NULL*/)
 {
 	if(from)
+	{
 		from->Visible(false);
+		from->OnHide();
+		from->Notify();
+	}
 	SceneMapItor it = mScenes.find(toid);
 	if(mScenes.end() != it)
 	{
 		it->second->Visible(true);
+		it->second->OnShow();
 		SceneListItor itor = mSceneStack.begin();
 		for( ; mSceneStack.end() != itor && (*itor) != it->second ; itor++);
 		if(mSceneStack.end() != itor)
@@ -40,6 +45,7 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ )
 	CScene* pScene = CreatScene(toid);
 	mScenes.insert(std::pair<SourceID,CScene*>(toid,pScene));
 	pScene->Visible(true);
+	pScene->OnShow();
 	mSceneStack.push_back(pScene);
 	pScene->DrawToWindow();
 }
@@ -73,9 +79,11 @@ void CSceneManager::Back()
 	else
 	{
 		CScene* pcur = mSceneStack.back();
-		pcur->Visible(true);
+		pcur->Visible(false);
+		pcur->OnHide();
 		mSceneStack.pop_back();
 		mSceneStack.back()->Visible(true);
+		mSceneStack.back()->OnShow();
 		mSceneStack.back()->DrawToWindow();
 	}
 }

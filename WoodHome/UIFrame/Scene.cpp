@@ -1,7 +1,7 @@
 #include "Scene.h"
 #include "UIWindow.h"
 #include "SceneManager.h"
-CScene::CScene()
+CScene::CScene():mFrom(NULL),mNotifyFunc(NULL)
 {
 }
 
@@ -20,7 +20,12 @@ void CScene::DrawToWindow()
 	mWind->DrawToWindow();
 }
 
-void CScene::Goto( SourceID toScene )
+void CScene::Goto( SourceID toScene,void* data /*= NULL*/ )
 {
-	mWind->GetSceneMgr()->GoTo(toScene ,this);
+	mWind->GetSceneMgr()->GoTo(toScene ,this,data);
+}
+
+void CScene::Back()
+{
+	mWind->GetSceneMgr()->Back();
 }
