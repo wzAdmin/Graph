@@ -13,7 +13,11 @@ typedef unsigned long long uint64;
  #else
 typedef __int64 int64;
 typedef unsigned __int64 uint64;
+#if _MSC_VER >= 1600
 #define ns_hash std
+#else
+#define ns_hash stdext
+#endif
 #define HASH_MAP <hash_map>
 #endif
 
