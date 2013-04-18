@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../UIFrame"
+				AdditionalIncludeDirectories="../UIFrame;../Graphic"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -90,7 +90,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\\Debug\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Debug\\*.exe ..\\build\\"
+				CommandLine="copy /y ..\\Debug\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Debug\\*.exe ..\\build\\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -120,7 +120,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../UIFrame"
+				AdditionalIncludeDirectories="../UIFrame;../Graphic"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -168,7 +168,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\\Release\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Release\\*.exe ..\\build\\"
+				CommandLine="copy /y ..\\Release\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Release\\*.exe ..\\build\\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
