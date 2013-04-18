@@ -1,0 +1,5 @@
+<Scene x="0" y ="0" width = "1024" height = "1024" Visible = "true" Order = "0" bgImage ="2">
+	<Button x="100" y = "100" width = "150" height = "50" Visible = "true" Order = "0" Focus = "1" Normal = "2" Disable = "3" Text = "我是按钮" Font = "3"/>
+	<Button x="100" y = "200" width = "150" height = "50" Visible = "true" Order = "0" Focus = "1" Normal = "2" Disable = "3" Text = "2号按钮" Font = "2"/>
+	<Button x="100" y = "300" width = "150" height = "50" Visible = "true" Order = "0" Focus = "1" Normal = "2" Disable = "3" Text = "我也是" Font = "1"/>
+</Scene>

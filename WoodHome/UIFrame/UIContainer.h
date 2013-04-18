@@ -25,5 +25,6 @@ protected:
 	virtual void Load(const slim::XmlNode* node);
 private:
 	std::vector<CUIObject*> mChilds;
+	CUIObject* mFcousedObj;
 };
 

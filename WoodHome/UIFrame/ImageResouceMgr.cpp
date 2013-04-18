@@ -4,7 +4,7 @@
 #include "FileSystem.h"
 #include <memory>
 
-CImageResouceMgr::CImageResouceMgr(void)
+CImageResouceMgr::CImageResouceMgr(void):mCachedSize(0),mMaxCacheSize(sDefualtMaxCacheSize)
 {
 }
 
@@ -27,13 +27,27 @@ CImageResouceMgr& CImageResouceMgr::Instance()
 CImageBuffer* CImageResouceMgr::GetImage( SourceID id )
 {
 	std::map<SourceID,CImageBuffer*>::iterator it = mImages.find(id);
+	CImageBuffer* p = NULL;
 	if(mImages.end()==it)
 	{
-		CImageBuffer* p = LoadFormFile(id);
+		p = LoadFormFile(id);
 		Add(id,p);
-		return p ;
 	}
-	return it->second;
+	else
+	{
+		p =  it->second;
+		std::list<SourceID>::iterator lsit= mUseLasted.begin();
+		for ( ; mUseLasted.end() != lsit ; lsit++)
+		{
+			if(id == *lsit)
+			{
+				mUseLasted.erase(lsit);
+				mUseLasted.push_front(id);
+				break;
+			}
+		}
+	}
+	return p;
 }
 
 CImageBuffer* CImageResouceMgr::LoadFormFile( SourceID id )
@@ -61,4 +75,14 @@ CImageBuffer* CImageResouceMgr::LoadFormFile( SourceID id )
 void CImageResouceMgr::Add( SourceID id ,CImageBuffer* pImage )
 {
 	mImages.insert(std::pair<SourceID,CImageBuffer*>(id,pImage));
+	while(mCachedSize > mMaxCacheSize)
+	{
+		std::map<SourceID,CImageBuffer*>::iterator it = mImages.find(mUseLasted.back());
+		mCachedSize -= it->second->GetSize();
+		delete it->second;
+		mUseLasted.pop_back();
+		mImages.erase(it);
+	}
+	mCachedSize += pImage->GetSize();
+	mUseLasted.push_front(id);
 }

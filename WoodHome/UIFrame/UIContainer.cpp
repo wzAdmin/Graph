@@ -4,7 +4,7 @@
 #include "SlimXml.h"
 #include "UIObjectFactory.h"
 
-CUIContainer::CUIContainer(void)
+CUIContainer::CUIContainer(void):mFcousedObj(NULL)
 {
 }
 
@@ -70,7 +70,19 @@ bool CUIContainer::OnInputChar( const wchar_t* wcs,int len )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		if(mChilds[i]->OnInputChar(wcs,len))
+		{
+			if(mFcousedObj && mFcousedObj != mChilds[i])
+			{
+				mFcousedObj->OnFocusOut();
+			}
+			mFcousedObj = mChilds[i];
 			return true;
+		}
+	}
+	if(mFcousedObj)
+	{
+		mFcousedObj->OnFocusOut();
+		mFcousedObj = NULL;
 	}
 	return false;
 }
@@ -81,7 +93,19 @@ bool CUIContainer::OnLBtnDown( int x ,int y )
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
 		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnLBtnDown(pt.X() , pt.Y()))
+		{
+			if(mFcousedObj && mFcousedObj != mChilds[i])
+			{
+				mFcousedObj->OnFocusOut();
+			}
+			mFcousedObj = mChilds[i];
 			return true;
+		}
+	}
+	if(mFcousedObj)
+	{
+		mFcousedObj->OnFocusOut();
+		mFcousedObj = NULL;
 	}
 	return false;
 }
@@ -92,7 +116,19 @@ bool CUIContainer::OnLBtnUp( int x ,int y )
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
 		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnLBtnUp(pt.X() , pt.Y()))
+		{
+			if(mFcousedObj && mFcousedObj != mChilds[i])
+			{
+				mFcousedObj->OnFocusOut();
+			}
+			mFcousedObj = mChilds[i];
 			return true;
+		}
+	}
+	if(mFcousedObj)
+	{
+		mFcousedObj->OnFocusOut();
+		mFcousedObj = NULL;
 	}
 	return false;
 }
@@ -103,7 +139,19 @@ bool CUIContainer::OnMouseMove( int x ,int y )
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
 		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnMouseMove(pt.X() , pt.Y()))
+		{
+			if(mFcousedObj && mFcousedObj != mChilds[i])
+			{
+				mFcousedObj->OnFocusOut();
+			}
+			mFcousedObj = mChilds[i];
 			return true;
+		}
+	}
+	if(mFcousedObj)
+	{
+		mFcousedObj->OnFocusOut();
+		mFcousedObj = NULL;
 	}
 	return false;
 }
@@ -114,7 +162,19 @@ bool CUIContainer::OnRBtnDown( int x ,int y )
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
 		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnRBtnDown(pt.X() , pt.Y()))
+		{
+			if(mFcousedObj && mFcousedObj != mChilds[i])
+			{
+				mFcousedObj->OnFocusOut();
+			}
+			mFcousedObj = mChilds[i];
 			return true;
+		}
+	}
+	if(mFcousedObj)
+	{
+		mFcousedObj->OnFocusOut();
+		mFcousedObj = NULL;
 	}
 	return false;
 }
@@ -125,7 +185,19 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
 		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnRBtnUp(pt.X() , pt.Y()))
+		{
+			if(mFcousedObj && mFcousedObj != mChilds[i])
+			{
+				mFcousedObj->OnFocusOut();
+			}
+			mFcousedObj = mChilds[i];
 			return true;
+		}
+	}
+	if(mFcousedObj)
+	{
+		mFcousedObj->OnFocusOut();
+		mFcousedObj = NULL;
 	}
 	return false;
 }

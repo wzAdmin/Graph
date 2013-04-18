@@ -2,6 +2,7 @@
 #include "UItype.h"
 #include "resource_image.h"
 #include <map>
+#include <list>
 
 class CUIFile;
 class CImageBuffer;
@@ -17,7 +18,12 @@ public:
 private:
 	CImageBuffer* LoadFormFile(SourceID id);
 	void Add(SourceID id ,CImageBuffer* pImage);
+	void SetCacheSize(int size){mMaxCacheSize = size;}
 private:
 	std::map<SourceID,CImageBuffer*> mImages;
+	std::list<SourceID> mUseLasted;
+	int mMaxCacheSize;
+	int mCachedSize;
+	static const int sDefualtMaxCacheSize = 1024 * 1024 * 4;
 };
 #define sImageResource CImageResouceMgr::Instance()

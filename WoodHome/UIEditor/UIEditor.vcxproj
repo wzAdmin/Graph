@@ -59,6 +59,10 @@
       <AdditionalDependencies>SlimXml.lib;UIFrame.lib;Graphic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y ..\\Debug\\*.dll ..\\build
+copy /y ..\\Debug\\*.exe ..\\build</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

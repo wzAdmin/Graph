@@ -30,6 +30,7 @@ public:
 	int Stride() const{return ((mWidth + 1)>>1)<<1;}
 	void Initialize(int width , int height , bool hasAlpha);
 	void ClearColor(COLORARGB color);
+	int GetSize();
 protected:
 	unsigned short* mData;
 	unsigned char* mAlpha;

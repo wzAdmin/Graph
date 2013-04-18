@@ -43,3 +43,11 @@ void CImageBuffer::Load( const char* path )
 	LoadFromMem(data,length);
 	free(data);
 }
+
+int CImageBuffer::GetSize()
+{
+	if(mAlpha)
+		return mHeight * mWidth + mHeight * Stride() * 2;
+	else
+		return mHeight * Stride() * 2;
+}

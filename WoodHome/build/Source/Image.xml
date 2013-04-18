@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Image Count="14">
+	<Item Format="jpg" name="Dirt" SourceType="0"/>
+	<Item Format="jpg" name="fight038" SourceType="0"/>
+	<Item Format="jpg" name="fight042" SourceType="0"/>
+	<Item Format="jpg" name="fijht042" SourceType="0"/>
+	<Item Format="jpg" name="gril00" SourceType="0"/>
+	<Item Format="jpg" name="gril01" SourceType="0"/>
+	<Item Format="scene" name="Start" SourceType="1"/>
+	<Item Format="scene" name="Test" SourceType="1"/>
+	<Item Format="xml" name="Image" SourceType="3"/>
+	<Item Format="png" name="black" SourceType="0"/>
+	<Item Format="xml" name="Font" SourceType="3"/>
+	<Item Format="png" name="green" SourceType="0"/>
+	<Item Format="png" name="red" SourceType="0"/>
+	<Item Format="png" name="yellow" SourceType="0"/>
+</Image>

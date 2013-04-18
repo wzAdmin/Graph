@@ -12,4 +12,9 @@ enum SourceID
 	SCENE_Start = 7,
 	SCENE_Test = 8,
 	USER_Image = 9,
+	IMG_black = 10,
+	USER_Font = 11,
+	IMG_green = 12,
+	IMG_red = 13,
+	IMG_yellow = 14,
 };

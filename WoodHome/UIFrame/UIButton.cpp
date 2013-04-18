@@ -3,12 +3,16 @@
 #include "Graphics.h"
 #include "ImageResouceMgr.h"
 #include "SlimXml.h"
+#include "CommonFun.h"
+#include "FontConfig.h"
 
 CUIButton::CUIButton(void):
 mBtnStatus(BS_Normal),
 mDisableImage(Invalid),
 mFocusImage(Invalid),
-mNormalImage(Invalid)
+mNormalImage(Invalid),
+mOnClickFunc(NULL),
+mListener(NULL)
 {
 }
 
@@ -33,14 +37,10 @@ void CUIButton::Draw( CGraphics* pGraphic )
 	}
 	if(pBuffer)
 	{
-		Font ft;
-		ft.color = CRGB(123,231,12);
-		ft.height = 15;
-		ft.width = 20;
 		CBound bd = Bound();
 		Parent()->SelfToParent(bd);
 		pGraphic->DrawImage_Repeat(pBuffer,CBound(0,pBuffer->Width()-1,0,pBuffer->Height()-1),bd);
-		pGraphic->DrawTextW(mText.c_str(),bd,ft,CENTER);
+		pGraphic->DrawTextW(mText.c_str(),bd,*sFontConfig.GetFont(mFontID),CENTER);
 	}
 }
 
@@ -53,8 +53,13 @@ bool CUIButton::OnLBtnDown( int x ,int y )
 
 bool CUIButton::OnLBtnUp( int x ,int y )
 {
-	mBtnStatus = BS_Normal;
-	DrawToWindow();
+	if(BS_Focus == mBtnStatus)
+	{
+		mBtnStatus = BS_Normal;
+		DrawToWindow();
+		if(mListener && mOnClickFunc)
+			(mListener->*mOnClickFunc)();
+	}
 	return true;
 }
 
@@ -65,8 +70,17 @@ void CUIButton::Load( const slim::XmlNode* node )
 	mDisableImage = SourceID(node->readAttributeAsInt("Disale",Invalid));
 	mFocusImage = SourceID(node->readAttributeAsInt("Focus",Invalid));
 	mNormalImage = SourceID(node->readAttributeAsInt("Normal",Invalid));
-	//mText = node->readAttributeAsString("Text","");
-	mText = L"ÎÒÊÇ°´Å¥";
+	mText = AnsiToWstring(node->readAttributeAsString("Text",""));
+	mFontID = node->readAttributeAsInt("Font");
+}
+
+void CUIButton::OnFocusOut()
+{
+	if(BS_Focus == mBtnStatus)
+	{
+		mBtnStatus = BS_Normal;
+		DrawToWindow();
+	}
 }
 
 
