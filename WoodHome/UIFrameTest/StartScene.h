@@ -10,5 +10,6 @@ public:
 private:
 	virtual void Load(const slim::XmlNode* node);
 	void OnBtn1Click();
+	void OnBtn2Click();
 	void OnBtn3Click();
 };

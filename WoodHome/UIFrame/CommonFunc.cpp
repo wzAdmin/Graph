@@ -4,8 +4,8 @@ std::wstring AnsiToWstring( const char* src , int len )
 {
 	if(len = -1)
 		len = strlen(src);
-	wchar_t* wcs = new wchar_t[len];
-	memset(wcs,0,len*sizeof(wchar_t));
+	wchar_t* wcs = new wchar_t[len + 1];
+	memset(wcs,0,(len + 1)*sizeof(wchar_t));
 	setlocale(LC_ALL, "chs");
 	mbstowcs(wcs,src,len);
 	std::wstring result(wcs);

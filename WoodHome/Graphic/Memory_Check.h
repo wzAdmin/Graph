@@ -33,8 +33,8 @@ extern "C" void  DbgFree(void* p);
 // 	DebugDel(p);
 // }
 
-#define NEW_LEAKCHECK new(__FILE__,__LINE__)
-#define malloc(n) DebugMalloc(n,__FILE__,__LINE__)
-#define free(p) DebugFree(p)
+// #define NEW_LEAKCHECK new(__FILE__,__LINE__)
+// #define malloc(n) DebugMalloc(n,__FILE__,__LINE__)
+// #define free(p) DebugFree(p)
 //#endif 
 

@@ -22,6 +22,8 @@ void CStartScene::Load( const slim::XmlNode* node )
 	CScene::Load(node);
 	CUIButton* pbtn1 = (CUIButton*)get("btn1");
 	pbtn1->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn1Click);
+	CUIButton* pbtn2 = (CUIButton*)get("btn2");
+	pbtn2->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn2Click);
 	CUIButton* pbtn3 = (CUIButton*)get("btn3");
 	pbtn3->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn3Click);
 }
@@ -29,4 +31,9 @@ void CStartScene::Load( const slim::XmlNode* node )
 void CStartScene::OnBtn3Click()
 {
 	mWind->Quit();
+}
+
+void CStartScene::OnBtn2Click()
+{
+	Goto(SCENE_ImageTest);
 }

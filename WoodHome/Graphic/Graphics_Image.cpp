@@ -308,12 +308,12 @@ void CGraphics::DrawImage( const CImageBuffer* pImage ,const CTransfrom& tf ,con
 					if(src.Contain(srcX,srcY))
 					{
 						unsigned short c1 = pData[srcX + srcY * iamgeWidth];
-						unsigned short c2 = pData[srcX + 1 + srcY * iamgeWidth];
-						unsigned short c3 = pData[srcX + (srcY  + 1)* iamgeWidth];
-						unsigned short c4 = pData[srcX + 1 + (srcY + 1) * iamgeWidth];
-						Alpha(c1,c2,alphax);
-						Alpha(c3,c4,alphax);
-						Alpha(c1,c3,alphay);
+  						unsigned short c2 = pData[srcX + 1 + srcY * iamgeWidth];
+  						unsigned short c3 = pData[srcX + (srcY  + 1)* iamgeWidth];
+  						unsigned short c4 = pData[srcX + 1 + (srcY + 1) * iamgeWidth];
+  						Alpha(c1,c2,alphax);
+  						Alpha(c3,c4,alphax);
+  						Alpha(c1,c3,alphay);
 						mpFrambuffer[i* stride + j] = c1;
 					}
   					else if(srcX==src.Left() - 1 && srcY == src.Top() - 1)

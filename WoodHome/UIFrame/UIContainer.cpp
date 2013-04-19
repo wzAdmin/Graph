@@ -93,7 +93,7 @@ bool CUIContainer::OnLBtnDown( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnLBtnDown(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(x ,y) && mChilds[i]->OnLBtnDown(pt.X() , pt.Y()))
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
@@ -116,7 +116,7 @@ bool CUIContainer::OnLBtnUp( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnLBtnUp(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(x ,y) && mChilds[i]->OnLBtnUp(pt.X() , pt.Y()))
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
@@ -139,7 +139,7 @@ bool CUIContainer::OnMouseMove( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnMouseMove(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(x ,y) && mChilds[i]->OnMouseMove(pt.X() , pt.Y()))
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
@@ -162,7 +162,7 @@ bool CUIContainer::OnRBtnDown( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnRBtnDown(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(x , y) && mChilds[i]->OnRBtnDown(pt.X() , pt.Y()))
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
@@ -185,7 +185,7 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 	for (unsigned int i = 0;i < mChilds.size() ; i ++)
 	{
 		CPosition pt = mChilds[i]->ParentToSelf(x,y);
-		if(mChilds[i]->Bound().Contain(pt.X() , pt.Y()) && mChilds[i]->OnRBtnUp(pt.X() , pt.Y()))
+		if(mChilds[i]->Bound().Contain(x , y) && mChilds[i]->OnRBtnUp(pt.X() , pt.Y()))
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{

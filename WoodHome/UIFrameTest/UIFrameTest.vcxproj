@@ -87,18 +87,20 @@ copy /y ..\\Debug\\*.exe ..\\build</Command>
       <AdditionalDependencies>UIFrame.lib;Graphic.lib;SlimXml.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y ..\\Debug\\*.dll ..\\build
-copy /y ..\\Debug\\*.exe ..\\build</Command>
+      <Command>copy /y ..\\Release\\*.dll ..\\build
+copy /y ..\\Release\\*.exe ..\\build</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AutoRegist.cpp" />
     <ClCompile Include="DrawTextTextScene.cpp" />
+    <ClCompile Include="ImageTestScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawTextTextScene.h" />
+    <ClInclude Include="ImageTestScene.h" />
     <ClInclude Include="StartScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

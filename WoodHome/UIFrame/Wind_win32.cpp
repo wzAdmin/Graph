@@ -205,5 +205,5 @@ void CWind_win32::DrawWin32( HDC hdc )
 
 void CWind_win32::Quit()
 {
-	PostQuitMessage(0);
+	PostMessage(mhWnd ,WM_DESTROY,0,0);
 }

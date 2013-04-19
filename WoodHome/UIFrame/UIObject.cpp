@@ -53,7 +53,7 @@ CPosition CUIObject::Absolute( int x ,int y )
 
 void CUIObject::SelfToParent( CBound& bound )
 {
-	bound.Move(mBound.Left() + bound.Left() , mBound.Top() + bound.Top());
+	bound.Move(mBound.Left() , mBound.Top());
 }
 
 CPosition CUIObject::SelfToParent( int x ,int y )
@@ -63,7 +63,7 @@ CPosition CUIObject::SelfToParent( int x ,int y )
 
 void CUIObject::ParentToSelf( CBound& bound )
 {
-	bound.Move(bound.Left() - mBound.Left() ,bound.Top() - mBound.Top());
+	bound.Move(-mBound.Left() , -mBound.Top());
 }
 
 CPosition CUIObject::ParentToSelf( int x ,int y )

@@ -18,4 +18,5 @@ enum SourceID
 	IMG_red = 13,
 	IMG_yellow = 14,
 	SCENE_DrawText = 15,
+	SCENE_ImageTest = 16,
 };
