@@ -351,7 +351,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				WarningLevel="3"
 				WarnAsError="true"
