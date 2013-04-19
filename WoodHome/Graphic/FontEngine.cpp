@@ -1,7 +1,7 @@
 #include "FontEngine.h"
 #include "FontCache.h"
 #include <assert.h>
-
+#include "Memory_Check.h"
 CFontEngine::CFontEngine(void)
 {
 	FT_Error error = FT_Init_FreeType(&mFtlib);

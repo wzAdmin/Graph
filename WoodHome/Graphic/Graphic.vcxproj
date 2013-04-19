@@ -52,7 +52,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHIC_EXPORTS;_DLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>../libz/include;../libpng;../libjpeg;../freetype/include</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4251;4291</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -92,6 +92,7 @@
     <ClInclude Include="GraphicType.h" />
     <ClInclude Include="ImageBuffer.h" />
     <ClInclude Include="matrix.h" />
+    <ClInclude Include="Memory_Check.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="PtAlongLine.h" />
     <ClInclude Include="Trace.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="Image_Gray.cpp" />
     <ClCompile Include="Image_JPG.cpp" />
     <ClCompile Include="Image_PNG.cpp" />
+    <ClCompile Include="Memory_Check.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="PtAlongLine.cpp" />
     <ClCompile Include="Transfrom.cpp" />

@@ -19,6 +19,7 @@ public:
 	virtual void DrawToWindow() = 0;
 	virtual void Run() = 0;
 	virtual WindID GetID() = 0;
+	virtual void Quit() = 0;
 	void DispatchSysMessage(const SystemMessage& msg);
 public:
 	CSceneManager* GetSceneMgr(){return mSceneManager;}

@@ -27,7 +27,7 @@ public:
 	void Back();
 protected:
 	NotifyFormerOnHide mNotifyFunc;
-private:
+protected:
 	CUIWindow* mWind;
 	CScene* mFrom;
 };

@@ -202,3 +202,8 @@ void CWind_win32::DrawWin32( HDC hdc )
 	StretchDIBits(hdc, 0, 0, mFramebuffer->Width(),mFramebuffer->Height(), 0, 0,mFramebuffer->Width(),
 		mFramebuffer->Height(),mFramebuffer->GetPixels(),(BITMAPINFO*)&header,0,SRCCOPY);
 }
+
+void CWind_win32::Quit()
+{
+	PostQuitMessage(0);
+}

@@ -60,6 +60,9 @@
     <ClInclude Include="Trace.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Memory_Check.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -102,6 +105,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PtAlongLine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory_Check.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

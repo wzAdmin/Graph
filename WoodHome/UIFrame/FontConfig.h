@@ -1,6 +1,7 @@
 #pragma once
 #include "GraphicType.h"
-class CFontConfig
+#include "UItype.h"
+class UI_API CFontConfig
 {
 private:
 	CFontConfig(void);

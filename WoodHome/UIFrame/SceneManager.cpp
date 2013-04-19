@@ -4,6 +4,7 @@
 #include "SlimXml.h"
 #include "UIFrame.h"
 #include "UIObjectFactory.h"
+#include "Memory_Check.h"
 
 CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd)
 {
@@ -35,11 +36,9 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NU
 		SceneListItor itor = mSceneStack.begin();
 		for( ; mSceneStack.end() != itor && (*itor) != it->second ; itor++);
 		if(mSceneStack.end() != itor)
-		{
-			(*itor)->DrawToWindow();
-			mSceneStack.push_back((*itor));
 			mSceneStack.erase(itor);
-		}
+		mSceneStack.push_back(it->second);
+		it->second->DrawToWindow();
 		return ;
 	}
 	CScene* pScene = CreatScene(toid);

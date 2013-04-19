@@ -1,5 +1,5 @@
 <StartScene name = "starts" x="0" y ="0" width = "1024" height = "1024" visible = "true" order = "0" bgImage ="12">
-	<Button name = "btn1" x="100" y = "100" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "我是按钮" font = "3"/>
+	<Button name = "btn1" x="100" y = "100" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "DrawText试例" font = "3"/>
 	<Button name = "btn2" x="100" y = "200" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "2号按钮" font = "2"/>
-	<Button name = "btn3" x="100" y = "300" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "我也是" font = "1"/>
+	<Button name = "btn3" x="100" y = "300" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "退出程序" font = "1"/>
 </StartScene>

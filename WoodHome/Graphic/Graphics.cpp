@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "utils.h"
 
+#include "Memory_Check.h"
 CGraphics::CGraphics(  CImageBuffer* image )
 {
 	Initialize(image);

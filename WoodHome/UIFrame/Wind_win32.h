@@ -17,6 +17,7 @@ private:
 	virtual void DrawToWindow();
 	virtual void Run();
 	virtual WindID GetID(){return int(mhWnd);}
+	virtual void Quit();
 	void DrawWin32(HDC hdc);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 private:

@@ -104,7 +104,7 @@ void CImage_PNG::To565( const char* data )
 		for (int j = 0; j < mWidth ; j++)
 		{
 			mData[i * mWidth + j] = ConstructRGB(data[4*(i*mWidth+j)],data[4*(i*mWidth+j)+1],data[4*(i*mWidth+j)+2]);
-			mAlpha[i * mWidth + j]= (unsigned char)(data[4*(i*mWidth+j)+3])>>3;
+			mAlpha[i * mWidth + j]= ((unsigned char)(data[4*(i*mWidth+j)+3]) + 1)>>3;
 		}
 	}
 }

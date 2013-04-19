@@ -92,7 +92,14 @@ copy /y ..\\Debug\\*.exe ..\\build</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoRegist.cpp" />
+    <ClCompile Include="DrawTextTextScene.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="StartScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DrawTextTextScene.h" />
+    <ClInclude Include="StartScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
