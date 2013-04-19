@@ -3,6 +3,7 @@
 #include "UIContainer.h"
 #include "SlimXml.h"
 #include "UIObjectFactory.h"
+#include "Trace.h"
 
 CUIContainer::CUIContainer(void):mFcousedObj(NULL)
 {
@@ -200,4 +201,15 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 		mFcousedObj = NULL;
 	}
 	return false;
+}
+
+CUIObject* CUIContainer::get( const std::string& name )
+{
+	for (unsigned int i = 0 ; i < mChilds.size() ; i++)
+	{
+		if(name == mChilds[i]->Name())
+			return mChilds[i];
+	}
+	DebugTrace("%s Cant not find %s \n",Name().c_str(),name.c_str());
+	return NULL;
 }

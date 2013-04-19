@@ -2,6 +2,7 @@
 #include "UItype.h"
 #include "Bound.h"
 #include "IMessageDealer.h"
+#include <string>
 namespace slim
 {
 	class XmlNode;
@@ -17,6 +18,7 @@ public:
 	virtual void Draw(CGraphics* pGraphic) = 0;
 	virtual void DrawToWindow();
 	virtual void OnFocusOut(){}
+	CUIObject* operator [] (const std::string& name){return get(name);}
 	void Bound(const CBound& bd){mBound =bd;}
 	const CBound& Bound() const {return mBound;}
 	bool InputMode() const {return mIsInputMode;}
@@ -33,7 +35,11 @@ public:
 	CPosition ParentToSelf(int x ,int y);
 	CPosition SelfToParent(int x ,int y);
 	CPosition Absolute(int x ,int y);
+	const std::string& Name() const {return mName;}
+protected:
+	virtual CUIObject* get(const std::string& name){return NULL;}
 private:
+	std::string mName;
 	int mOrder;
 	CUIObject* mParent;
 	CBound mBound;

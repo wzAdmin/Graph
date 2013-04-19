@@ -27,12 +27,13 @@ void CUIObject::InputMode( bool val )
 
 void CUIObject::Load( const slim::XmlNode* node )
 {
-	mOrder = node->readAttributeAsInt("Order");
-	mIsVisible = node->readAttributeAsBool("Visible");
+	mOrder = node->readAttributeAsInt("order");
+	mIsVisible = node->readAttributeAsBool("visible");
 	mBound.Left(node->readAttributeAsInt("x"));
 	mBound.Top(node->readAttributeAsInt("y"));
 	mBound.Right(mBound.Left() - 1 + node->readAttributeAsInt("width"));
 	mBound.Bottom(mBound.Top() - 1 + node->readAttributeAsInt("height"));
+	mName = node->readAttributeAsString("name");
 }
 
 void CUIObject::Absolute(CBound& bound)

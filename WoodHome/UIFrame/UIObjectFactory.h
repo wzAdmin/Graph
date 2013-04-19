@@ -1,10 +1,12 @@
 #pragma once
 #include <map>
 #include <string>
+#include "UItype.h"
 
 class CUIObject;
 typedef CUIObject* (*ObjCreatFun)();
-class CUIObjectFactory
+
+class UI_API CUIObjectFactory
 {
 public:
 	CUIObjectFactory(void);

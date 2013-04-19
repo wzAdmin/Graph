@@ -41,13 +41,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="../UIFrame;../SlimXml/SlimXml;../Graphic"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4251"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -60,7 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="UIFrame.lib SlimXml.lib Graphic.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(OutDir)"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -85,6 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy /y ..\\Debug\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Debug\\*.exe ..\\build\\"
 			/>
 		</Configuration>
 		<Configuration

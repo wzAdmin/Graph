@@ -4,6 +4,7 @@
 #include "FileSystem.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Trace.h"
 
 CUIFrame::CUIFrame(void):mValidID(0)
 {

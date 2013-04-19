@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Trace.h"
 struct BITHEADER : BITMAPINFOHEADER
 {
 	unsigned int mask[256];
@@ -102,12 +103,13 @@ void CWind_win32::Run()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-	printf("ex");
 }
 
 LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
 	CWind_win32* pwnd = (CWind_win32*)sUIFrame.GetWindow(WindID(hWnd));
+	if(pwnd && pwnd->mbDestroyed)
+		DebugTrace("ERROR\n");
 	PAINTSTRUCT ps;
 	HDC hdc;
 	SystemMessage mss;
@@ -121,6 +123,10 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 		}
 		break;
 	case WM_DESTROY:
+		if(!pwnd)
+			DebugTrace("WM_DESTROY NULL WND!");
+		if(pwnd &&pwnd->mbDestroyed)
+			DebugTrace("WM_DESTROY TWICE");
 		if(pwnd)
 		{
 			pwnd->mbDestroyed = true;

@@ -67,11 +67,11 @@ void CUIButton::Load( const slim::XmlNode* node )
 {
 	CUIObject::Load(node);
 	mBtnStatus = BS_Normal;
-	mDisableImage = SourceID(node->readAttributeAsInt("Disale",Invalid));
-	mFocusImage = SourceID(node->readAttributeAsInt("Focus",Invalid));
-	mNormalImage = SourceID(node->readAttributeAsInt("Normal",Invalid));
-	mText = AnsiToWstring(node->readAttributeAsString("Text",""));
-	mFontID = node->readAttributeAsInt("Font");
+	mDisableImage = SourceID(node->readAttributeAsInt("disale",Invalid));
+	mFocusImage = SourceID(node->readAttributeAsInt("focus",Invalid));
+	mNormalImage = SourceID(node->readAttributeAsInt("normal",Invalid));
+	mText = AnsiToWstring(node->readAttributeAsString("text",""));
+	mFontID = node->readAttributeAsInt("font");
 }
 
 void CUIButton::OnFocusOut()

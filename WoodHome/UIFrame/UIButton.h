@@ -8,8 +8,6 @@ enum ButtonStaus
 	BS_Focus,
 	BS_Disable
 };
-typedef void (CUIObject::*OnBtnDown)();
-typedef void (CUIObject::*OnBtnUp)();
 typedef void (CUIObject::*OnBtnClick)();
 class CUIButton :
 	public CUIObject
@@ -18,6 +16,7 @@ public:
 	static CUIObject* Create(){return new CUIButton;}
 	CUIButton(void);
 	~CUIButton(void);
+	void AddClickListen(CUIObject* pobj,OnBtnClick func){mListener = pobj ; mOnClickFunc=func;}
 private:
 	virtual void Draw(CGraphics* pGraphic);
 	virtual bool OnLBtnDown(int x ,int y);
@@ -29,6 +28,7 @@ private:
 	//
 	virtual void Load(const slim::XmlNode* node);
 	void SetText(const std::wstring& text){mText = text;}
+
 protected:
 	virtual void OnFocusOut();
 private:

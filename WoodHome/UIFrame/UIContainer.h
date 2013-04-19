@@ -23,6 +23,7 @@ protected:
 	virtual void DrawSelf(CGraphics* pGraphic) = 0;
 	virtual void LoadSelf(const slim::XmlNode* node) = 0;
 	virtual void Load(const slim::XmlNode* node);
+	virtual CUIObject* get(const std::string& name);
 private:
 	std::vector<CUIObject*> mChilds;
 	CUIObject* mFcousedObj;

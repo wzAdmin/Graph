@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="UIFrame.lib"
+				AdditionalDependencies="UIFrame.lib Graphic.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(OutDir)"
@@ -181,7 +181,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\AutoRegist.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\StartScene.cpp"
 				>
 			</File>
 		</Filter>
@@ -190,6 +198,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\StartScene.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
