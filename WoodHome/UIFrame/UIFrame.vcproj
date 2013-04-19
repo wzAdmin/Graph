@@ -177,7 +177,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\CommonFunc.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FileSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FontConfig.cpp"
 				>
 			</File>
 			<File
@@ -190,6 +198,10 @@
 			</File>
 			<File
 				RelativePath=".\SceneManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UIButton.cpp"
 				>
 			</File>
 			<File
@@ -231,7 +243,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\CommonFun.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FileSystem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FontConfig.h"
 				>
 			</File>
 			<File
@@ -248,6 +268,10 @@
 			</File>
 			<File
 				RelativePath=".\SceneManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UIButton.h"
 				>
 			</File>
 			<File
