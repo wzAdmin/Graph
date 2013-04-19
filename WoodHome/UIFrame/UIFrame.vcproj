@@ -259,6 +259,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\IMessageDealer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resource_image.h"
 				>
 			</File>
