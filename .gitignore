@@ -8,3 +8,5 @@ ipch/
 *.suo
 *.user
 *.ncb
+WoodHome/build/*.dll
+Woodhome/build/*.exe

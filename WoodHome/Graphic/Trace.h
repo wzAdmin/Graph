@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #ifdef _MSC_VER
-bool OutTrace(const char* format,...)
+inline bool OutTrace(const char* format,...)
 {
 	va_list arg;
 	va_start(arg,format);
