@@ -29,6 +29,7 @@ private:
 	int mValidID;
 	std::list<CUIWindow*> mWindwosTobeDelete;
 	CWindConfig* mWindConfig;
+	bool mbRunning;
 };
 
 #define sUIFrame CUIFrame::Instance()

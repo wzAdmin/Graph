@@ -7,7 +7,7 @@
 #include "WindConfig.h"
 #include "Trace.h"
 
-CUIFrame::CUIFrame(void):mValidID(0)
+CUIFrame::CUIFrame(void):mValidID(0),mbRunning(false)
 {
 	mObjFactory = new CUIObjectFactory();
 	sFilesystem.Open("Out/Image");
@@ -72,6 +72,9 @@ void CUIFrame::Exit()
 
 void CUIFrame::Run()
 {
+	if(mbRunning)
+		return;
+	mbRunning = true;
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{

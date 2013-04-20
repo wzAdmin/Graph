@@ -21,6 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIFrame", "UIFrame\UIFrame.
 	ProjectSection(ProjectDependencies) = postProject
 		{B933006E-2937-407D-AE01-2DD8A9B2B298} = {B933006E-2937-407D-AE01-2DD8A9B2B298}
 		{1201FB93-5F9A-48BC-8E32-5420881715A7} = {1201FB93-5F9A-48BC-8E32-5420881715A7}
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B} = {D5D948CB-0DED-40C7-94D9-191C89B3988B}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SlimXml", "SlimXml\SlimXml\SlimXml.vcxproj", "{1201FB93-5F9A-48BC-8E32-5420881715A7}"
@@ -35,6 +36,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIFrameTest", "UIFrameTest\
 	ProjectSection(ProjectDependencies) = postProject
 		{68B70930-C150-41C3-B953-4F39FCD49068} = {68B70930-C150-41C3-B953-4F39FCD49068}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpthread", "libpthread\libpthread.vcxproj", "{D5D948CB-0DED-40C7-94D9-191C89B3988B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -154,6 +157,18 @@ Global
 		{AD00ACBB-901D-4F99-9D50-3900BDFFB004}.Release_Unicode|Win32.Build.0 = Release|Win32
 		{AD00ACBB-901D-4F99-9D50-3900BDFFB004}.Release|Win32.ActiveCfg = Release|Win32
 		{AD00ACBB-901D-4F99-9D50-3900BDFFB004}.Release|Win32.Build.0 = Release|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Debug_MultiByte|Win32.ActiveCfg = Debug|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Debug_MultiByte|Win32.Build.0 = Debug|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Debug_Unicode|Win32.ActiveCfg = Debug|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Debug_Unicode|Win32.Build.0 = Debug|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Debug|Win32.Build.0 = Debug|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Release_MultiByte|Win32.ActiveCfg = Release|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Release_MultiByte|Win32.Build.0 = Release|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Release_Unicode|Win32.ActiveCfg = Release|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Release_Unicode|Win32.Build.0 = Release|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Release|Win32.ActiveCfg = Release|Win32
+		{D5D948CB-0DED-40C7-94D9-191C89B3988B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

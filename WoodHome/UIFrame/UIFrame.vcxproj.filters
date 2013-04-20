@@ -75,6 +75,9 @@
     <ClInclude Include="WindConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIObject.cpp">
@@ -123,6 +126,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="WindConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
