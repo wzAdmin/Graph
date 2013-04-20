@@ -15,7 +15,7 @@ private:
 	virtual void Minimize();
 	virtual void SetPostion(int x , int y);
 	virtual void DrawToWindow();
-	virtual void Run();
+	virtual void Start();
 	virtual WindID GetID(){return int(mhWnd);}
 	virtual void Quit();
 	void DrawWin32(HDC hdc);

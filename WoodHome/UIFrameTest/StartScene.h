@@ -12,4 +12,5 @@ private:
 	void OnBtn1Click();
 	void OnBtn2Click();
 	void OnBtn3Click();
+	void OnBtn4Click();
 };

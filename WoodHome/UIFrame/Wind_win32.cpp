@@ -90,19 +90,6 @@ void CWind_win32::DrawToWindow()
 	DeleteDC(hdc);
 }
 
-void CWind_win32::Run()
-{
-	MSG msg;
-	mSceneManager->GoTo(mStartSceneID);
-	ShowWindow();
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-}
-
 LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
 	CWind_win32* pwnd = (CWind_win32*)sUIFrame.GetWindow(WindID(hWnd));
@@ -121,7 +108,8 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 	case WM_DESTROY:
 		if(pwnd)
 			sUIFrame.EndWindow(pwnd->GetID());
-		PostQuitMessage(0);
+		if(sUIFrame.WndCount() < 1)
+			PostQuitMessage(0);
 		break;
 	case WM_MOUSEMOVE:
 		mss.msg = MouseMove;
@@ -194,5 +182,11 @@ void CWind_win32::DrawWin32( HDC hdc )
 
 void CWind_win32::Quit()
 {
-	PostMessage(mhWnd ,WM_CLOSE,0,0);
+	::SendMessage(mhWnd ,WM_CLOSE,0,0);
+}
+
+void CWind_win32::Start()
+{
+	mSceneManager->GoTo(mStartSceneID);
+	ShowWindow();
 }

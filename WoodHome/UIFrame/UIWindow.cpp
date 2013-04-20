@@ -25,6 +25,7 @@ CUIWindow::~CUIWindow(void)
 
 void CUIWindow::DispatchSysMessage( const SystemMessage& msg )
 {
+	assert(this);
 	switch (msg.msg)
 	{
 	case LBtnDown:

@@ -17,7 +17,7 @@ public:
 	virtual void Minimize() = 0;
 	virtual void SetPostion(int x , int y) = 0;
 	virtual void DrawToWindow() = 0;
-	virtual void Run() = 0;
+	virtual void Start() = 0;
 	virtual WindID GetID() = 0;
 	virtual void Quit() = 0;
 	void DispatchSysMessage(const SystemMessage& msg);

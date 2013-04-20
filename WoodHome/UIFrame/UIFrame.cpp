@@ -32,9 +32,8 @@ void CUIFrame::EndWindow( WindID id )
 	WinIterator it = mWinds.find(id);
 	if(mWinds.end() != it)
 	{
-		CUIWindow* pWnd = it->second;
+		mWindwosTobeDelete.push_back(it->second);
 		mWinds.erase(it);
-		delete pWnd;
 	}
 }
 
@@ -43,7 +42,7 @@ void CUIFrame::StartWindow( Style_Window id )
 #ifdef WIN32
 	CUIWindow* pWind = new CWind_win32(id);
 	mWinds.insert(std::pair<WindID,CUIWindow*>(pWind->GetID(),pWind));
-	((CUIWindow*)pWind)->Run();
+	((CUIWindow*)pWind)->Start();
 #else
 #error("UIFrame::StartWindow not implement");
 #endif
@@ -60,7 +59,30 @@ CUIWindow* CUIFrame::GetWindow( WindID id )
 
 void CUIFrame::Exit()
 {
-	WinIterator it = mWinds.begin();
-	for( ; mWinds.end() != it ; it++)
+	while(mWinds.size())
+	{
+		WinIterator it = mWinds.begin();
 		it->second->Quit();
+	}
+	PostQuitMessage(0);
+}
+
+void CUIFrame::Run()
+{
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		while (mWindwosTobeDelete.size())
+		{
+			delete mWindwosTobeDelete.front();
+			mWindwosTobeDelete.pop_front();
+		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	while (mWindwosTobeDelete.size())
+	{
+		delete mWindwosTobeDelete.front();
+		mWindwosTobeDelete.pop_front();
+	}
 }

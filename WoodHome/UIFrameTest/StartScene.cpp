@@ -26,14 +26,21 @@ void CStartScene::Load( const slim::XmlNode* node )
 	pbtn2->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn2Click);
 	CUIButton* pbtn3 = (CUIButton*)get("btn3");
 	pbtn3->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn3Click);
+	CUIButton* pbtn4 = (CUIButton*)get("btn4");
+	pbtn4->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn4Click);
 }
 
 void CStartScene::OnBtn3Click()
 {
-	mWind->Quit();
+	sUIFrame.StartWindow(Window_Main);
 }
 
 void CStartScene::OnBtn2Click()
 {
 	Goto(SCENE_ImageTest);
+}
+
+void CStartScene::OnBtn4Click()
+{
+	sUIFrame.Exit();
 }

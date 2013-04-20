@@ -7,5 +7,6 @@ int main()
 {
 	DebugTrace("MainStarted\n");
 	sUIFrame.StartWindow(Window_Main);
+	sUIFrame.Run();
 	return 0;
 }
