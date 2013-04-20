@@ -14,6 +14,7 @@ public:
 	CScene* GetCurScene();
 	void GoTo(SourceID toid ,CScene* from = 0,void* data = NULL);
 	void Back();
+	void OnDestroy();
 private:
 	CScene* CreatScene(SourceID sceneid);
 private:

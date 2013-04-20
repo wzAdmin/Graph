@@ -18,6 +18,7 @@ public:
 	void Run();
 	void Exit();
 	int WndCount(){return mWinds.size();}
+	void AddWindowToDelete(CUIWindow* pwnd);
 private:
 	CUIObjectFactory* mObjFactory;
 	typedef std::map<WindID,CUIWindow*>::iterator WinIterator;

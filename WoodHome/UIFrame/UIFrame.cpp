@@ -86,3 +86,19 @@ void CUIFrame::Run()
 		mWindwosTobeDelete.pop_front();
 	}
 }
+
+void CUIFrame::AddWindowToDelete( CUIWindow* pwnd )
+{
+	if(pwnd)
+	{
+		pwnd->OnDestroy();
+		WinIterator it = mWinds.find(pwnd->GetID());
+		if(mWinds.end() != it)
+		{
+			mWindwosTobeDelete.push_back(it->second);
+			mWinds.erase(it);
+		}
+		else
+			assert(false || DebugTrace("no longer should come here!\n"));
+	}
+}

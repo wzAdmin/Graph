@@ -51,5 +51,10 @@ void CUIWindow::DispatchSysMessage( const SystemMessage& msg )
 	}
 }
 
+void CUIWindow::OnDestroy()
+{
+	mSceneManager->OnDestroy();
+}
+
 
 

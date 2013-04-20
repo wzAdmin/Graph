@@ -86,3 +86,12 @@ void CSceneManager::Back()
 		mSceneStack.back()->DrawToWindow();
 	}
 }
+
+void CSceneManager::OnDestroy()
+{
+	SceneMapItor it = mScenes.begin();
+	for ( ; mScenes.end() != it ; it++)
+	{
+		it->second->OnUnload();
+	}
+}

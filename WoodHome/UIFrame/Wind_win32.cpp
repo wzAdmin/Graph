@@ -106,8 +106,7 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 		}
 		break;
 	case WM_DESTROY:
-		if(pwnd)
-			sUIFrame.EndWindow(pwnd->GetID());
+		sUIFrame.AddWindowToDelete(pwnd);
 		if(sUIFrame.WndCount() < 1)
 			PostQuitMessage(0);
 		break;

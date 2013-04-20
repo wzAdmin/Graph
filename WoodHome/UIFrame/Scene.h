@@ -15,6 +15,9 @@ public:
 	virtual void DrawToWindow();
 	virtual void OnShow(void* data = NULL){}
 
+	// the OnUnload will be called when the window which the scene belong to destroyed
+	virtual void OnUnload(){}
+
 	//call mNotifyFunc to notify the listener
 	//why not call in OnHide()?
 	//because when OnHide not always needs notify the listener such as Back

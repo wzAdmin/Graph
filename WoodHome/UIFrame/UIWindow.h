@@ -20,6 +20,7 @@ public:
 	virtual void Start() = 0;
 	virtual WindID GetID() = 0;
 	virtual void Quit() = 0;
+	virtual void OnDestroy();
 	void DispatchSysMessage(const SystemMessage& msg);
 public:
 	CSceneManager* GetSceneMgr(){return mSceneManager;}

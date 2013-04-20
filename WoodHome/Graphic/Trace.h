@@ -8,7 +8,7 @@ inline bool OutTrace(const char* format,...)
 	va_start(arg,format);
 	vprintf(format,arg);
 	va_end(arg);
-	return true;
+	return false;
 }
 #endif
 #ifdef _DEBUG
