@@ -1,6 +1,6 @@
 #pragma once
 #include "UItype.h"
-#include "WindowID.h"
+#include "window_Style.h"
 #include "resource_image.h"
 typedef int WindID;
 class CGraphics;
@@ -28,6 +28,8 @@ protected:
 	CGraphics* mGraphic;
 	CImageBuffer* mFramebuffer;
 	CSceneManager* mSceneManager;
+	int mPositionX;
+	int mPositionY;
 	int mWidth;
 	int mHeight;
 	SourceID mStartSceneID;

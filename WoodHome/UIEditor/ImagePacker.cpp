@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <Windows.h>
-
+#include "WindowStyleHeader.h"
 #define ImageXML "Source/Image.xml"
 #define ImageFolder "Image"
 
@@ -129,6 +129,8 @@ bool CImagePacker::Existed(slim::XmlNode* root, const char* filename )
 
 void CImagePacker::GenerateHeader()
 {
+	CWindowStyleHeader styleheader;
+	styleheader.GenerateHeader("Source\\WindowStyle.xml");
 	std::ofstream ofs("resource_image.h",std::ios::out);
 	ofs<<"//this file is auto generated ! do not edit"<<std::endl;
 	ofs<<"#pragma once"<<std::endl;

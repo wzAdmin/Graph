@@ -24,7 +24,7 @@ CImageTestScene::~CImageTestScene(void)
 void CImageTestScene::Draw( CGraphics* pGraphic )
 {
 	CScene::Draw(pGraphic);
-	CImageBuffer* pImage = sImageResource.GetImage(IMG_gril00);
+	CImageBuffer* pImage = sImageResource.GetImage(IMG_gril01);
 	CTransfrom tf;
 	tf.SetRotation(mRotate + mSkewX ,mRotate + mSkewY);
 	tf.SetScale(mScaleX,mScaleY);
@@ -89,7 +89,7 @@ void CImageTestScene::OnBtnRotateClick()
 
 void CImageTestScene::OnBtnSkewXClick()
 {
-	mSkewY += 10.0f * 3.1415926f / 180.0f;
+	mSkewX += 10.0f * 3.1415926f / 180.0f;
 	DrawToWindow();
 }
 

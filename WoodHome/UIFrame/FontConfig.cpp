@@ -2,7 +2,6 @@
 #include <assert.h>
 #include "Trace.h"
 #include "SlimXml.h"
-#include "resource_image.h"
 #include "FileSystem.h"
 
 // the font config is like this
@@ -15,7 +14,6 @@
 
 CFontConfig::CFontConfig(void):mFonts(NULL),mFontCount(0)
 {
-	Load();
 }
 
 
@@ -24,10 +22,10 @@ CFontConfig::~CFontConfig(void)
 	delete[] mFonts;
 }
 
-void CFontConfig::Load()
+void CFontConfig::Load(SourceID id)
 {
 	slim::XmlDocument doc;
-	Sourceitem item = sFilesystem.GetSource(USER_Font);
+	Sourceitem item = sFilesystem.GetSource(id);
 
 	char* data = new char[item.length];
 	sFilesystem.LoadSource(item,data);

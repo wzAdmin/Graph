@@ -4,17 +4,20 @@
 #include "FileSystem.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "WindConfig.h"
 #include "Trace.h"
 
 CUIFrame::CUIFrame(void):mValidID(0)
 {
 	mObjFactory = new CUIObjectFactory();
 	sFilesystem.Open("Out/Image");
+	mWindConfig = new CWindConfig;
 }
 
 
 CUIFrame::~CUIFrame(void)
 {
+	delete mWindConfig;
 	WinIterator it = mWinds.begin();
 	for( ; mWinds.end() != it ; it++)
 		delete it->second;
@@ -101,4 +104,9 @@ void CUIFrame::AddWindowToDelete( CUIWindow* pwnd )
 		else
 			assert(false || DebugTrace("no longer should come here!\n"));
 	}
+}
+
+void CUIFrame::InitWindStyle( SourceID styleconfig )
+{
+	mWindConfig->Init(styleconfig);
 }

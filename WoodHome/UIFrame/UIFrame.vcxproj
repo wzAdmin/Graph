@@ -103,7 +103,8 @@
     <ClInclude Include="UIObjectFactory.h" />
     <ClInclude Include="UItype.h" />
     <ClInclude Include="UIWindow.h" />
-    <ClInclude Include="WindowID.h" />
+    <ClInclude Include="WindConfig.h" />
+    <ClInclude Include="window_Style.h" />
     <ClInclude Include="Wind_win32.h" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +122,7 @@
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="UIObjectFactory.cpp" />
     <ClCompile Include="UIWindow.cpp" />
+    <ClCompile Include="WindConfig.cpp" />
     <ClCompile Include="Wind_win32.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

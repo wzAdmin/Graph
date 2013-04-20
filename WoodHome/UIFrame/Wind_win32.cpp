@@ -30,9 +30,8 @@ CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
 	wcex.lpszMenuName   = NULL;
 	RegisterClassEx(&wcex);
 	int y =GetSystemMetrics(SM_CYCAPTION);
-	mhWnd = CreateWindow(L"window", L"UI",
-		WS_OVERLAPPEDWINDOW,
-		0,0, mWidth, mHeight, NULL, NULL, NULL, NULL);
+	mhWnd = CreateWindow(L"window", L"UI",WS_OVERLAPPEDWINDOW,
+		mPositionX,mPositionY, mWidth, mHeight, NULL, NULL, NULL, NULL);
 }
 
 

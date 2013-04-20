@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 
+class CWindConfig;
 class CUIObjectFactory;
 class UI_API CUIFrame
 {
@@ -19,12 +20,15 @@ public:
 	void Exit();
 	int WndCount(){return mWinds.size();}
 	void AddWindowToDelete(CUIWindow* pwnd);
+	void InitWindStyle(SourceID styleconfig);
+	CWindConfig* GetWindCof(){return mWindConfig;}
 private:
 	CUIObjectFactory* mObjFactory;
 	typedef std::map<WindID,CUIWindow*>::iterator WinIterator;
 	std::map<WindID,CUIWindow*> mWinds;
 	int mValidID;
 	std::list<CUIWindow*> mWindwosTobeDelete;
+	CWindConfig* mWindConfig;
 };
 
 #define sUIFrame CUIFrame::Instance()

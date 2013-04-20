@@ -57,9 +57,6 @@
     <ClInclude Include="UIWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="WindowID.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Wind_win32.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -70,6 +67,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FontConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="window_Style.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WindConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -117,6 +120,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="FontConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WindConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

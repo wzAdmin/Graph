@@ -4,12 +4,17 @@
 #include "ImageBuffer.h"
 #include "Graphics.h"
 #include "Scene.h"
+#include "WindConfig.h"
+#include "UIFrame.h"
 CUIWindow::CUIWindow(Style_Window id)
 {
+	const WindowConfig* cf = sUIFrame.GetWindCof()->GetConfig(id);
 	mSceneManager = new CSceneManager(this);
-	mHeight = 700;
-	mWidth = 1024;
-	mStartSceneID = SCENE_Start;
+	mHeight = cf->height;
+	mWidth = cf->width;
+	mStartSceneID = cf->startScene;
+	mPositionX = cf->x;
+	mPositionY = cf->y;
 	mFramebuffer = new CImageBuffer;
 	mFramebuffer->Initialize(mWidth , mHeight , false);
 	mGraphic = new CGraphics(mFramebuffer);

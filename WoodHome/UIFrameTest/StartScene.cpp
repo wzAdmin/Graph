@@ -32,7 +32,7 @@ void CStartScene::Load( const slim::XmlNode* node )
 
 void CStartScene::OnBtn3Click()
 {
-	sUIFrame.StartWindow(Window_Main);
+	sUIFrame.StartWindow(Main_Window);
 }
 
 void CStartScene::OnBtn2Click()

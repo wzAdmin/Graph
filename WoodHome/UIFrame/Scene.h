@@ -23,6 +23,7 @@ public:
 	//because when OnHide not always needs notify the listener such as Back
 	//not call mNotifyFunc in base class as I do not know the param yet
 	virtual void Notify(){}
+
 	virtual void OnHide(void* data = NULL){}
 	virtual void SetNotify(NotifyFormerOnHide func){mNotifyFunc = func;}
 	void SetWind(CUIWindow* Wnd){mWind = Wnd;}
