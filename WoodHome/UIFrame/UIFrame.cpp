@@ -47,7 +47,6 @@ void CUIFrame::StartWindow( Style_Window id )
 #ifdef WIN32
 	CUIWindow* pWind = new CWind_win32(id);
 	mWinds.insert(std::pair<WindID,CUIWindow*>(pWind->GetID(),pWind));
-	::PostMessage(NULL,100000,10000,10000);
 	((CUIWindow*)pWind)->Run();
 #else
 	error("not implement");

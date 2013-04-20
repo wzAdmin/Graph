@@ -38,8 +38,6 @@ CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id),mbDestroyed(false)
 
 CWind_win32::~CWind_win32(void)
 {
-	if(mhWnd && !mbDestroyed)
-		::DestroyWindow(mhWnd);
 }
 
 void CWind_win32::MessageTo( WindID windowId,const SystemMessage& msg )
@@ -205,5 +203,5 @@ void CWind_win32::DrawWin32( HDC hdc )
 
 void CWind_win32::Quit()
 {
-	PostMessage(mhWnd ,WM_DESTROY,0,0);
+	PostMessage(mhWnd ,WM_CLOSE,0,0);
 }
