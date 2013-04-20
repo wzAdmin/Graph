@@ -17,11 +17,7 @@ CUIFrame::~CUIFrame(void)
 {
 	WinIterator it = mWinds.begin();
 	for( ; mWinds.end() != it ; it++)
-	{
-		CUIWindow* pWnd = it->second;
-		mWinds.erase(it);
-		delete pWnd;
-	}
+		delete it->second;
 	delete mObjFactory;
 }
 
@@ -49,7 +45,7 @@ void CUIFrame::StartWindow( Style_Window id )
 	mWinds.insert(std::pair<WindID,CUIWindow*>(pWind->GetID(),pWind));
 	((CUIWindow*)pWind)->Run();
 #else
-	error("not implement");
+#error("UIFrame::StartWindow not implement");
 #endif
 }
 
@@ -61,8 +57,10 @@ CUIWindow* CUIFrame::GetWindow( WindID id )
 	return NULL;
 }
 
-void CUIFrame::DestroyWnd( CUIWindow* pWnd )
+
+void CUIFrame::Exit()
 {
-	if(pWnd)
-		EndWindow(pWnd->GetID());
+	WinIterator it = mWinds.begin();
+	for( ; mWinds.end() != it ; it++)
+		it->second->Quit();
 }

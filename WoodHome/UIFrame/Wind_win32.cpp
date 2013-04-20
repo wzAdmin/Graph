@@ -10,7 +10,7 @@ struct BITHEADER : BITMAPINFOHEADER
 	unsigned int mask[256];
 };
 
-CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id),mbDestroyed(false)
+CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
 {
 	mInputCount = 0;
 	WNDCLASSEX wcex;
@@ -106,8 +106,6 @@ void CWind_win32::Run()
 LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
 	CWind_win32* pwnd = (CWind_win32*)sUIFrame.GetWindow(WindID(hWnd));
-	if(pwnd && pwnd->mbDestroyed)
-		DebugTrace("ERROR\n");
 	PAINTSTRUCT ps;
 	HDC hdc;
 	SystemMessage mss;
@@ -121,15 +119,8 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 		}
 		break;
 	case WM_DESTROY:
-		if(!pwnd)
-			DebugTrace("WM_DESTROY NULL WND!");
-		if(pwnd &&pwnd->mbDestroyed)
-			DebugTrace("WM_DESTROY TWICE");
 		if(pwnd)
-		{
-			pwnd->mbDestroyed = true;
-			sUIFrame.DestroyWnd(pwnd);
-		}
+			sUIFrame.EndWindow(pwnd->GetID());
 		PostQuitMessage(0);
 		break;
 	case WM_MOUSEMOVE:

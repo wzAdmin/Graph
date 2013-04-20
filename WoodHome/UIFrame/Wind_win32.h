@@ -22,7 +22,6 @@ private:
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 private:
 	HWND mhWnd;
-	bool mbDestroyed;
 	wchar_t mInputChar[MAX_INPUT_WORDS];
 	int mInputCount;
 };
