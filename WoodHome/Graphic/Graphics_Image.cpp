@@ -118,7 +118,7 @@ void CGraphics::DrawImage_Scale(const CImageBuffer* pImage , const CBound& srcBo
 	int srcHeight= src.Height();
 	int stride = Stride();
 
-	unsigned short* psrcX = (unsigned short*)malloc(sizeof(unsigned short)*(endX-beginX)*2);
+	unsigned short* psrcX = (unsigned short*)MALLOC_LEAKCHECK(sizeof(unsigned short)*(endX-beginX)*2);
 	int tempX = endX;
 	for (int i = beginX ; i < endX ; i++)
 	{
@@ -129,7 +129,7 @@ void CGraphics::DrawImage_Scale(const CImageBuffer* pImage , const CBound& srcBo
 			tempX = i;
 		}
 	}
-	unsigned short* psrcY = (unsigned short*)malloc(sizeof(unsigned short)*(endY - beginY)*2);
+	unsigned short* psrcY = (unsigned short*)MALLOC_LEAKCHECK(sizeof(unsigned short)*(endY - beginY)*2);
 	int tempY = endY;
 	for (int i = beginY ; i < endY ; i++)
 	{
@@ -252,8 +252,8 @@ void CGraphics::DrawImage_Scale(const CImageBuffer* pImage , const CBound& srcBo
 			}
 		}
 	}
-	free(psrcX);
-	free(psrcY);
+	FREE_LEAKCHECK(psrcX);
+	FREE_LEAKCHECK(psrcY);
 }
 
 void CGraphics::DrawImage( const CImageBuffer* pImage ,const CTransfrom& tf ,const CBound* srcBound /*= NULL*/, const CBound* clipBuond /*= NULL*/ )

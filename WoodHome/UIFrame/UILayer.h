@@ -9,7 +9,7 @@ public:
 	~CUILayer(void);
 public:
 	void LoadFromFile(SourceID id);
-	static CUIObject* Create(){return new CUILayer;}
+	static CUIObject* Create(){return NEW_LEAKCHECK CUILayer;}
 protected:
 	virtual void LoadSelf(const slim::XmlNode* node);
 	virtual void Load(const slim::XmlNode* node);

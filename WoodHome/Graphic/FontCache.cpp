@@ -3,15 +3,15 @@
 
 CFontCache::CFontCache(int cacheWidth, int cacheHeight):mBigFont(NULL)
 {
-	mCache = new CGrayImage(cacheWidth , cacheHeight);
+	mCache = NEW_LEAKCHECK CGrayImage(cacheWidth , cacheHeight);
 	Init();
 }
 
 
 CFontCache::~CFontCache(void)
 {
-	delete mBigFont;
-	delete mCache;
+	DELETE_LEAKCHECK(mBigFont);
+	DELETE_LEAKCHECK(mCache);
 }
 
  FontImage CFontCache::GetFontImage(unsigned short charCode,int width,int height) const
@@ -114,8 +114,8 @@ FontImage CFontCache::GetBigFont( const FT_GlyphSlot slot)
 	else
 	{
 		if(mBigFont)
-			delete mBigFont;
-		mBigFont = new CGrayImage(slot->bitmap.width,slot->bitmap.rows);
+			DELETE_LEAKCHECK(mBigFont);
+		mBigFont = NEW_LEAKCHECK CGrayImage(slot->bitmap.width,slot->bitmap.rows);
 		mBigFont->Set(slot->bitmap.buffer, slot->bitmap.width , slot->bitmap.rows, 0, 0);
 	}
 	FontImage ftImage;

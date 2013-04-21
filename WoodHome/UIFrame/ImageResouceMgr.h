@@ -15,6 +15,7 @@ public:
 	static CImageResouceMgr& Instance();
 public:
 	CImageBuffer* GetImage(SourceID id);
+	void Destroy();
 private:
 	CImageBuffer* LoadFormFile(SourceID id);
 	void Add(SourceID id ,CImageBuffer* pImage);

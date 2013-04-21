@@ -7,24 +7,21 @@
 #include "WindConfig.h"
 #include "Trace.h"
 #include "TimerManager.h"
+#include "ImageResouceMgr.h"
+#include "FontConfig.h"
 
 CUIFrame::CUIFrame(void):mValidID(0),mbRunning(false)
 {
-	mObjFactory = new CUIObjectFactory();
+	mObjFactory = NEW_LEAKCHECK CUIObjectFactory();
 	sFilesystem.Open("Out/Image");
-	mWindConfig = new CWindConfig;
-	mTimerMgr = new CTimerManager;
+	mWindConfig = NEW_LEAKCHECK CWindConfig;
+	mTimerMgr = NEW_LEAKCHECK CTimerManager;
 }
 
 
 CUIFrame::~CUIFrame(void)
 {
-	delete mTimerMgr;
-	delete mWindConfig;
-	WinIterator it = mWinds.begin();
-	for( ; mWinds.end() != it ; it++)
-		delete it->second;
-	delete mObjFactory;
+
 }
 
 CUIFrame& CUIFrame::Instance()
@@ -46,7 +43,7 @@ void CUIFrame::EndWindow( WindID id )
 void CUIFrame::StartWindow( Style_Window id )
 {
 #ifdef WIN32
-	CUIWindow* pWind = new CWind_win32(id);
+	CUIWindow* pWind = NEW_LEAKCHECK CWind_win32(id);
 	mWinds.insert(std::pair<WindID,CUIWindow*>(pWind->GetID(),pWind));
 	((CUIWindow*)pWind)->Start();
 #else
@@ -83,7 +80,7 @@ void CUIFrame::Run()
 	{
 		while (mWindwosTobeDelete.size())
 		{
-			delete mWindwosTobeDelete.front();
+			DELETE_LEAKCHECK(mWindwosTobeDelete.front());
 			mWindwosTobeDelete.pop_front();
 		}
 		while (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
@@ -96,7 +93,7 @@ void CUIFrame::Run()
 	}
 	while (mWindwosTobeDelete.size())
 	{
-		delete mWindwosTobeDelete.front();
+		DELETE_LEAKCHECK(mWindwosTobeDelete.front());
 		mWindwosTobeDelete.pop_front();
 	}
 }
@@ -120,4 +117,21 @@ void CUIFrame::AddWindowToDelete( CUIWindow* pwnd )
 void CUIFrame::InitWindStyle( SourceID styleconfig )
 {
 	mWindConfig->Init(styleconfig);
+}
+
+void CUIFrame::Destroy()
+{
+	sFilesystem.Close();
+	sImageResource.Destroy();
+	sFontConfig.Destroy();
+	DELETE_LEAKCHECK(mTimerMgr);
+	mTimerMgr = NULL;
+	DELETE_LEAKCHECK(mWindConfig);
+	mWindConfig = NULL;
+	WinIterator it = mWinds.begin();
+	for( ; mWinds.end() != it ; it++)
+		DELETE_LEAKCHECK(it->second);
+	mWinds.clear();
+	DELETE_LEAKCHECK(mObjFactory);
+	mObjFactory = NULL;
 }

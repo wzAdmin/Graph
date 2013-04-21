@@ -25,6 +25,7 @@ private:
 public:
 	static CFileSystem& Instance();
 	void Open(const char* dataPath);
+	void Close();
 	Sourceitem GetSource(SourceID id);
 	void LoadSource(const Sourceitem& item , char* data);
 private:

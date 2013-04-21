@@ -10,6 +10,7 @@ private:
 public:
 	void Load(SourceID id);
 	static CFontConfig& Instance();
+	void Destroy();
 public:
 	 const Font* GetFont(int id);
 private:

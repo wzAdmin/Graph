@@ -13,7 +13,7 @@ class CUIButton :
 	public CUIObject
 {
 public:
-	static CUIObject* Create(){return new CUIButton;}
+	static CUIObject* Create(){return NEW_LEAKCHECK CUIButton;}
 	CUIButton(void);
 	~CUIButton(void);
 	void AddClickListen(CUIObject* pobj,OnBtnClick func){mListener = pobj ; mOnClickFunc=func;}

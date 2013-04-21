@@ -4,12 +4,12 @@
 CGrayImage::CGrayImage(int width ,int height):
 mWidth(width),mHeight(height)
 {
-	mData = (unsigned char*)malloc(height*width);
+	mData = (unsigned char*)MALLOC_LEAKCHECK(height*width);
 }
 
 CGrayImage::~CGrayImage()
 {
-	free(mData);
+	FREE_LEAKCHECK(mData);
 }
 
 void CGrayImage::Set(unsigned char* pData,int width,int height,int x,int y)

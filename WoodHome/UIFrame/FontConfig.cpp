@@ -19,7 +19,7 @@ CFontConfig::CFontConfig(void):mFonts(NULL),mFontCount(0)
 
 CFontConfig::~CFontConfig(void)
 {
-	delete[] mFonts;
+	Destroy();
 }
 
 void CFontConfig::Load(SourceID id)
@@ -27,15 +27,15 @@ void CFontConfig::Load(SourceID id)
 	slim::XmlDocument doc;
 	Sourceitem item = sFilesystem.GetSource(id);
 
-	char* data = new char[item.length];
+	char* data = NEW_LEAKCHECK char[item.length];
 	sFilesystem.LoadSource(item,data);
 	doc.loadFromMemory(data,item.length);
-	delete[] data;
+	DELETEARR_LEAKCHECK(data);
 
 	slim::NodeIterator nodeit;
 	slim::XmlNode* root = doc.getFirstChild(nodeit);
 	mFontCount = root->readAttributeAsInt("Count");
-	mFonts = new Font[mFontCount];
+	mFonts = NEW_LEAKCHECK Font[mFontCount];
 	slim::XmlNode* child = root->getFirstChild(nodeit);
 	while (child)
 	{
@@ -60,4 +60,13 @@ CFontConfig& CFontConfig::Instance()
 {
 	static CFontConfig ftconf;
 	return ftconf;
+}
+
+void CFontConfig::Destroy()
+{
+	if(mFonts)
+	{
+		DELETEARR_LEAKCHECK(mFonts);
+		mFonts = NULL;
+	}
 }

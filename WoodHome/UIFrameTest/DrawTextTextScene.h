@@ -4,7 +4,7 @@ class CDrawTextTextScene :
 	public CScene
 {
 public:
-	static CUIObject* Create(){return new CDrawTextTextScene;}
+	static CUIObject* Create(){return NEW_LEAKCHECK CDrawTextTextScene;}
 	CDrawTextTextScene(void);
 	~CDrawTextTextScene(void);
 private:

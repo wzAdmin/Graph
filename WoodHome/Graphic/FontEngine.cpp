@@ -2,22 +2,15 @@
 #include "FontCache.h"
 #include <assert.h>
 #include "Memory_Check.h"
-CFontEngine::CFontEngine(void)
+CFontEngine::CFontEngine(void):mCache(NULL)
 {
-	FT_Error error = FT_Init_FreeType(&mFtlib);
-	assert(0 == error);
-	error = FT_New_Face(mFtlib,"msyh.ttf",0,&mFace);
-	assert(0 == error); 
-	mCache = new CFontCache(1024,1024);
+
 }
 
 CFontEngine::~CFontEngine(void)
 {
-	delete mCache;
-	FT_Error error = FT_Done_Face(mFace);
-	assert(0 == error);
-	error = FT_Done_FreeType(mFtlib);
-	assert(0 == error);
+	if(mCache)
+		Destroy();
 }
 
 
@@ -39,4 +32,24 @@ CFontEngine& CFontEngine::Instance()
 {
 	static CFontEngine engine;
 	return engine;
+}
+
+void CFontEngine::Destroy()
+{
+	DELETE_LEAKCHECK(mCache);
+	mCache = NULL;
+	FT_Error error = FT_Done_Face(mFace);
+	assert(0 == error);
+	error = FT_Done_FreeType(mFtlib);
+	assert(0 == error);
+}
+
+bool CFontEngine::Init( const char* fontpath )
+{
+	FT_Error error = FT_Init_FreeType(&mFtlib);
+	assert(0 == error);
+	error = FT_New_Face(mFtlib,fontpath,0,&mFace);
+	assert(0 == error); 
+	mCache = NEW_LEAKCHECK CFontCache(1024,1024);
+	return 0==error;
 }

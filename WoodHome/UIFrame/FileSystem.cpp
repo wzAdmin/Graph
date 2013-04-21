@@ -1,6 +1,7 @@
 #include "FileSystem.h"
 #include "UIFile.h"
 #include <memory>
+#include "Memory_Check.h"
 
 CFileSystem::CFileSystem(void):mFile(NULL),mIndexData(NULL)
 {
@@ -9,15 +10,17 @@ CFileSystem::CFileSystem(void):mFile(NULL),mIndexData(NULL)
 
 CFileSystem::~CFileSystem(void)
 {
+	if(mFile)
+		Close();
 }
 
 void CFileSystem::Open( const char* dataPath )
 {
-	mFile = new CUIFile;
+	mFile = NEW_LEAKCHECK CUIFile;
 	mFile->Open(dataPath,"rb");
 	int Count = 0;
 	mFile->Read(&Count,0,4);
-	mIndexData = new char[Count * 9];
+	mIndexData = NEW_LEAKCHECK char[Count * 9];
 	mFile->Read(mIndexData , 4,Count*9);
 }
 
@@ -39,4 +42,14 @@ CFileSystem& CFileSystem::Instance()
 {
 	static CFileSystem fs;
 	return fs;
+}
+
+void CFileSystem::Close()
+{
+	if(mFile)
+	{
+		DELETE_LEAKCHECK(mFile);
+		DELETEARR_LEAKCHECK(mIndexData);
+		mFile = NULL;
+	}
 }

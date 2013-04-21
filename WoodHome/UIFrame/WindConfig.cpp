@@ -2,7 +2,7 @@
 #include "FileSystem.h"
 #include "SlimXml.h"
 #include "Trace.h"
-
+#include "Memory_Check.h"
 CWindConfig::CWindConfig(void)
 {
 }
@@ -15,11 +15,11 @@ CWindConfig::~CWindConfig(void)
 void CWindConfig::Init( SourceID config )
 {
 	Sourceitem item = sFilesystem.GetSource(config);
-	char* data = new char[item.length];
+	char* data = NEW_LEAKCHECK char[item.length];
 	sFilesystem.LoadSource(item,data);
 	slim::XmlDocument doc;
 	doc.loadFromMemory(data,item.length);
-	delete[] data;
+	DELETEARR_LEAKCHECK(data);
 	slim::NodeIterator it;
 	slim::XmlNode* root = doc.getFirstChild(it);
 	slim::XmlNode* child = root->getFirstChild(it);

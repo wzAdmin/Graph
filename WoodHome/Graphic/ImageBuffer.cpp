@@ -12,17 +12,17 @@ mHeight(0)
 
 CImageBuffer::~CImageBuffer(void)
 {
-	free(mData);
-	free(mAlpha);
+	FREE_LEAKCHECK(mData);
+	FREE_LEAKCHECK(mAlpha);
 }
 
 void CImageBuffer::Initialize( int width , int height, bool hasAlpha )
 {
 	mWidth = width;
 	mHeight = height;
-	mData = (unsigned short*)malloc(Stride()*height*sizeof(unsigned short));
+	mData = (unsigned short*)MALLOC_LEAKCHECK(Stride()*height*sizeof(unsigned short));
 	if(hasAlpha)
-		mAlpha = (unsigned char*)malloc(width*height);
+		mAlpha = (unsigned char*)MALLOC_LEAKCHECK(width*height);
 }
 
 void CImageBuffer::ClearColor( COLORARGB color )
@@ -36,12 +36,12 @@ void CImageBuffer::Load( const char* path )
 	FILE* hFile = fopen(path,"rb");
 	fseek(hFile , 0 , SEEK_END);
 	int length = ftell(hFile);
-	char* data = (char*)malloc(length);
+	char* data = (char*)MALLOC_LEAKCHECK(length);
 	fseek(hFile , 0 , SEEK_SET);
 	int ZI = fread(data,1,length,hFile);
 	fclose(hFile);
 	LoadFromMem(data,length);
-	free(data);
+	FREE_LEAKCHECK(data);
 }
 
 int CImageBuffer::GetSize()

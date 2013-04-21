@@ -1,4 +1,5 @@
 #pragma once
+#include "Memory_Check.h"
 #ifdef _DLL
 #define GRAPHIC_API _declspec(dllexport)
 #else

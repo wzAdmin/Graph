@@ -80,7 +80,7 @@ void CImage_JPG::LoadFromMem(const char* data , int len)
 										JPOOL_IMAGE, row_stride, 1);
 
 	// allocate returned buffer
-	char* image_data = (char*)malloc(mHeight * row_stride * sizeof(char));
+	char* image_data = (char*)MALLOC_LEAKCHECK(mHeight * row_stride * sizeof(char));
 	char* tmp = image_data;
 
 	/*
@@ -104,5 +104,5 @@ void CImage_JPG::LoadFromMem(const char* data , int len)
 	// This is an important step since it will release a good deal of memory
 	jpeg_destroy_decompress(&cinfo);
 	To565(image_data);
-	free(image_data);
+	FREE_LEAKCHECK(image_data);
 }

@@ -11,11 +11,7 @@ CImageResouceMgr::CImageResouceMgr(void):mCachedSize(0),mMaxCacheSize(sDefualtMa
 
 CImageResouceMgr::~CImageResouceMgr(void)
 {
-	std::map<SourceID,CImageBuffer*>::iterator it = mImages.begin();
-	for ( ; mImages.end() != it; it++)
-	{
-		delete it->second;
-	}
+	Destroy();
 }
 
 CImageResouceMgr& CImageResouceMgr::Instance()
@@ -53,22 +49,22 @@ CImageBuffer* CImageResouceMgr::GetImage( SourceID id )
 CImageBuffer* CImageResouceMgr::LoadFormFile( SourceID id )
 {
 	Sourceitem it = sFilesystem.GetSource(id);
-	char* data = new char[it.length];
+	char* data = NEW_LEAKCHECK char[it.length];
 	sFilesystem.LoadSource(it,data);
 	CImageBuffer* pImage = NULL;
 	switch (it.format)
 	{
 	case FM_PNG:
-		pImage = new CImage_PNG;
+		pImage = NEW_LEAKCHECK CImage_PNG;
 		break;
 	case FM_JPG:
-		pImage = new CImage_JPG;
+		pImage = NEW_LEAKCHECK CImage_JPG;
 		break;
 	default:
 		return NULL;
 	}
 	pImage->LoadFromMem(data,it.length);
-	delete[] data;
+	DELETEARR_LEAKCHECK(data);
 	return pImage;
 }
 
@@ -79,10 +75,20 @@ void CImageResouceMgr::Add( SourceID id ,CImageBuffer* pImage )
 	{
 		std::map<SourceID,CImageBuffer*>::iterator it = mImages.find(mUseLasted.back());
 		mCachedSize -= it->second->GetSize();
-		delete it->second;
+		DELETE_LEAKCHECK(it->second);
 		mUseLasted.pop_back();
 		mImages.erase(it);
 	}
 	mCachedSize += pImage->GetSize();
 	mUseLasted.push_front(id);
+}
+
+void CImageResouceMgr::Destroy()
+{
+	std::map<SourceID,CImageBuffer*>::iterator it = mImages.begin();
+	for ( ; mImages.end() != it; it++)
+	{
+		DELETE_LEAKCHECK(it->second);
+	}
+	mImages.clear();
 }

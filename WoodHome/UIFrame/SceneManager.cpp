@@ -16,7 +16,7 @@ CSceneManager::~CSceneManager(void)
 	SceneMapItor it = mScenes.begin();
 	for ( ; mScenes.end() != it ; it++)
 	{
-		delete it->second;
+		DELETE_LEAKCHECK(it->second);
 	}
 }
 
@@ -58,11 +58,11 @@ CScene* CSceneManager::GetCurScene()
 CScene* CSceneManager::CreatScene( SourceID sceneid )
 {
 	Sourceitem item = sFilesystem.GetSource(sceneid);
-	char* pdata = new char[item.length];
+	char* pdata = NEW_LEAKCHECK char[item.length];
 	sFilesystem.LoadSource(item,pdata);
 	slim::XmlDocument doc;
 	doc.loadFromMemory(pdata,item.length);
-	delete[] pdata;
+	DELETEARR_LEAKCHECK(pdata);
 	slim::NodeIterator nodeit ;
 	slim::XmlNode* child = doc.getFirstChild(nodeit);
 	CScene* pScene = (CScene*)sUIFrame.GetObjFactory()->CreateObject(child->getName());

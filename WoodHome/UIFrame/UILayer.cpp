@@ -17,14 +17,14 @@ void CUILayer::LoadFromFile( SourceID id )
 {
 	Sourceitem item = sFilesystem.GetSource(id);
 	assert(item.format == FM_SCENE || item.format == FM_LAYER);
-	char* data = new char[item.length];
+	char* data = NEW_LEAKCHECK char[item.length];
 	sFilesystem.LoadSource(item,data);
 	slim::XmlDocument doc;
 	doc.loadFromMemory(data,item.length);
 	slim::NodeIterator it;
 	slim::XmlNode* root = doc.getFirstChild(it);
 	CUIContainer::Load(root);
-	delete[] data;
+	DELETEARR_LEAKCHECK(data);
 }
 
 void CUILayer::LoadSelf( const slim::XmlNode* node )

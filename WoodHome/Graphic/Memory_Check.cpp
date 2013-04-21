@@ -2,10 +2,10 @@
 #include <assert.h>
 #include <stdlib.h>
 #include "GraphicType.h"
-
+#include "Trace.h"
+#if defined(_DEBUG) || defined(DEBUG)
 #define MEMORY_RECORD_INDEX_SIZE 0x10000
 #define MEMORY_RECORD_INDEX_MASK 0xFFFF
-//extern "C"{
 typedef struct _MemoryRecord {
 	void* startadress;
 	int Memsize;
@@ -24,8 +24,9 @@ public:
 	}
 	~Hash_MemoryRecord()
 	{
-
+		Printmem();
 	}
+
 	void Insert(MemoryRecord* record)
 	{
 		int index = int(record->startadress) & MEMORY_RECORD_INDEX_MASK;
@@ -75,7 +76,7 @@ public:
 
 static Hash_MemoryRecord sMemRecords;
 
-extern "C" GRAPHIC_API void*  DebugNew(size_t n, const char* file, int line)
+GRAPHIC_API void*  DebugNew(size_t n, const char* file, int line)
 {
 	void* p = ::malloc(n);
 	MemoryRecord* record = ::new MemoryRecord;
@@ -87,7 +88,7 @@ extern "C" GRAPHIC_API void*  DebugNew(size_t n, const char* file, int line)
 	sMemRecords.Insert(record);
 	return p;
 }
-extern "C" GRAPHIC_API void* DebugNewArray(size_t n, const char* file, int line)
+GRAPHIC_API void* DebugNewArray(size_t n, const char* file, int line)
 {
 	void* p = ::malloc(n);
 	MemoryRecord* record = ::new MemoryRecord;
@@ -100,26 +101,24 @@ extern "C" GRAPHIC_API void* DebugNewArray(size_t n, const char* file, int line)
 	return p;
 }
 
-extern "C" GRAPHIC_API void  DebugDel(void* p)
+GRAPHIC_API void  DebugDel(void* p)
 {
 	if(!p)
 		return ;
 	const MemoryRecord* record = sMemRecords.FindRecord(p);
 	assert( record && record->type == "new" );
 	sMemRecords.RemoveRecord(record);
-	::free(p);
 }
-extern "C" GRAPHIC_API void  DebugDelArray(void* p)
+GRAPHIC_API void  DebugDelArray(void* p)
 {
 	if(!p)
 		return ;
 	const MemoryRecord* record = sMemRecords.FindRecord(p);
 	assert( record && record->type == "new[]" );
 	sMemRecords.RemoveRecord(record);
-	::free(p);
 }
 
-extern "C" GRAPHIC_API void*  DbgMalloc(size_t n, const char* file, int line)
+GRAPHIC_API void*  DbgMalloc(size_t n, const char* file, int line)
 {
 	void* p = ::malloc(n);
 	MemoryRecord* record = ::new MemoryRecord;
@@ -131,7 +130,7 @@ extern "C" GRAPHIC_API void*  DbgMalloc(size_t n, const char* file, int line)
 	sMemRecords.Insert(record);
 	return p;
 }
-extern "C" GRAPHIC_API void  DbgFree(void* p)
+GRAPHIC_API void  DbgFree(void* p)
 {
 	if(!p)
 		return ;
@@ -140,4 +139,23 @@ extern "C" GRAPHIC_API void  DbgFree(void* p)
 	sMemRecords.RemoveRecord(record);
 	::free(p);
 }
-//};
+
+GRAPHIC_API void Printmem() 
+{
+	DebugTrace("MemMaxUsed not include external libs %d bytes\n",sMemRecords.MemMaxUsed);
+	DebugTrace("MemLeak not include external libs %d bytes\n",sMemRecords.MemCurUsed);
+	if(sMemRecords.MemCurUsed)
+	{
+		for (int i = 0 ;  i < MEMORY_RECORD_INDEX_SIZE ; i++)
+		{
+			MemoryRecord* r = sMemRecords.mHashIndex[i];
+			while (r)
+			{
+				DebugTrace("File %s line %d leak %d bytes\n",r->file,r->line,r->Memsize);
+				r = r->next;
+			}
+
+		}
+	}
+}
+#endif

@@ -4,8 +4,8 @@
 #include <memory.h>
 #include <stdlib.h>
 #include "utils.h"
-
 #include "Memory_Check.h"
+
 CGraphics::CGraphics(  CImageBuffer* image )
 {
 	Initialize(image);
@@ -14,14 +14,14 @@ CGraphics::CGraphics(  CImageBuffer* image )
 
 CGraphics::~CGraphics(void)
 {
-	delete mClip;
+	DELETE_LEAKCHECK(mClip);
 }
 
 void CGraphics::Initialize(  CImageBuffer* image)
 {
 	mWidth = image->Width();
 	mHeight = image->Height();
-	mClip = new CClipUtils(0 , 0 , mWidth - 1, mHeight - 1);
+	mClip = NEW_LEAKCHECK CClipUtils(0 , 0 , mWidth - 1, mHeight - 1);
 	mpFrambuffer = const_cast<unsigned short*>(image->GetPixels());
 	mImagebuffer = image;
 }

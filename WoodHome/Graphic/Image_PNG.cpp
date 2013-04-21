@@ -71,17 +71,17 @@ void CImage_PNG::LoadFromMem( const char* data , int len)
 	// allocate memory for rows
 	png_uint_32 rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 	char* image_data = NULL;
-	if ((image_data = (char*)malloc(height * rowbytes)) == NULL) {
+	if ((image_data = (char*)MALLOC_LEAKCHECK(height * rowbytes)) == NULL) {
 		LOGW("allocate png data buffer failed");
 		png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
 	}
 
 	// allocate memory for row pointers
 	png_bytepp row_pointers;
-	if ((row_pointers = (png_bytepp)malloc( height * sizeof(png_bytep))) == NULL) {
+	if ((row_pointers = (png_bytepp)MALLOC_LEAKCHECK( height * sizeof(png_bytep))) == NULL) {
 		LOGW("allocate png row pointer buffer failed");
 		png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-		free(image_data);
+		FREE_LEAKCHECK(image_data);
 		image_data = NULL;
 	}
 
@@ -89,11 +89,11 @@ void CImage_PNG::LoadFromMem( const char* data , int len)
 	for (png_uint_32 i = 0; i < height; i++)
 		row_pointers[i] = (png_bytep)(image_data + i * rowbytes);
 	png_read_image(png_ptr, row_pointers);
-	free(row_pointers);
+	FREE_LEAKCHECK(row_pointers);
 	png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
 	Initialize(width , height ,true);
 	To565(image_data);
-	free(image_data);
+	FREE_LEAKCHECK(image_data);
 }
 
 

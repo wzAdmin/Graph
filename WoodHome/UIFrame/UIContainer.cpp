@@ -12,6 +12,8 @@ CUIContainer::CUIContainer(void):mFcousedObj(NULL)
 
 CUIContainer::~CUIContainer(void)
 {
+	for (unsigned int i = 0; i < mChilds.size(); i++)
+		DELETE_LEAKCHECK(mChilds[i]);
 }
 
 void CUIContainer::Draw( CGraphics* pGraphic )
@@ -46,7 +48,7 @@ void CUIContainer::AddChild( CUIObject* child )
 void CUIContainer::Clear()
 {
 	for (unsigned int i  = 0 ; i <  mChilds.size(); i++)
-		delete mChilds[i];
+		DELETE_LEAKCHECK(mChilds[i]);
 	mChilds.clear();
 }
 

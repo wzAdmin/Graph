@@ -24,6 +24,7 @@ public:
 	void InitWindStyle(SourceID styleconfig);
 	CWindConfig* GetWindCof(){return mWindConfig;}
 	CTimerManager* GetTimerMgr() {return mTimerMgr;}
+	void Destroy();
 private:
 	CUIObjectFactory* mObjFactory;
 	typedef std::map<WindID,CUIWindow*>::iterator WinIterator;

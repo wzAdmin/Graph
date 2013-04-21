@@ -9,23 +9,23 @@
 CUIWindow::CUIWindow(Style_Window id)
 {
 	const WindowConfig* cf = sUIFrame.GetWindCof()->GetConfig(id);
-	mSceneManager = new CSceneManager(this);
+	mSceneManager = NEW_LEAKCHECK CSceneManager(this);
 	mHeight = cf->height;
 	mWidth = cf->width;
 	mStartSceneID = cf->startScene;
 	mPositionX = cf->x;
 	mPositionY = cf->y;
-	mFramebuffer = new CImageBuffer;
+	mFramebuffer = NEW_LEAKCHECK CImageBuffer;
 	mFramebuffer->Initialize(mWidth , mHeight , false);
-	mGraphic = new CGraphics(mFramebuffer);
+	mGraphic = NEW_LEAKCHECK CGraphics(mFramebuffer);
 }
 
 
 CUIWindow::~CUIWindow(void)
 {
-	delete mGraphic;
-	delete mFramebuffer;
-	delete mSceneManager;
+	DELETE_LEAKCHECK(mGraphic);
+	DELETE_LEAKCHECK(mFramebuffer);
+	DELETE_LEAKCHECK(mSceneManager);
 }
 
 void CUIWindow::DispatchSysMessage( const SystemMessage& msg )

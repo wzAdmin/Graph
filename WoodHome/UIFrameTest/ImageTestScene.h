@@ -4,7 +4,7 @@ class CImageTestScene :
 	public CScene
 {
 public:
-	static CUIObject* Create(){return new CImageTestScene;}
+	static CUIObject* Create(){return NEW_LEAKCHECK CImageTestScene;}
 	CImageTestScene(void);
 	~CImageTestScene(void);
 private:

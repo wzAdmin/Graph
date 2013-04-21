@@ -5,7 +5,7 @@ class CStartScene :
 	public CScene , public ITimerListener
 {
 public:
-	static CUIObject* Create(){return new CStartScene;}
+	static CUIObject* Create(){return NEW_LEAKCHECK CStartScene;}
 	CStartScene(void);
 	~CStartScene(void);
 private:

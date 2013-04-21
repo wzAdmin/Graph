@@ -9,7 +9,7 @@ class UI_API CScene :
 public:
 	CScene();
 	~CScene(void);
-	static CUIObject* Create(){return new CScene;}
+	static CUIObject* Create(){return NEW_LEAKCHECK CScene;}
 public:
 	virtual void Draw(CGraphics* pGraphic);
 	virtual void DrawToWindow();
