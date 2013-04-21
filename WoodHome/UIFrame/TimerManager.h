@@ -1,4 +1,5 @@
 #pragma once
+#include "pthread.h"
 #include <map>
 typedef int TimerID;
 class ITimerListener
@@ -23,7 +24,7 @@ public:
 	void RemoveTimer(TimerID id);
 	void OnTimer(TimerID id);
 private:
-	static int TimerThreadFunc(void* param);
+	static void* TimerThreadFunc(void* param);
 private:
 	typedef std::map<TimerID ,Timer>::iterator TimerIterator;
 	typedef std::pair<TimerID ,Timer> TimerPair;
@@ -31,6 +32,9 @@ private:
 	TimerID mCurValiadID;
 	bool mbRunning;
 
+	pthread_t mThreadId;
+	pthread_mutex_t mCondMutex;
+	pthread_cond_t  mCond;
 	//the min interval is 10ms
 	static const int sMinInterval = 10;
 };

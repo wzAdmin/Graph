@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 
+class CTimerManager;
 class CWindConfig;
 class CUIObjectFactory;
 class UI_API CUIFrame
@@ -29,6 +30,7 @@ private:
 	int mValidID;
 	std::list<CUIWindow*> mWindwosTobeDelete;
 	CWindConfig* mWindConfig;
+	CTimerManager* mTimerMgr;
 	bool mbRunning;
 };
 

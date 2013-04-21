@@ -6,17 +6,21 @@
 #include "Scene.h"
 #include "WindConfig.h"
 #include "Trace.h"
+#include "TimerManager.h"
 
 CUIFrame::CUIFrame(void):mValidID(0),mbRunning(false)
 {
 	mObjFactory = new CUIObjectFactory();
 	sFilesystem.Open("Out/Image");
 	mWindConfig = new CWindConfig;
+	mTimerMgr = new CTimerManager;
+	mTimerMgr->Start();
 }
 
 
 CUIFrame::~CUIFrame(void)
 {
+	delete mTimerMgr;
 	delete mWindConfig;
 	WinIterator it = mWinds.begin();
 	for( ; mWinds.end() != it ; it++)
