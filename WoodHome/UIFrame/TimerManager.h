@@ -1,8 +1,8 @@
 #pragma once
-#include "pthread.h"
 #include <map>
+#include "UItype.h"
 typedef int TimerID;
-class ITimerListener
+class UI_API ITimerListener
 {
 public:
 	virtual void OnTimer(TimerID timerid) = 0;
@@ -12,30 +12,27 @@ typedef struct _Timer
 	int interval_all;
 	int interval_cur;
 	ITimerListener* listener;
+	bool toBeremove;
 }Timer;
-class CTimerManager
+class UI_API CTimerManager
 {
 public:
 	CTimerManager(void);
 	~CTimerManager(void);
 public:
-	void Start();
 	TimerID CreateTimer(ITimerListener* listener,int  interval);
 	void RemoveTimer(TimerID id);
 	void OnTimer(TimerID id);
+	void TimerUpdate();
 private:
-	static void* TimerThreadFunc(void* param);
+	void RemoveTimer();
+	void AddTimer();
 private:
 	typedef std::map<TimerID ,Timer>::iterator TimerIterator;
 	typedef std::pair<TimerID ,Timer> TimerPair;
 	std::map<TimerID , Timer> mTimers;
+	std::map<TimerID , Timer> mTimersToAdd;
 	TimerID mCurValiadID;
-	bool mbRunning;
-
-	pthread_t mThreadId;
-	pthread_mutex_t mCondMutex;
-	pthread_cond_t  mCond;
-	//the min interval is 10ms
-	static const int sMinInterval = 10;
+	int mCurTime;
 };
 

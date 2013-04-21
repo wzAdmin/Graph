@@ -1,7 +1,8 @@
 #pragma once
 #include "Scene.h"
+#include "TimerManager.h"
 class CStartScene :
-	public CScene
+	public CScene , public ITimerListener
 {
 public:
 	static CUIObject* Create(){return new CStartScene;}
@@ -13,4 +14,7 @@ private:
 	void OnBtn2Click();
 	void OnBtn3Click();
 	void OnBtn4Click();
+	void OnTimer(TimerID timerid);
+private:
+	TimerID mtimerid;
 };

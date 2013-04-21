@@ -23,6 +23,7 @@ public:
 	void AddWindowToDelete(CUIWindow* pwnd);
 	void InitWindStyle(SourceID styleconfig);
 	CWindConfig* GetWindCof(){return mWindConfig;}
+	CTimerManager* GetTimerMgr() {return mTimerMgr;}
 private:
 	CUIObjectFactory* mObjFactory;
 	typedef std::map<WindID,CUIWindow*>::iterator WinIterator;

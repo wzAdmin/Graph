@@ -14,7 +14,6 @@ CUIFrame::CUIFrame(void):mValidID(0),mbRunning(false)
 	sFilesystem.Open("Out/Image");
 	mWindConfig = new CWindConfig;
 	mTimerMgr = new CTimerManager;
-	mTimerMgr->Start();
 }
 
 
@@ -71,7 +70,7 @@ void CUIFrame::Exit()
 		WinIterator it = mWinds.begin();
 		it->second->Quit();
 	}
-	PostQuitMessage(0);
+	mbRunning = false;
 }
 
 void CUIFrame::Run()
@@ -80,15 +79,20 @@ void CUIFrame::Run()
 		return;
 	mbRunning = true;
 	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (mbRunning)
 	{
 		while (mWindwosTobeDelete.size())
 		{
 			delete mWindwosTobeDelete.front();
 			mWindwosTobeDelete.pop_front();
 		}
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		while (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		mTimerMgr->TimerUpdate();
+		Sleep(20);
 	}
 	while (mWindwosTobeDelete.size())
 	{

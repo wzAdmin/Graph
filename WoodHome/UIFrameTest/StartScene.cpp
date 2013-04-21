@@ -28,6 +28,7 @@ void CStartScene::Load( const slim::XmlNode* node )
 	pbtn3->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn3Click);
 	CUIButton* pbtn4 = (CUIButton*)get("btn4");
 	pbtn4->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn4Click);
+	mtimerid = sUIFrame.GetTimerMgr()->CreateTimer(this,100);
 }
 
 void CStartScene::OnBtn3Click()
@@ -43,4 +44,9 @@ void CStartScene::OnBtn2Click()
 void CStartScene::OnBtn4Click()
 {
 	sUIFrame.Exit();
+}
+
+void CStartScene::OnTimer( TimerID timerid )
+{
+	DebugTrace("Timer come %d %d\n",timerid,mtimerid);
 }
