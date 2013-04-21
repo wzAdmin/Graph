@@ -15,13 +15,14 @@ CTimerManager::CTimerManager(void):mbRunning(false),mCurValiadID(1)
 
 CTimerManager::~CTimerManager(void)
 {
-	while (mbRunning)
+	if(mbRunning)
 	{
-		mbRunning = false;
-		Sleep(10);
+		void* re = NULL;
+	 	mbRunning = false;
+		pthread_join(mThreadId,&re);
 	}
-	pthread_cond_destroy(&mCond);
-	pthread_mutex_destroy(&mCondMutex);
+ 	pthread_cond_destroy(&mCond);
+ 	pthread_mutex_destroy(&mCondMutex);
 }
 void CTimerManager::Start()
 {
