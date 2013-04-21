@@ -22,7 +22,6 @@ public:
 public:
 	TimerID CreateTimer(ITimerListener* listener,int  interval);
 	void RemoveTimer(TimerID id);
-	void OnTimer(TimerID id);
 	void TimerUpdate();
 private:
 	void RemoveTimer();

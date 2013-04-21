@@ -17,7 +17,7 @@ void CTimerManager::TimerUpdate()
 	AddTimer();
 	int interval = GetTickCount() - mCurTime;
 	mCurTime = GetTickCount();
-	DebugTrace("Timermgr interval %d\n",interval);
+	DebugTrace(Trace_Info,"Timermgr interval %d\n",interval);
 	TimerIterator it = mTimers.begin();
 	for ( ; mTimers.end() != it ; it++)
 	{
@@ -38,7 +38,7 @@ void CTimerManager::RemoveTimer( TimerID id )
 		it->second.toBeremove = true;
 	else
 	{
-		DebugTrace("Timer %d not find\n",id);
+		DebugTrace(Trace_Warning,"Timer %d not find\n",id);
 	}
 }
 
@@ -67,16 +67,6 @@ TimerID CTimerManager::CreateTimer( ITimerListener* listener,int interval )
 	return id;
 }
 
-void CTimerManager::OnTimer( TimerID id )
-{
-	TimerIterator it = mTimers.find(id);
-	if(mTimers.end() != it)
-		it->second.listener->OnTimer(id);
-	else
-	{
-		DebugTrace("CTimerManager::OnTimer can not find the timer %d \n" ,id);
-	}
-}
 
 void CTimerManager::AddTimer()
 {

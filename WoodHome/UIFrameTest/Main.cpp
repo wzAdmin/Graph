@@ -8,7 +8,7 @@
 
 int main()
 {
-	DebugTrace("MainStarted\n");
+	DebugTrace(Trace_Normal,"MainStarted\n");
 	sFontEngine.Init("msyh.ttf");
 	sFontConfig.Load(USER_Font);
 	sUIFrame.InitWindStyle(USER_WindowStyle);

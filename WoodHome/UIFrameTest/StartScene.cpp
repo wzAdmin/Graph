@@ -13,7 +13,7 @@ CStartScene::~CStartScene(void)
 
 void CStartScene::OnBtn1Click()
 {
-	DebugTrace("notify Sucessfull\n");
+	DebugTrace(Trace_Info,"notify Sucessfull\n");
 	Goto(SCENE_DrawText);
 }
 
@@ -48,5 +48,5 @@ void CStartScene::OnBtn4Click()
 
 void CStartScene::OnTimer( TimerID timerid )
 {
-	DebugTrace("Timer come %d %d\n",timerid,mtimerid);
+	DebugTrace(Trace_Normal,"Timer come %d %d\n",timerid,mtimerid);
 }

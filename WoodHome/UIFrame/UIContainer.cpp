@@ -1,9 +1,9 @@
 
 #include "UIFrame.h"
 #include "UIContainer.h"
-#include "SlimXml.h"
 #include "UIObjectFactory.h"
 #include "Trace.h"
+#include "SlimXml.h"
 
 CUIContainer::CUIContainer(void):mFcousedObj(NULL)
 {
@@ -212,6 +212,6 @@ CUIObject* CUIContainer::get( const std::string& name )
 		if(name == mChilds[i]->Name())
 			return mChilds[i];
 	}
-	DebugTrace("%s Cant not find %s \n",Name().c_str(),name.c_str());
+	DebugTrace(Trace_Warning,"%s Cant not find %s \n",Name().c_str(),name.c_str());
 	return NULL;
 }

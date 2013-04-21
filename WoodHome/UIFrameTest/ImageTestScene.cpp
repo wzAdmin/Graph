@@ -34,7 +34,7 @@ void CImageTestScene::Draw( CGraphics* pGraphic )
 	bd.Top(100);
 	int a = GetTickCount();
 	pGraphic->DrawImage(pImage,tf,NULL,&bd);
-	DebugTrace("DrawTime:%d\n",GetTickCount() - a);
+	DebugTrace(Trace_Info,"DrawTime:%d\n",GetTickCount() - a);
 }
 
 void CImageTestScene::Load( const slim::XmlNode* node )

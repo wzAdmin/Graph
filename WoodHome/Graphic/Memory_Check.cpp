@@ -142,8 +142,8 @@ GRAPHIC_API void  DbgFree(void* p)
 
 GRAPHIC_API void Printmem() 
 {
-	DebugTrace("MemMaxUsed not include external libs %d bytes\n",sMemRecords.MemMaxUsed);
-	DebugTrace("MemLeak not include external libs %d bytes\n",sMemRecords.MemCurUsed);
+	DebugTrace(Trace_Error,"MemMaxUsed not include external libs %d bytes\n",sMemRecords.MemMaxUsed);
+	DebugTrace(Trace_Error,"MemLeak not include external libs %d bytes\n",sMemRecords.MemCurUsed);
 	if(sMemRecords.MemCurUsed)
 	{
 		for (int i = 0 ;  i < MEMORY_RECORD_INDEX_SIZE ; i++)
@@ -151,7 +151,7 @@ GRAPHIC_API void Printmem()
 			MemoryRecord* r = sMemRecords.mHashIndex[i];
 			while (r)
 			{
-				DebugTrace("File %s line %d leak %d bytes\n",r->file,r->line,r->Memsize);
+				DebugTrace(Trace_Error,"File %s line %d leak %d bytes\n",r->file,r->line,r->Memsize);
 				r = r->next;
 			}
 

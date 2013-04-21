@@ -110,7 +110,7 @@ void CUIFrame::AddWindowToDelete( CUIWindow* pwnd )
 			mWinds.erase(it);
 		}
 		else
-			assert(false || DebugTrace("no longer should come here!\n"));
+			assert(false || DebugTrace(Trace_Error,"no longer should come here!\n"));
 	}
 }
 

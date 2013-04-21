@@ -40,7 +40,7 @@ void CFontConfig::Load(SourceID id)
 	while (child)
 	{
 		int id = child->readAttributeAsInt("ID");
-		assert((id <= mFontCount && id > 0) || DebugTrace("id out of range in CFontConfig::Load"));
+		assert((id <= mFontCount && id > 0) || DebugTrace(Trace_Error,"id out of range in CFontConfig::Load"));
 		const char * color = child->readAttributeAsString("Color");
 		mFonts[id-1].color = strtol(color,NULL,16);
 		mFonts[id-1].height = child->readAttributeAsInt("Height");
@@ -51,8 +51,8 @@ void CFontConfig::Load(SourceID id)
 
  const Font* CFontConfig::GetFont( int id )
 {
-	assert(mFonts|| DebugTrace("mFonts is null in CFontConfig::GetFont"));
-	assert((id <= mFontCount && id > 0) || DebugTrace("id out of range in CFontConfig::GetFont"));
+	assert(mFonts|| DebugTrace(Trace_Error,"mFonts is null in CFontConfig::GetFont"));
+	assert((id <= mFontCount && id > 0) || DebugTrace(Trace_Error,"id out of range in CFontConfig::GetFont"));
 	return mFonts + id - 1;
 }
 

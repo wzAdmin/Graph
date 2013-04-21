@@ -1,7 +1,7 @@
 #include "WindConfig.h"
 #include "FileSystem.h"
-#include "SlimXml.h"
 #include "Trace.h"
+#include "SlimXml.h"
 #include "Memory_Check.h"
 CWindConfig::CWindConfig(void)
 {
@@ -39,12 +39,12 @@ void CWindConfig::Init( SourceID config )
 
 const WindowConfig* CWindConfig::GetConfig( Style_Window style ) const
 {
-	std::map<Style_Window,WindowConfig>::const_iterator it = mWindowStyles.find(style);
-	if(mWindowStyles.end() != it)
-		return &it->second;
-	else
-	{
-		DebugTrace("CWindConfig::GetConfig Con not find %d\n",style);
-		return NULL;
-	}
+  	std::map<Style_Window,WindowConfig>::const_iterator it = mWindowStyles.find(style);
+  	if(mWindowStyles.end() != it)
+  		return &it->second;
+  	else
+  	{
+  		DebugTrace(Trace_Warning,"CWindConfig::GetConfig Con not find %d\n",style);
+  		return NULL;
+  	}
 }
