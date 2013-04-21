@@ -15,6 +15,13 @@ CTimerManager::CTimerManager(void):mbRunning(false),mCurValiadID(1)
 
 CTimerManager::~CTimerManager(void)
 {
+	while (mbRunning)
+	{
+		mbRunning = false;
+		Sleep(10);
+	}
+	pthread_cond_destroy(&mCond);
+	pthread_mutex_destroy(&mCondMutex);
 }
 void CTimerManager::Start()
 {
@@ -39,7 +46,7 @@ void* CTimerManager::TimerThreadFunc( void* param )
 			long long ns100;
 			FILETIME ft;
 		} now;
-		printf("Timermanager is running %d \n",GetTickCount() -a);
+		DebugTrace("Timermanager is running %d \n",GetTickCount() -a);
 		a = GetTickCount();
 		GetSystemTimeAsFileTime (&now.ft);
  		struct timeval tv;
