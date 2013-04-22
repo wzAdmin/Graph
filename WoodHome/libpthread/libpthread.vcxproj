@@ -69,7 +69,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(OutDir)$(TargetName)D$(TargetExt) ..\\build</Command>
+      <Command>copy /y $(OutDir)$(TargetName)$(TargetExt) ..\\build</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
