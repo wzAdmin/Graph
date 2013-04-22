@@ -117,6 +117,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics_Font.cpp" />
     <ClCompile Include="Graphics_Image.cpp" />
+    <ClCompile Include="Graphics_Polygon.cpp" />
     <ClCompile Include="ImageBuffer.cpp" />
     <ClCompile Include="Image_Gray.cpp" />
     <ClCompile Include="Image_JPG.cpp" />
