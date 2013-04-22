@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include "Trace.h"
+#include "utils.h"
 
 class CEdge
 {
@@ -24,9 +25,9 @@ public:
 			mdeltaX = double(mA.X() - mB.X()) / (mA.Y() - mB.Y());
 	}
 public:
-	bool Intersect(int& x , int y)
+	inline bool Intersect(int& x , int y)
 	{
-		if(y < mA.Y() || y > mB.Y())
+		if(y < mA.Y() || y > mB.Y() || mB.Y() == mA.Y())
 			return false;
 		if(y == mA.Y())
 		{
@@ -35,7 +36,7 @@ public:
 			return true;
 		}
 		mCurX += mdeltaX;
-		x = int(mCurX);
+		x = Double2Int(mCurX);
 		return true;
 	}
 private:

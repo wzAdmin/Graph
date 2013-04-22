@@ -17,7 +17,6 @@ void CTimerManager::TimerUpdate()
 	AddTimer();
 	int interval = GetTickCount() - mCurTime;
 	mCurTime = GetTickCount();
-	DebugTrace(Trace_Info,"Timermgr interval %d\n",interval);
 	TimerIterator it = mTimers.begin();
 	for ( ; mTimers.end() != it ; it++)
 	{

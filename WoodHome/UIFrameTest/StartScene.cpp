@@ -49,5 +49,5 @@ void CStartScene::OnBtn4Click()
 
 void CStartScene::OnTimer( TimerID timerid )
 {
-	DebugTrace(Trace_Normal,"Timer come %d %d\n",timerid,mtimerid);
+	//DebugTrace(Trace_Normal,"Timer come %d %d\n",timerid,mtimerid);
 }
