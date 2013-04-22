@@ -90,7 +90,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\\Debug\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Debug\\*.exe ..\\build\\&#x0D;&#x0A;"
+				CommandLine="copy /y $(OutDir)\$(ProjectName).exe ..\\build\\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -141,7 +141,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Graphic.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(OutDir)"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -168,7 +170,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\\Release\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Release\\*.exe ..\\build\\&#x0D;&#x0A;"
+				CommandLine="copy /y $(OutDir)\$(ProjectName).exe ..\\build\\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

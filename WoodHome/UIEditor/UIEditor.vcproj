@@ -89,7 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y ..\\Debug\\*.dll ..\\build\\&#x0D;&#x0A;copy /y ..\\Debug\\*.exe ..\\build\\"
+				CommandLine="copy /y $(OutDir)\$(ProjectName).exe ..\\build\\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -164,6 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy /y $(OutDir)\$(ProjectName).exe ..\\build\\"
 			/>
 		</Configuration>
 	</Configurations>

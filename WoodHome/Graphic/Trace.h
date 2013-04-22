@@ -1,9 +1,7 @@
 #pragma once
 #include <stdarg.h>
 #include <stdio.h>
-#ifdef _MSC_VER
-#if defined(_DEBUG) || defined(DEBUG)
-#include <Windows.h>
+#define TRACE_OUT
 enum Type_Trace
 {
 	//white
@@ -18,6 +16,10 @@ enum Type_Trace
 	//green
 	Trace_Info = 0x2
 };
+#ifdef _MSC_VER
+#include <Windows.h>
+#if defined(TRACE_OUT)
+
 inline bool OutTrace(Type_Trace type,const char* format,...)
 {
 	//set color of console output
