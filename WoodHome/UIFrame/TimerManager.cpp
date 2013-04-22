@@ -38,7 +38,11 @@ void CTimerManager::RemoveTimer( TimerID id )
 		it->second.toBeremove = true;
 	else
 	{
-		DebugTrace(Trace_Warning,"Timer %d not find\n",id);
+		it = mTimersToAdd.find(id);
+		if(mTimersToAdd.end() != it)
+			mTimersToAdd.erase(it);
+		else
+			DebugTrace(Trace_Warning,"Timer %d not find\n",id);
 	}
 }
 
