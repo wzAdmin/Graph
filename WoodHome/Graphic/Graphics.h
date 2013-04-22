@@ -20,6 +20,7 @@ public:
 	const CImageBuffer* GetImage() const {return mImagebuffer;}
 	void ClearColor(COLORARGB color){mImagebuffer->ClearColor(color);}
 	void DrawCirce(CPosition center ,int R ,COLORARGB color);
+	void Polygon(const CPosition* points , int pointCount,COLORARGB color);
 	void Line(CPosition A , CPosition B ,int Width ,COLORARGB color);
 	void LineDDA(CPosition A , CPosition B  ,COLORARGB color);
 	void LineDDA(CPosition A , CPosition B ,int width ,COLORARGB color);

@@ -2,6 +2,7 @@
 #include "Position.h"
 class CClipUtils
 {
+	friend class CGraphics;
 public:
 	CClipUtils(int minx ,int miny ,int maxx ,int maxy);
 	~CClipUtils(void);

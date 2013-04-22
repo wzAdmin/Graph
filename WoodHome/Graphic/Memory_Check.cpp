@@ -4,8 +4,6 @@
 #include "GraphicType.h"
 #include "Trace.h"
 #if defined(_DEBUG) || defined(DEBUG)
-#define MEMORY_RECORD_INDEX_SIZE 0x10000
-#define MEMORY_RECORD_INDEX_MASK 0xFFFF
 typedef struct _MemoryRecord {
 	void* startadress;
 	int Memsize;
@@ -18,9 +16,16 @@ typedef struct _MemoryRecord {
 class Hash_MemoryRecord
 {
 public:
+	int MemCurUsed;
+	int MemMaxUsed;
+	const static int sHash_INDEX_SIZE = 0x10000;
+
+	//if n = 2^k,then m%n = m&(n-1).
+	const static int sMask  = sHash_INDEX_SIZE - 1;
+public:
 	Hash_MemoryRecord()
 	{
-		memset(mHashIndex,0,sizeof(MemoryRecord*)*MEMORY_RECORD_INDEX_SIZE);
+		memset(mHashIndex,0,sizeof(MemoryRecord*)*sHash_INDEX_SIZE);
 	}
 	~Hash_MemoryRecord()
 	{
@@ -29,7 +34,9 @@ public:
 
 	void Insert(MemoryRecord* record)
 	{
-		int index = int(record->startadress) & MEMORY_RECORD_INDEX_MASK;
+		//if n = 2^k,then m%n = m&(n-1).
+		int index = int(record->startadress) & sMask;
+
 		record->next = mHashIndex[index];
 		mHashIndex[index] = record;
 		MemCurUsed += record->Memsize;
@@ -37,7 +44,7 @@ public:
 	}
 	const MemoryRecord* FindRecord(void* p)
 	{
-		int index = int(p) & MEMORY_RECORD_INDEX_MASK;
+		int index = int(p) & sMask;
 		MemoryRecord* r = mHashIndex[index];
 		while (r && p!=r->startadress)
 		{
@@ -48,7 +55,7 @@ public:
 	void RemoveRecord(const MemoryRecord* record)
 	{
 		MemCurUsed -= record->Memsize;
-		int index = int(record->startadress) & MEMORY_RECORD_INDEX_MASK;
+		int index = int(record->startadress) & sMask;
 		MemoryRecord* r = mHashIndex[index];
 		if(r == record)
 		{
@@ -68,10 +75,7 @@ public:
 		}
 		assert(false);
 	}
-	MemoryRecord* mHashIndex[MEMORY_RECORD_INDEX_SIZE];
-public:
-	int MemCurUsed;
-	int MemMaxUsed;
+	MemoryRecord* mHashIndex[sHash_INDEX_SIZE];
 };
 
 static Hash_MemoryRecord sMemRecords;
@@ -114,6 +118,15 @@ GRAPHIC_API void  DebugDelArray(void* p)
 	if(!p)
 		return ;
 	const MemoryRecord* record = sMemRecords.FindRecord(p);
+
+	//If p is an array of class object and the class have a destructor explicitly(
+	//include destructor of base class and member's),
+	//the compiler will malloc more 4(it is different in different compiler, gcc and vc++ is 4) 
+	//bytes to save the number of the objects,so that it can call the destructor correctly when delete
+	//the array.
+	if(!record)
+		record = sMemRecords.FindRecord((char*)p-4);
+
 	assert( record && record->type == "new[]" );
 	sMemRecords.RemoveRecord(record);
 }
@@ -146,7 +159,7 @@ GRAPHIC_API void Printmem()
 	DebugTrace(Trace_Error,"MemLeak not include external libs %d bytes\n",sMemRecords.MemCurUsed);
 	if(sMemRecords.MemCurUsed)
 	{
-		for (int i = 0 ;  i < MEMORY_RECORD_INDEX_SIZE ; i++)
+		for (int i = 0 ;  i < Hash_MemoryRecord::sHash_INDEX_SIZE ; i++)
 		{
 			MemoryRecord* r = sMemRecords.mHashIndex[i];
 			while (r)

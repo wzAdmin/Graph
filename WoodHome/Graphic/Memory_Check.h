@@ -24,6 +24,10 @@ _declspec(dllexport) void Printmem() ;
  {
  	DebugDel(p);
  }
+ inline void operator delete[](void* p, const char* file, int line)
+ {
+	 DebugDel(p);
+ }
 
 #define NEW_LEAKCHECK new(__FILE__,__LINE__)
 #define DELETE_LEAKCHECK(p){ delete(p);DebugDel(p);}

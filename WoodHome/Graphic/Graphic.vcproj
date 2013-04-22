@@ -209,6 +209,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Graphics_Polygon.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Image_Gray.cpp"
 				>
 			</File>

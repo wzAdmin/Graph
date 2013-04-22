@@ -21,6 +21,7 @@ void CDrawTextTextScene::Draw( CGraphics* pGraphic )
 	pts[2] = CPosition(200,600);
 	pts[1] = CPosition(200,300);
 	pts[0] = CPosition(30,200);
+	pGraphic->Polygon(pts,5,CRGB(255,124,122));
 	wchar_t* wcs = L"这是沿线绘制吴德宏啊伍德WoodHome";
 	pGraphic->DrawTextW(wcs,pts,5,*sFontConfig.GetFont(2),50.0f);
 	pGraphic->LineDDA(pts[0],pts[1],0,CRGB(255,124,122));
