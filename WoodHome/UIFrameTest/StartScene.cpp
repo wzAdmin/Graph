@@ -9,6 +9,7 @@ CStartScene::CStartScene(void)
 
 CStartScene::~CStartScene(void)
 {
+	sUIFrame.GetTimerMgr()->RemoveTimer(mtimerid);
 }
 
 void CStartScene::OnBtn1Click()

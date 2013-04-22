@@ -23,7 +23,7 @@ void CTimerManager::TimerUpdate()
 	{
 		it->second.interval_cur += interval;
 		int leftTime = it->second.interval_cur - it->second.interval_all;
-		if(leftTime >=0 )
+		if(leftTime >=0 && !it->second.toBeremove )
 		{
 			it->second.listener->OnTimer(it->first);
 			it->second.interval_cur = 0;
@@ -75,4 +75,5 @@ void CTimerManager::AddTimer()
 	{
 		mTimers.insert(TimerPair(it->first,it->second));
 	}
+	mTimersToAdd.clear();
 }
