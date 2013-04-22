@@ -107,7 +107,7 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 	case WM_DESTROY:
 		sUIFrame.AddWindowToDelete(pwnd);
 		if(sUIFrame.WndCount() < 1)
-			PostQuitMessage(0);
+			sUIFrame.Exit();
 		break;
 	case WM_MOUSEMOVE:
 		mss.msg = MouseMove;

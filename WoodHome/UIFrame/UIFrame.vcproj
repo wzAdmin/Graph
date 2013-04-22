@@ -202,6 +202,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TimerManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\UIButton.cpp"
 				>
 			</File>
@@ -235,6 +239,10 @@
 			</File>
 			<File
 				RelativePath=".\Wind_win32.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\WindConfig.cpp"
 				>
 			</File>
 		</Filter>
@@ -273,6 +281,10 @@
 			</File>
 			<File
 				RelativePath=".\SceneManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TimerManager.h"
 				>
 			</File>
 			<File
@@ -316,7 +328,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WindowID.h"
+				RelativePath=".\WindConfig.h"
+				>
+			</File>
+			<File
+				RelativePath=".\window_Style.h"
 				>
 			</File>
 		</Filter>

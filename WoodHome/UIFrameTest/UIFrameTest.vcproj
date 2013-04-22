@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../UIFrame;../Graphic"
+				AdditionalIncludeDirectories="../UIFrame;../Graphic;../freetype/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -120,7 +120,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../UIFrame;../Graphic"
+				AdditionalIncludeDirectories="../UIFrame;../Graphic;../freetype/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -185,6 +185,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DrawTextTextScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ImageTestScene.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Main.cpp"
 				>
 			</File>
@@ -198,6 +206,14 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\DrawTextTextScene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ImageTestScene.h"
+				>
+			</File>
 			<File
 				RelativePath=".\StartScene.h"
 				>

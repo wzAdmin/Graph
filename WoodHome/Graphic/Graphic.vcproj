@@ -225,6 +225,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Memory_Check.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Position.cpp"
 				>
 			</File>
@@ -272,6 +276,10 @@
 			</File>
 			<File
 				RelativePath=".\matrix.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Memory_Check.h"
 				>
 			</File>
 			<File
