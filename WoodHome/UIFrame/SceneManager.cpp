@@ -26,6 +26,8 @@ CSceneManager::~CSceneManager(void)
 
 void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NULL*/)
 {
+	mParam_Onshow = data;
+	// hide from
 	if(from)
 	{
 		from->Visible(false);
@@ -34,6 +36,8 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NU
 	}
 	SceneMapItor it = mScenes.find(toid);
 	CScene* pTo = NULL;
+
+	//created already
 	if(mScenes.end() != it)
 	{
 
@@ -44,16 +48,19 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NU
 		pTo = it->second;
 		mSceneStack.push_back(pTo);
 	}
-	else
+	else// has not created so create a new
 	{
 		pTo = CreatScene(toid);
 		mScenes.insert(std::pair<SourceID,CScene*>(toid,pTo));
+		pTo->Visible(false);
 		mSceneStack.push_back(pTo);
 	}
+
+	//deal effect
 	if(!from)
 	{
 		pTo->Visible(true);
-		pTo->OnShow(data);
+		pTo->OnShow(mParam_Onshow);
 		pTo->DrawToWindow();
 	}
 	else
@@ -85,8 +92,9 @@ CScene* CSceneManager::CreatScene( SourceID sceneid )
 	return pScene;
 }
 
-void CSceneManager::Back()
+void CSceneManager::Back(void* data /*= NULL*/)
 {
+	mParam_Onshow = data;
 	if(1==mSceneStack.size())
 		printf("left scene < 2 can not Back\n");
 	else
@@ -95,7 +103,7 @@ void CSceneManager::Back()
 		pcur->Visible(false);
 		pcur->OnHide();
 		mSceneStack.pop_back();
-		mEffect = new CEffectFadeto(this,50,20,mWind->Graphic());
+		mEffect = NEW_LEAKCHECK CEffectFadeto(this,50,20,mWind->Graphic());
 		mEffect->Start(pcur , mSceneStack.back());
 	}
 }
@@ -117,7 +125,7 @@ void CSceneManager::OnEffect()
 void CSceneManager::OnEffectEnd( CScene* src , CScene* dest )
 {
 	dest->Visible(true);
-	dest->OnShow();
+	dest->OnShow(mParam_Onshow);
 	dest->DrawToWindow();
 	DELETE_LEAKCHECK(mEffect);
 	mEffect = NULL;

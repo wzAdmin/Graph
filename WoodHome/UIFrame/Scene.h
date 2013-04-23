@@ -25,7 +25,7 @@ public:
 	//not call mNotifyFunc in base class as I do not know the param yet
 	virtual void Notify(){}
 
-	virtual void OnHide(void* data = NULL){}
+	virtual void OnHide(){}
 	virtual void SetNotify(NotifyFormerOnHide func){mNotifyFunc = func;}
 	void SetWind(CUIWindow* Wnd){mWind = Wnd;}
 	void Goto(SourceID toScene,void* data = NULL);

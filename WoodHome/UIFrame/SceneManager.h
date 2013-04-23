@@ -15,7 +15,7 @@ public:
 public:
 	CScene* GetCurScene();
 	void GoTo(SourceID toid ,CScene* from = 0,void* data = NULL);
-	void Back();
+	void Back(void* data = NULL);
 	void OnDestroy();
 private:
 	virtual void OnEffect();
@@ -28,5 +28,6 @@ private:
 	std::map<SourceID , CScene*> mScenes;
 	std::list<CScene*> mSceneStack;
 	CSceneEffect* mEffect;
+	void* mParam_Onshow;
 };
 
