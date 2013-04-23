@@ -31,28 +31,32 @@ CUIWindow::~CUIWindow(void)
 void CUIWindow::DispatchSysMessage( const SystemMessage& msg )
 {
 	assert(this);
-	switch (msg.msg)
+	CScene* pScene = mSceneManager->GetCurScene();
+	if(pScene && pScene->Visible())
 	{
-	case LBtnDown:
-		mSceneManager->GetCurScene()->OnLBtnDown(msg.lParam , msg.wParam);
-		break;
-	case LBtnUp:
-		mSceneManager->GetCurScene()->OnLBtnUp(msg.lParam , msg.wParam);
-		break;
-	case RBtnDown:
-		mSceneManager->GetCurScene()->OnRBtnDown(msg.lParam , msg.wParam);
-		break;
-	case RBtnUp:
-		mSceneManager->GetCurScene()->OnRBtnUp(msg.lParam , msg.wParam);
-		break;
-	case MouseMove:
-		mSceneManager->GetCurScene()->OnMouseMove(msg.lParam , msg.wParam);
-		break;
-	case CharInput:
-		mSceneManager->GetCurScene()->OnInputChar((const wchar_t*)msg.lParam , msg.wParam);
-		break;
-	default:
-		break;
+		switch (msg.msg)
+		{
+		case LBtnDown:
+			pScene->OnLBtnDown(msg.lParam , msg.wParam);
+			break;
+		case LBtnUp:
+			pScene->OnLBtnUp(msg.lParam , msg.wParam);
+			break;
+		case RBtnDown:
+			pScene->OnRBtnDown(msg.lParam , msg.wParam);
+			break;
+		case RBtnUp:
+			pScene->OnRBtnUp(msg.lParam , msg.wParam);
+			break;
+		case MouseMove:
+			pScene->OnMouseMove(msg.lParam , msg.wParam);
+			break;
+		case CharInput:
+			pScene->OnInputChar((const wchar_t*)msg.lParam , msg.wParam);
+			break;
+		default:
+			break;
+		}
 	}
 }
 

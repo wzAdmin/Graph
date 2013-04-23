@@ -6,7 +6,7 @@
 #include "utils.h"
 #include "Memory_Check.h"
 
-CGraphics::CGraphics(  CImageBuffer* image )
+CGraphics::CGraphics(  CImageBuffer* image ):mClip(NULL)
 {
 	Initialize(image);
 }
@@ -21,6 +21,8 @@ void CGraphics::Initialize(  CImageBuffer* image)
 {
 	mWidth = image->Width();
 	mHeight = image->Height();
+	if(mClip)
+		DELETE_LEAKCHECK(mClip);
 	mClip = NEW_LEAKCHECK CClipUtils(0 , 0 , mWidth - 1, mHeight - 1);
 	mpFrambuffer = const_cast<unsigned short*>(image->GetPixels());
 	mImagebuffer = image;

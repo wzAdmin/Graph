@@ -6,19 +6,22 @@
 #include "Graphics.h"
 #include <Windows.h>
 #include "Trace.h"
+#include "UIFrame.h"
 
 CImageTestScene::CImageTestScene(void):
 mRotate(0.0f),
 mSkewX(0.0f),
 mSkewY(0.0f),
 mScaleX(1.0f),
-mScaleY(1.0f)
+mScaleY(1.0f),
+mtimeid(0)
 {
 }
 
 
 CImageTestScene::~CImageTestScene(void)
 {
+	sUIFrame.GetTimerMgr()->RemoveTimer(mtimeid);
 }
 
 void CImageTestScene::Draw( CGraphics* pGraphic )
@@ -52,6 +55,7 @@ void CImageTestScene::Load( const slim::XmlNode* node )
 	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnSkewYClick);
 	pbtn = (CUIButton*)get("Rotate");
 	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnRotateClick);
+	mtimeid =  sUIFrame.GetTimerMgr()->CreateTimer(this,20);
 }
 
 void CImageTestScene::OnBtnbackClick()
@@ -96,5 +100,16 @@ void CImageTestScene::OnBtnSkewXClick()
 void CImageTestScene::OnBtnSkewYClick()
 {
 	mSkewY += 10.0f * 3.1415926f / 180.0f;
+	DrawToWindow();
+}
+
+void CImageTestScene::OnTimer( TimerID timerid )
+{
+	static float deltaX = 1.1f;
+	if(mScaleX > 2.0f)
+		deltaX= 0.9f;
+	if(mScaleX < 0.3f)
+		deltaX= 1.1f;
+	mScaleX *= deltaX;
 	DrawToWindow();
 }

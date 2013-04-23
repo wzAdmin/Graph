@@ -27,6 +27,7 @@ public:
 	void LineDDA(CPosition A ,int width1 ,CPosition B , int width2,COLORARGB color);
 	void DrawImage(const CImageBuffer* pImage ,const CTransfrom& tf ,const CBound* srcBound = NULL,const CBound* clipBuond = NULL);
 	void DrawImage(const CGrayImage* pImage , const CTransfrom& tf ,COLORARGB color,const CBound* srcBound = NULL,const CBound* clipBuond = NULL);
+	void DrawImage_Repeat(const CImageBuffer* pImage , unsigned char alpha ,const CBound* srcBound , const CBound* destBound);
 	void DrawImage_Repeat(const CImageBuffer* pImage , const CBound& srcBound , const CBound& destBound);
 	void DrawImage_Scale(const CImageBuffer* pImage , const CBound& srcBound , const CBound& destBound);
 	void DrawTextW(const wchar_t* str ,int left , int bottom,const Font& ft,const CBound* clipBuond = NULL);

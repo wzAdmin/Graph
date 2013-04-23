@@ -5,8 +5,10 @@
 #include "UIFrame.h"
 #include "UIObjectFactory.h"
 #include "Memory_Check.h"
+#include "Graphics.h"
+#include "EffectFadeto.h"
 
-CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd)
+CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd),mEffect(NULL)
 {
 }
 
@@ -18,6 +20,8 @@ CSceneManager::~CSceneManager(void)
 	{
 		DELETE_LEAKCHECK(it->second);
 	}
+	if(mEffect)
+		DELETE_LEAKCHECK(mEffect);
 }
 
 void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NULL*/)
@@ -29,24 +33,34 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NU
 		from->Notify();
 	}
 	SceneMapItor it = mScenes.find(toid);
+	CScene* pTo = NULL;
 	if(mScenes.end() != it)
 	{
-		it->second->Visible(true);
-		it->second->OnShow();
+
 		SceneListItor itor = mSceneStack.begin();
 		for( ; mSceneStack.end() != itor && (*itor) != it->second ; itor++);
 		if(mSceneStack.end() != itor)
 			mSceneStack.erase(itor);
-		mSceneStack.push_back(it->second);
-		it->second->DrawToWindow();
-		return ;
+		pTo = it->second;
+		mSceneStack.push_back(pTo);
 	}
-	CScene* pScene = CreatScene(toid);
-	mScenes.insert(std::pair<SourceID,CScene*>(toid,pScene));
-	pScene->Visible(true);
-	pScene->OnShow();
-	mSceneStack.push_back(pScene);
-	pScene->DrawToWindow();
+	else
+	{
+		pTo = CreatScene(toid);
+		mScenes.insert(std::pair<SourceID,CScene*>(toid,pTo));
+		mSceneStack.push_back(pTo);
+	}
+	if(!from)
+	{
+		pTo->Visible(true);
+		pTo->OnShow(data);
+		pTo->DrawToWindow();
+	}
+	else
+	{
+		mEffect = NEW_LEAKCHECK CEffectFadeto(this,50,10,mWind->Graphic());
+		mEffect->Start(from , pTo);
+	}
 }
 
 CScene* CSceneManager::GetCurScene()
@@ -81,9 +95,8 @@ void CSceneManager::Back()
 		pcur->Visible(false);
 		pcur->OnHide();
 		mSceneStack.pop_back();
-		mSceneStack.back()->Visible(true);
-		mSceneStack.back()->OnShow();
-		mSceneStack.back()->DrawToWindow();
+		mEffect = new CEffectFadeto(this,50,20,mWind->Graphic());
+		mEffect->Start(pcur , mSceneStack.back());
 	}
 }
 
@@ -94,4 +107,18 @@ void CSceneManager::OnDestroy()
 	{
 		it->second->OnUnload();
 	}
+}
+
+void CSceneManager::OnEffect()
+{
+	mWind->BufferToWindow(mWind->Graphic()->GetImage());
+}
+
+void CSceneManager::OnEffectEnd( CScene* src , CScene* dest )
+{
+	dest->Visible(true);
+	dest->OnShow();
+	dest->DrawToWindow();
+	DELETE_LEAKCHECK(mEffect);
+	mEffect = NULL;
 }

@@ -41,6 +41,7 @@ void CGraphics::DrawGrayImage(const CGrayImage* pImage,const CBound& srcBound , 
 	}
 	
 }
+
 void CGraphics::DrawImage_Repeat(const CImageBuffer* pImage , const CBound& srcBound , const CBound& destBound)
 {
 	if(!pImage)
@@ -92,6 +93,50 @@ void CGraphics::DrawImage_Repeat(const CImageBuffer* pImage , const CBound& srcB
 				srcY = src.Top();
 		}
 	}
+}
+
+void CGraphics::DrawImage_Repeat(const CImageBuffer* pImage , unsigned char alpha ,const CBound* psrcBound , const CBound* pdestBound)
+{
+	if(!pImage)
+		return;
+	const unsigned short* data = pImage->GetPixels();
+	int ImageWidth = pImage->Width();
+	int ImageHeight = pImage->Height();
+	CBound src(0,ImageWidth-1,0,ImageHeight-1);
+	CBound srcBound(src),destBound(0,mWidth -1 , 0, mHeight -1);
+	if(psrcBound)
+		srcBound = *psrcBound;
+	if(pdestBound)
+		destBound = *pdestBound;
+	if(!CBound::Intersect(srcBound,src,src) || !data)
+		return;
+	int beginY = MAX(destBound.Top(),0);
+	int endY = MIN(destBound.Bottom() + 1,mHeight);
+	int beginX = MAX(destBound.Left(),0);
+	int endX = MIN(destBound.Right() + 1,mWidth);
+	int srcWidth = src.Width();
+	int srcHeight= src.Height();
+	int srcX = ((beginX - destBound.Left()) % srcWidth) + src.Left();
+	int len = src.Right() - srcX + 1;
+	int destlen = endX - beginX;
+	len = MIN(len,destlen);
+	int srcY = ((beginY - destBound.Top()) % srcHeight) + src.Top();
+
+	for (int i = beginY ; i < endY ; i++)
+	{
+		srcX = ((beginX - destBound.Left()) % srcWidth) + src.Left();
+		for (int j = beginX ; j < endX ; j++)
+		{
+			Alpha(mpFrambuffer[i*mWidth+j],data[srcY*ImageWidth+srcX],alpha);
+			srcX++;
+			if(srcX > src.Right())
+				srcX = src.Left();
+		}
+		srcY++;
+		if(srcY > src.Bottom())
+			srcY = src.Top();
+	}
+	
 }
 
 

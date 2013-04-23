@@ -1,11 +1,13 @@
 #pragma once
 #include "resource_image.h"
 #include "UItype.h"
+#include "SceneEffect.h"
 #include <map>
 #include <list>
+
 class CScene;
 class CUIWindow;
-class UI_API CSceneManager
+class UI_API CSceneManager : public IEffectListner
 {
 public:
 	CSceneManager(CUIWindow* wnd);
@@ -16,6 +18,8 @@ public:
 	void Back();
 	void OnDestroy();
 private:
+	virtual void OnEffect();
+	virtual void OnEffectEnd(CScene* src , CScene* dest);
 	CScene* CreatScene(SourceID sceneid);
 private:
 	CUIWindow* mWind;
@@ -23,5 +27,6 @@ private:
 	typedef std::list<CScene*>::iterator SceneListItor;
 	std::map<SourceID , CScene*> mScenes;
 	std::list<CScene*> mSceneStack;
+	CSceneEffect* mEffect;
 };
 

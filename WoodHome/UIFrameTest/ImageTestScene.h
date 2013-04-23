@@ -1,7 +1,8 @@
 #pragma once
 #include "scene.h"
+#include "TimerManager.h"
 class CImageTestScene :
-	public CScene
+	public CScene , public ITimerListener
 {
 public:
 	static CUIObject* Create(){return NEW_LEAKCHECK CImageTestScene;}
@@ -16,11 +17,13 @@ private:
 	void OnBtnRotateClick();
 	void OnBtnSkewXClick();
 	void OnBtnSkewYClick();
+	void OnTimer(TimerID timerid);
 private:
 	float mRotate;
 	float mScaleX;
 	float mScaleY;
 	float mSkewX;
 	float mSkewY;
+	TimerID mtimeid;
 };
 

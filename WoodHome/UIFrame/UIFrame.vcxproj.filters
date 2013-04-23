@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="SceneEffect">
+      <UniqueIdentifier>{eaed1263-66bd-4cd3-a0f7-063c910e68ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -78,6 +81,12 @@
     <ClInclude Include="TimerManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SceneEffect.h">
+      <Filter>SceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectFadeto.h">
+      <Filter>SceneEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIObject.cpp">
@@ -130,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="TimerManager.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEffect.cpp">
+      <Filter>SceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectFadeto.cpp">
+      <Filter>SceneEffect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

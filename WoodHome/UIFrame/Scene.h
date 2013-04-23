@@ -1,5 +1,6 @@
 #pragma once
 #include "UILayer.h"
+
 class CUIWindow;
 class UI_API CScene :
 	public CUILayer

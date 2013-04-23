@@ -68,6 +68,8 @@ void CWind_win32::SetPostion( int x , int y )
 
 void CWind_win32::DrawToWindow()
 {
+	if(!mSceneManager->GetCurScene()->Visible())
+		return ;
 	mSceneManager->GetCurScene()->Draw(mGraphic);
 	HDC hdc= GetDC(mhWnd);
 	BITHEADER header;
@@ -187,4 +189,26 @@ void CWind_win32::Start()
 {
 	mSceneManager->GoTo(mStartSceneID);
 	ShowWindow();
+}
+
+void CWind_win32::BufferToWindow( const CImageBuffer* buffer )
+{
+	HDC hdc= GetDC(mhWnd);
+	BITHEADER header;
+	header.mask[0] = 0xf800;
+	header.mask[1] = 0x07e0;
+	header.mask[2] = 0x001f;
+	header.biBitCount = 16;
+	header.biWidth = buffer->Width();
+	header.biSize = sizeof(BITMAPINFOHEADER);
+	header.biHeight = -buffer->Height();
+	header.biPlanes = 1;
+	header.biCompression = BI_BITFIELDS;
+	header.biClrUsed = 0;
+	header.biClrImportant = 0;
+	header.biXPelsPerMeter = 0;
+	header.biYPelsPerMeter = 0;
+	StretchDIBits(hdc, 0, 0, buffer->Width(),buffer->Height(), 0, 0,buffer->Width(),
+		mFramebuffer->Height(),buffer->GetPixels(),(BITMAPINFO*)&header,0,SRCCOPY);
+	DeleteDC(hdc);
 }

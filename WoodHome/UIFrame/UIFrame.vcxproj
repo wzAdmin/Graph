@@ -89,11 +89,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFun.h" />
+    <ClInclude Include="EffectFadeto.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FontConfig.h" />
     <ClInclude Include="ImageResouceMgr.h" />
     <ClInclude Include="resource_image.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneEffect.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="UIButton.h" />
@@ -111,10 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommonFunc.cpp" />
+    <ClCompile Include="EffectFadeto.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="FontConfig.cpp" />
     <ClCompile Include="ImageResouceMgr.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneEffect.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="UIButton.cpp" />
