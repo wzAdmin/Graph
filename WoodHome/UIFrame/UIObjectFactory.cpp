@@ -3,6 +3,7 @@
 #include "UILayer.h"
 #include "UIButton.h"
 #include "UIStaticImage.h"
+#include "UITextView.h"
 
 CUIObjectFactory::CUIObjectFactory(void)
 {
@@ -10,6 +11,7 @@ CUIObjectFactory::CUIObjectFactory(void)
 	Register("Layer",CUILayer::Create);
 	Register("Button",CUIButton::Create);
 	Register("StaticImage",CUIStaticImage::Create);
+	Register("TextView",CUITextView::Create);
 }
 
 
