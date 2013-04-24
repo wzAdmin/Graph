@@ -40,22 +40,6 @@ void CImageTestScene::Draw( CGraphics* pGraphic )
 	DebugTrace(Trace_Info,"DrawTime:%d\n",GetTickCount() - a);
 }
 
-void CImageTestScene::Load( const slim::XmlNode* node )
-{
-	CScene::Load(node);
-	CUIButton* pbtn = (CUIButton*)get("back");
-	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnbackClick);
-	pbtn = (CUIButton*)get("ScaleX");
-	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnScaleXClick);
-	pbtn = (CUIButton*)get("ScaleY");
-	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnScaleYClick);
-	pbtn = (CUIButton*)get("SkewX");
-	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnSkewXClick);
-	pbtn = (CUIButton*)get("SkewY");
-	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnSkewYClick);
-	pbtn = (CUIButton*)get("Rotate");
-	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnRotateClick);
-}
 
 void CImageTestScene::OnBtnbackClick()
 {
@@ -121,4 +105,20 @@ void CImageTestScene::OnHide()
 void CImageTestScene::OnShow( void* data /* = NULL */ )
 {
 	mtimeid =  sUIFrame.GetTimerMgr()->CreateTimer(this,20);
+}
+
+void CImageTestScene::OnLoad()
+{
+	CUIButton* pbtn = (CUIButton*)get("back");
+	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnbackClick);
+	pbtn = (CUIButton*)get("ScaleX");
+	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnScaleXClick);
+	pbtn = (CUIButton*)get("ScaleY");
+	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnScaleYClick);
+	pbtn = (CUIButton*)get("SkewX");
+	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnSkewXClick);
+	pbtn = (CUIButton*)get("SkewY");
+	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnSkewYClick);
+	pbtn = (CUIButton*)get("Rotate");
+	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnRotateClick);
 }

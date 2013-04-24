@@ -9,7 +9,7 @@ public:
 	~CDrawTextTextScene(void);
 private:
 	virtual void Draw(CGraphics* pGraphic);
-	virtual void Load(const slim::XmlNode* node);
+	virtual void OnLoad();
 	void OnBtnbackClick();
 };
 

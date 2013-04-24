@@ -46,14 +46,14 @@ void CDrawTextTextScene::Draw( CGraphics* pGraphic )
 	DebugTrace(Trace_Info,"µÈ¿íÏß Time:%d\n",GetTickCount() - a);
 }
 
-void CDrawTextTextScene::Load( const slim::XmlNode* node )
-{
-	CScene::Load(node);
-	CUIButton* back = (CUIButton*)get("back");
-	back->AddClickListen(this,(OnBtnClick)&CDrawTextTextScene::OnBtnbackClick);
-}
 
 void CDrawTextTextScene::OnBtnbackClick()
 {
 	Back();
+}
+
+void CDrawTextTextScene::OnLoad()
+{
+	CUIButton* back = (CUIButton*)get("back");
+	back->AddClickListen(this,(OnBtnClick)&CDrawTextTextScene::OnBtnbackClick);
 }

@@ -10,9 +10,9 @@ public:
 	~CImageTestScene(void);
 private:
 	virtual void Draw(CGraphics* pGraphic);
-	virtual void Load(const slim::XmlNode* node);
 	virtual void OnHide();
 	virtual void OnShow(void* data /* = NULL */);
+	virtual void OnLoad();
 	void OnBtnbackClick();
 	void OnBtnScaleXClick();
 	void OnBtnScaleYClick();

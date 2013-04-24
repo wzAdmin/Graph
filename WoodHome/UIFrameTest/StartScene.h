@@ -9,7 +9,7 @@ public:
 	CStartScene(void);
 	~CStartScene(void);
 private:
-	virtual void Load(const slim::XmlNode* node);
+	virtual void OnLoad();
 	void OnBtn1Click();
 	void OnBtn2Click();
 	void OnBtn3Click();
