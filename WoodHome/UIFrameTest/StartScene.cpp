@@ -29,6 +29,8 @@ void CStartScene::Load( const slim::XmlNode* node )
 	pbtn3->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn3Click);
 	CUIButton* pbtn4 = (CUIButton*)get("btn4");
 	pbtn4->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn4Click);
+	CUIButton* pbtn5 = (CUIButton*)get("btn5");
+	pbtn5->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn5Click);
 	mtimerid = sUIFrame.GetTimerMgr()->CreateTimer(this,100);
 }
 
@@ -50,4 +52,9 @@ void CStartScene::OnBtn4Click()
 void CStartScene::OnTimer( TimerID timerid )
 {
 	//DebugTrace(Trace_Normal,"Timer come %d %d\n",timerid,mtimerid);
+}
+
+void CStartScene::OnBtn5Click()
+{
+	Goto(SCENE_EffectTest,NULL,Effect_FadeTo);
 }

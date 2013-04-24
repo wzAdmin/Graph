@@ -20,12 +20,18 @@ void CScene::DrawToWindow()
 	mWind->DrawToWindow();
 }
 
-void CScene::Goto( SourceID toScene,void* data /*= NULL*/ )
+void CScene::Goto( SourceID toScene,void* data /*= NULL*/,EffectType effect /*= Effect_Invalid*/ )
 {
-	mWind->GetSceneMgr()->GoTo(toScene ,this,data);
+	mWind->GetSceneMgr()->GoTo(toScene ,this , data , effect);
 }
 
-void CScene::Back()
+void CScene::Back(void* data /*= NULL*/,EffectType effect /*= Effect_Invalid*/ )
 {
-	mWind->GetSceneMgr()->Back();
+	mWind->GetSceneMgr()->Back(data,effect);
+}
+
+void CScene::Load( const slim::XmlNode* node )
+{
+	CUILayer::Load(node);
+	OnLoad();
 }

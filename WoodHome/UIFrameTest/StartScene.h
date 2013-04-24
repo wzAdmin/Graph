@@ -14,6 +14,7 @@ private:
 	void OnBtn2Click();
 	void OnBtn3Click();
 	void OnBtn4Click();
+	void OnBtn5Click();
 	void OnTimer(TimerID timerid);
 private:
 	TimerID mtimerid;

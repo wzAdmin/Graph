@@ -3,6 +3,7 @@
 #include "UIFrame.h"
 #include "DrawTextTextScene.h"
 #include "ImageTestScene.h"
+#include "EffectTest.h"
 class AutoRegister
 {
 public:
@@ -11,6 +12,7 @@ public:
 		sUIFrame.GetObjFactory()->Register("StartScene",CStartScene::Create);
 		sUIFrame.GetObjFactory()->Register("TextScene",CDrawTextTextScene::Create);
 		sUIFrame.GetObjFactory()->Register("ImageScene",CImageTestScene::Create);
+		sUIFrame.GetObjFactory()->Register("EffectScene",CEffectTest::Create);
 	}
 };
 static AutoRegister g;

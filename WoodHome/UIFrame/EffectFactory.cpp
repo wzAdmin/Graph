@@ -1,8 +1,10 @@
 #include "EffectFactory.h"
 #include "Trace.h"
+#include "EffectFadeto.h"
 
 CEffectFactory::CEffectFactory(void)
 {
+	Register(Effect_FadeTo, CEffectFadeto::Create);
 }
 
 CEffectFactory::~CEffectFactory(void)

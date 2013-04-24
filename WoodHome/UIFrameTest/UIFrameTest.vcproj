@@ -191,6 +191,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EffectTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ImageTestScene.cpp"
 				>
 			</File>
@@ -210,6 +214,10 @@
 			>
 			<File
 				RelativePath=".\DrawTextTextScene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectTest.h"
 				>
 			</File>
 			<File
