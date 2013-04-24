@@ -2,12 +2,14 @@
 #include "Scene.h"
 #include "UILayer.h"
 #include "UIButton.h"
+#include "UIStaticImage.h"
 
 CUIObjectFactory::CUIObjectFactory(void)
 {
 	Register("Scene",CScene::Create);
 	Register("Layer",CUILayer::Create);
 	Register("Button",CUIButton::Create);
+	Register("StaticImage",CUIStaticImage::Create);
 }
 
 

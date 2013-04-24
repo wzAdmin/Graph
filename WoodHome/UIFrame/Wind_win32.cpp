@@ -29,7 +29,10 @@ CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
 	wcex.hIconSm		= NULL;//LoadIcon(wcex.hInstance, L"_2_1.png");
 	wcex.lpszMenuName   = NULL;
 	RegisterClassEx(&wcex);
-	mhWnd = CreateWindow(L"window", L"UI",WS_OVERLAPPEDWINDOW|WS_MINIMIZE,
+	mhWnd = CreateWindow(L"window", L"UI",WS_OVERLAPPED | \
+		WS_CAPTION        | \
+		WS_SYSMENU        | \
+		WS_MINIMIZEBOX|WS_MINIMIZE,
 		mPositionX,mPositionY, mWidth, mHeight, NULL, NULL, NULL, NULL);
 }
 

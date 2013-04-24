@@ -16,21 +16,15 @@
     <Filter Include="SceneEffect">
       <UniqueIdentifier>{eaed1263-66bd-4cd3-a0f7-063c910e68ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UIController">
+      <UniqueIdentifier>{7a194a19-8d2e-41d0-bdb1-032c18aca302}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UItype.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="UIObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="UIContainer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ImageResouceMgr.h">
@@ -48,9 +42,6 @@
     <ClInclude Include="UIFrame.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="UILayer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -61,9 +52,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Wind_win32.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="UIButton.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CommonFun.h">
@@ -90,17 +78,26 @@
     <ClInclude Include="EffectFactory.h">
       <Filter>SceneEffect</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
+    <ClInclude Include="UIContainer.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
+    <ClInclude Include="UILayer.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
+    <ClInclude Include="UIStaticImage.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UIObject.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="UIContainer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ImageResouceMgr.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -113,9 +110,6 @@
     <ClCompile Include="UIFrame.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="UILayer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -126,9 +120,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Wind_win32.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="UIButton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CommonFunc.cpp">
@@ -151,6 +142,24 @@
     </ClCompile>
     <ClCompile Include="EffectFactory.cpp">
       <Filter>SceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UIContainer.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UILayer.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UIStaticImage.cpp">
+      <Filter>UIController</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,12 +1,13 @@
 #pragma once
 #include "EffectType.h"
+#include "UItype.h"
 #include <map>
 
 class IEffectListner;
 class CGraphics;
 class CSceneEffect;
 typedef CSceneEffect* (*CreateFunc)(IEffectListner* listner , int interval , int Frames ,CGraphics* pGraphic);
-class CEffectFactory
+class UI_API CEffectFactory
 {
 public:
 	CEffectFactory(void);

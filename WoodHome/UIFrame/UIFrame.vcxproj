@@ -106,6 +106,7 @@
     <ClInclude Include="UILayer.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="UIObjectFactory.h" />
+    <ClInclude Include="UIStaticImage.h" />
     <ClInclude Include="UItype.h" />
     <ClInclude Include="UIWindow.h" />
     <ClInclude Include="WindConfig.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="UILayer.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="UIObjectFactory.cpp" />
+    <ClCompile Include="UIStaticImage.cpp" />
     <ClCompile Include="UIWindow.cpp" />
     <ClCompile Include="WindConfig.cpp" />
     <ClCompile Include="Wind_win32.cpp" />

@@ -5,14 +5,14 @@ class CScene;
 class CImageBuffer;
 class CGraphics;
 
-class IEffectListner
+class UI_API IEffectListner
 {
 public:
 	virtual void OnEffect() = 0;
 	virtual void OnEffectEnd(CScene* src , CScene* dest) = 0;
 };
 
-class CSceneEffect : public ITimerListener
+class UI_API CSceneEffect : public ITimerListener
 {
 public:
 	CSceneEffect(IEffectListner* listner , int interval , int Frames ,CGraphics* pGraphic);
