@@ -87,6 +87,9 @@
     <ClInclude Include="EffectFadeto.h">
       <Filter>SceneEffect</Filter>
     </ClInclude>
+    <ClInclude Include="EffectFactory.h">
+      <Filter>SceneEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIObject.cpp">
@@ -144,6 +147,9 @@
       <Filter>SceneEffect</Filter>
     </ClCompile>
     <ClCompile Include="EffectFadeto.cpp">
+      <Filter>SceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectFactory.cpp">
       <Filter>SceneEffect</Filter>
     </ClCompile>
   </ItemGroup>

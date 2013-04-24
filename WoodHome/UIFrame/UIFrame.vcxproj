@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFun.h" />
+    <ClInclude Include="EffectFactory.h" />
     <ClInclude Include="EffectFadeto.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FontConfig.h" />
@@ -113,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommonFunc.cpp" />
+    <ClCompile Include="EffectFactory.cpp" />
     <ClCompile Include="EffectFadeto.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="FontConfig.cpp" />
