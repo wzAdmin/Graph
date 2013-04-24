@@ -1,6 +1,7 @@
 #pragma once
 #include "resource_image.h"
 #include "UItype.h"
+#include "EffectType.h"
 #include "SceneEffect.h"
 #include <map>
 #include <list>
@@ -14,8 +15,8 @@ public:
 	~CSceneManager(void);
 public:
 	CScene* GetCurScene();
-	void GoTo(SourceID toid ,CScene* from = 0,void* data = NULL);
-	void Back(void* data = NULL);
+	void GoTo(SourceID toid ,CScene* from = 0,void* data = NULL , EffectType effect = Effect_Invalid);
+	void Back(void* data = NULL, EffectType effect = Effect_Invalid);
 	void OnDestroy();
 private:
 	virtual void OnEffect();

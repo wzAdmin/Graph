@@ -343,6 +343,38 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<Filter
+			Name="SceneEffect"
+			>
+			<File
+				RelativePath=".\EffectFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectFactory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectFadeto.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectFadeto.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectType.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneEffect.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneEffect.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

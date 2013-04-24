@@ -9,6 +9,7 @@
 #include "TimerManager.h"
 #include "ImageResouceMgr.h"
 #include "FontConfig.h"
+#include "EffectFactory.h"
 
 CUIFrame::CUIFrame(void):mValidID(0),mbRunning(false)
 {
@@ -16,6 +17,7 @@ CUIFrame::CUIFrame(void):mValidID(0),mbRunning(false)
 	sFilesystem.Open("Out/Image");
 	mWindConfig = NEW_LEAKCHECK CWindConfig;
 	mTimerMgr = NEW_LEAKCHECK CTimerManager;
+	mEffectFactroy = NEW_LEAKCHECK CEffectFactory;
 }
 
 
@@ -124,14 +126,21 @@ void CUIFrame::Destroy()
 	sFilesystem.Close();
 	sImageResource.Destroy();
 	sFontConfig.Destroy();
+
+	DELETE_LEAKCHECK(mEffectFactroy);
+	mEffectFactroy = NULL;
+
 	DELETE_LEAKCHECK(mTimerMgr);
 	mTimerMgr = NULL;
+
 	DELETE_LEAKCHECK(mWindConfig);
 	mWindConfig = NULL;
+
 	WinIterator it = mWinds.begin();
 	for( ; mWinds.end() != it ; it++)
 		DELETE_LEAKCHECK(it->second);
 	mWinds.clear();
+
 	DELETE_LEAKCHECK(mObjFactory);
 	mObjFactory = NULL;
 }

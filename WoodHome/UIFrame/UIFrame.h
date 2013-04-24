@@ -6,6 +6,7 @@
 class CTimerManager;
 class CWindConfig;
 class CUIObjectFactory;
+class CEffectFactory;
 class UI_API CUIFrame
 {
 private:
@@ -24,6 +25,7 @@ public:
 	void InitWindStyle(SourceID styleconfig);
 	CWindConfig* GetWindCof(){return mWindConfig;}
 	CTimerManager* GetTimerMgr() {return mTimerMgr;}
+	CEffectFactory* GetEffectFactory(){return mEffectFactroy;}
 	void Destroy();
 private:
 	CUIObjectFactory* mObjFactory;
@@ -33,6 +35,7 @@ private:
 	std::list<CUIWindow*> mWindwosTobeDelete;
 	CWindConfig* mWindConfig;
 	CTimerManager* mTimerMgr;
+	CEffectFactory* mEffectFactroy;
 	bool mbRunning;
 };
 

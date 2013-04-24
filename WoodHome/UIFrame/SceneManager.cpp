@@ -6,7 +6,7 @@
 #include "UIObjectFactory.h"
 #include "Memory_Check.h"
 #include "Graphics.h"
-#include "EffectFadeto.h"
+#include "EffectFactory.h"
 
 CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd),mEffect(NULL)
 {
@@ -24,7 +24,7 @@ CSceneManager::~CSceneManager(void)
 		DELETE_LEAKCHECK(mEffect);
 }
 
-void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NULL*/)
+void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NULL*/, EffectType effect /*= Effect_Invalid*/)
 {
 	mParam_Onshow = data;
 	// hide from
@@ -56,16 +56,16 @@ void CSceneManager::GoTo( SourceID toid ,CScene* from /*= 0*/ ,void* data/* = NU
 		mSceneStack.push_back(pTo);
 	}
 
-	//deal effect
-	if(!from)
+	//no effect
+	if(!from || Effect_Invalid == effect)
 	{
 		pTo->Visible(true);
 		pTo->OnShow(mParam_Onshow);
 		pTo->DrawToWindow();
 	}
-	else
+	else//deal effect
 	{
-		mEffect = NEW_LEAKCHECK CEffectFadeto(this,50,10,mWind->Graphic());
+		mEffect = sUIFrame.GetEffectFactory()->CreateEffect(effect,this,50,10,mWind->Graphic());
 		mEffect->Start(from , pTo);
 	}
 }
@@ -92,7 +92,7 @@ CScene* CSceneManager::CreatScene( SourceID sceneid )
 	return pScene;
 }
 
-void CSceneManager::Back(void* data /*= NULL*/)
+void CSceneManager::Back(void* data /*= NULL*/, EffectType effect /*= Effect_Invalid*/)
 {
 	mParam_Onshow = data;
 	if(1==mSceneStack.size())
@@ -103,8 +103,18 @@ void CSceneManager::Back(void* data /*= NULL*/)
 		pcur->Visible(false);
 		pcur->OnHide();
 		mSceneStack.pop_back();
-		mEffect = NEW_LEAKCHECK CEffectFadeto(this,50,20,mWind->Graphic());
-		mEffect->Start(pcur , mSceneStack.back());
+		//deal effect
+		if(Effect_Invalid != effect)
+		{
+			mEffect = sUIFrame.GetEffectFactory()->CreateEffect(effect,this,50,20,mWind->Graphic());
+			mEffect->Start(pcur , mSceneStack.back());
+		}
+		else
+		{
+			mSceneStack.back()->Visible(true);
+			mSceneStack.back()->OnShow(mParam_Onshow);
+			mSceneStack.back()->DrawToWindow();
+		}
 	}
 }
 

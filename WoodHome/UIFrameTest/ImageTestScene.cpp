@@ -55,7 +55,6 @@ void CImageTestScene::Load( const slim::XmlNode* node )
 	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnSkewYClick);
 	pbtn = (CUIButton*)get("Rotate");
 	pbtn->AddClickListen(this,(OnBtnClick)&CImageTestScene::OnBtnRotateClick);
-	mtimeid =  sUIFrame.GetTimerMgr()->CreateTimer(this,20);
 }
 
 void CImageTestScene::OnBtnbackClick()
@@ -112,4 +111,14 @@ void CImageTestScene::OnTimer( TimerID timerid )
 		deltaX= 1.1f;
 	mScaleX *= deltaX;
 	DrawToWindow();
+}
+
+void CImageTestScene::OnHide()
+{
+	sUIFrame.GetTimerMgr()->RemoveTimer(mtimeid);
+}
+
+void CImageTestScene::OnShow( void* data /* = NULL */ )
+{
+	mtimeid =  sUIFrame.GetTimerMgr()->CreateTimer(this,20);
 }
