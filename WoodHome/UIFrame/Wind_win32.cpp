@@ -24,13 +24,12 @@ CWind_win32::CWind_win32(Style_Window id) : CUIWindow(id)
 	wcex.hInstance		= NULL;
 	wcex.hIcon			= NULL;
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
+	wcex.hbrBackground	= NULL;//(HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszClassName	= L"window";
 	wcex.hIconSm		= NULL;//LoadIcon(wcex.hInstance, L"_2_1.png");
 	wcex.lpszMenuName   = NULL;
 	RegisterClassEx(&wcex);
-	int y =GetSystemMetrics(SM_CYCAPTION);
-	mhWnd = CreateWindow(L"window", L"UI",WS_OVERLAPPEDWINDOW,
+	mhWnd = CreateWindow(L"window", L"UI",WS_OVERLAPPEDWINDOW|WS_MINIMIZE,
 		mPositionX,mPositionY, mWidth, mHeight, NULL, NULL, NULL, NULL);
 }
 
@@ -48,7 +47,8 @@ void CWind_win32::MessageTo( WindID windowId,const SystemMessage& msg )
 
 void CWind_win32::ShowWindow()
 {
-	::ShowWindow(mhWnd,SW_SHOW);
+	::SetWindowPos(mhWnd,HWND_TOP,mPositionX,mPositionY,mWidth,mHeight,SWP_SHOWWINDOW);
+	::ShowWindow(mhWnd,SW_SHOWNORMAL);
 }
 
 void CWind_win32::HideWindow()
@@ -99,10 +99,12 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 	SystemMessage mss;
 	switch (message)
 	{
+ 	case WM_ERASEBKGND:
+ 		pwnd->DrawWin32(HDC(wParam));
+ 		return 0;
 	case WM_PAINT:
 		{
 			hdc = ::BeginPaint(hWnd,&ps);
-			pwnd->DrawWin32(hdc);
 			::EndPaint(hWnd,&ps);
 		}
 		break;
