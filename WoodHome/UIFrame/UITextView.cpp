@@ -22,6 +22,7 @@ void CUITextView::Load( const slim::XmlNode* node )
 
 void CUITextView::Draw( CGraphics* pGraphic )
 {
-
-	pGraphic->DrawTextW(mText.c_str(),Bound(),*sFontConfig.GetFont(mFontID),CENTER);
+	CBound bd = Bound();
+	Parent()->Absolute(bd);
+	pGraphic->DrawTextW(mText.c_str(),bd,*sFontConfig.GetFont(mFontID),CENTER);
 }

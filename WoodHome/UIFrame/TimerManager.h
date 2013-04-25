@@ -2,6 +2,7 @@
 #include <map>
 #include "UItype.h"
 typedef int TimerID;
+#define InvalidTimer 0 
 class UI_API ITimerListener
 {
 public:

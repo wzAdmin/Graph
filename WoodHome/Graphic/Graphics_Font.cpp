@@ -152,5 +152,5 @@ CPosition CGraphics::GetAlignPostion(const CBound& dest, const CBound& src,ALIGN
 unsigned int CGraphics::GetCharWidth( wchar_t ch, const Font& ft )
 {
 	FontImage fim = sFontEngine.GetFont(ch,ft.width,ft.height);
-	return fim.left + fim.advanceX + fim.bound.Width();
+	return fim.advanceX ;
 }

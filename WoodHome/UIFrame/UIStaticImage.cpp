@@ -41,8 +41,11 @@ void CUIStaticImage::Draw( CGraphics* pGraphic )
 {
 	CImageBuffer* pbuffer = sImageResource.GetImage(mImageID);
 	CTransfrom tf;
+	int x = mCenterX;
+	int y = mCenterY;
+	Parent()->Absolute(x,y);
 	tf.SetAnchorPoint(pbuffer->Width()/2.0f,pbuffer->Height()/2.0f);
-	tf.SetPosition(float(mCenterX) , float(mCenterY));
+	tf.SetPosition(float(x) , float(y));
 	tf.SetRotation(float(mSkewX) , float(mSkewY));
 	tf.SetScale(float(mScaleX) , float(mScaleY));
 	tf.Update();

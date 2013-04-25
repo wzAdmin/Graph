@@ -12,10 +12,10 @@ public:
 public:
 	void Text(const std::wstring& wcs){mText = wcs;}
 	const std::wstring& Text() const {return mText;}
-private:
+protected:
 	virtual void Load(const slim::XmlNode* node);
 	virtual void Draw(CGraphics* pGraphic);
-private:
+protected:
 	std::wstring mText;
 	int mFontID;
 };
