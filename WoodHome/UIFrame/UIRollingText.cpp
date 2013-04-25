@@ -29,7 +29,7 @@ void CUIRollingText::Draw( CGraphics* pGraphic )
 	if(mRolling)
 	{
 		const Font& ft = *sFontConfig.GetFont(mFontID);
-		mCurCharWidth = pGraphic->GetCharWidth(mText[mIndex] , ft);
+		mCurCharWidth = pGraphic->GetCharWidthW(mText[mIndex] , ft);
 		CBound bd = Bound();
 		Parent()->Absolute(bd);
 		bd.Left(bd.Left() - mOffset);
@@ -48,13 +48,13 @@ void CUIRollingText::Init( CGraphics* pGraphic)
 	const Font& ft = *sFontConfig.GetFont(mFontID);
 	for (unsigned int i = 0 ; i < mText.size() ; i ++)
 	{
-		TextWidth += pGraphic->GetCharWidth(mText[i] , ft);
+		TextWidth += pGraphic->GetCharWidthW(mText[i] , ft);
 		if(TextWidth > Bound().Width())
 		{
 			mIndex = 0;
 			mOffset = 0;
 			mRolling = true;
-			sUIFrame.GetTimerMgr()->CreateTimer(this , mRollFrequency);
+			mTimerid = sUIFrame.GetTimerMgr()->CreateTimer(this , mRollFrequency);
 			break;
 		}
 	}
@@ -67,6 +67,12 @@ void CUIRollingText::Load( const slim::XmlNode* node )
 
 void CUIRollingText::OnTimer( TimerID timerid )
 {
+	if(!IsRealVisible())
+	{
+		sUIFrame.GetTimerMgr()->RemoveTimer(mTimerid);
+		mInited = false;
+		return;
+	}
 	mOffset += 5;
 	if(mCurCharWidth <= mOffset)
 	{

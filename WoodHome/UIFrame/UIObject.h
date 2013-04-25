@@ -16,7 +16,7 @@ public:
 public:
 	virtual void Load(const slim::XmlNode* node) ;
 	virtual void Draw(CGraphics* pGraphic) = 0;
-	virtual void DrawToWindow();
+	virtual void DrawToWindow(const CBound* bd = NULL);
 	virtual void OnFocusOut(){}
 	CUIObject* operator [] (const std::string& name){return get(name);}
 	void Bound(const CBound& bd){mBound =bd;}
@@ -27,8 +27,18 @@ public:
 	CUIObject* Parent() const {return mParent;}
 	void Order(int od){mOrder = od;}
 	int Order()const{return mOrder;}
+
+	//
+	//why there is IsRealVisible ? 
+	//function Visible is just return the visible attribute of itself.
+	//it is maybe hidden even if the mIsVisible is true as it's parent
+	//or parent's parent and so on is hidden.
+	//so IsRealVisible returns the object is showing or hiding indeed.
+	bool IsRealVisible();
 	bool Visible()const{return mIsVisible;}
 	void Visible(bool val){mIsVisible = val;}
+
+
 	void Absolute(CBound& bound);
 	void ParentToSelf(CBound& bound);
 	void SelfToParent(CBound& bound);

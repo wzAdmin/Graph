@@ -71,8 +71,24 @@ CPosition CUIObject::ParentToSelf( int x ,int y )
 	return CPosition(x - mBound.Left() , y - mBound.Top());
 }
 
-void CUIObject::DrawToWindow()
+void CUIObject::DrawToWindow(const CBound* bd/* = NULL*/)
 {
 	if(mParent)
-		mParent->DrawToWindow();
+	{
+		if(bd)
+		{
+			CBound parentBd =*bd;
+			SelfToParent(parentBd);
+			mParent->DrawToWindow(&parentBd);
+		}
+		else
+			mParent->DrawToWindow(&mBound);
+	}
+}
+
+bool CUIObject::IsRealVisible()
+{
+	if(mParent)
+		return mParent->IsRealVisible();
+	return mIsVisible;
 }

@@ -43,20 +43,20 @@ bool CClipUtils::ClipLineMinX( CPosition& A , CPosition& B )
 
 bool CClipUtils::ClipLineMaxX( CPosition& A , CPosition& B )
 {
-	if(A.X() > mMaxX && B.X() > mMaxX)
+	if(A.X() > mMaxX - 1 && B.X() > mMaxX - 1)
 		return false;
-	else if(A.X() <= mMaxX && B.X() <= mMaxX)
+	else if(A.X() <= mMaxX - 1 && B.X() <= mMaxX - 1)
 		return true;
-	else if(A.X() > mMaxX)
+	else if(A.X() > mMaxX - 1)
 	{
-		A.Y(int(A.Y() - double(A.X() - mMaxX) * (A.Y() - B.Y()) / (A.X() - B.X())));
-		A.X(mMaxX);
+		A.Y(int(A.Y() - double(A.X() - mMaxX + 1) * (A.Y() - B.Y()) / (A.X() - B.X())));
+		A.X(mMaxX - 1);
 		return true;
 	}
 	else
 	{
-		B.Y(int(B.Y() - double(B.X() - mMaxX) * (B.Y() - A.Y()) / (B.X() - A.X())));
-		B.X(mMaxX);
+		B.Y(int(B.Y() - double(B.X() - mMaxX + 1) * (B.Y() - A.Y()) / (B.X() - A.X())));
+		B.X(mMaxX - 1);
 		return true;
 	}
 }
@@ -83,20 +83,20 @@ bool CClipUtils::ClipLineMinY( CPosition& A , CPosition& B )
 
 bool CClipUtils::ClipLineMaxY( CPosition& A , CPosition& B )
 {
-	if(A.Y() > mMaxY && B.Y() > mMaxY)
+	if(A.Y() > mMaxY - 1 && B.Y() > mMaxY - 1)
 		return false;
-	else if(A.Y() <= mMaxY && B.Y() <= mMaxY)
+	else if(A.Y() <= mMaxY - 1 && B.Y() <= mMaxY - 1)
 		return true;
-	else if(A.Y() > mMaxY)
+	else if(A.Y() > mMaxY - 1 )
 	{
-		A.X(int(A.X() - double(A.Y() - mMaxY) * (A.X() - B.X()) / (A.Y() - B.Y())));
-		A.Y(mMaxY);
+		A.X(int(A.X() - double(A.Y() - mMaxY  + 1) * (A.X() - B.X()) / (A.Y() - B.Y())));
+		A.Y(mMaxY - 1);
 		return true;
 	}
 	else
 	{
-		B.X(int(B.X() - double(B.Y() - mMaxY) * (B.X() - A.X()) / (B.Y() - A.Y())));
-		B.Y(mMaxY);
+		B.X(int(B.X() - double(B.Y() - mMaxY  + 1) * (B.X() - A.X()) / (B.Y() - A.Y())));
+		B.Y(mMaxY - 1);
 		return true;
 	}
 }

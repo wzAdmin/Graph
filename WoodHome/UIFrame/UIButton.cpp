@@ -39,7 +39,7 @@ void CUIButton::Draw( CGraphics* pGraphic )
 	{
 		CBound bd = Bound();
 		Parent()->SelfToParent(bd);
-		pGraphic->DrawImage_Repeat(pBuffer,CBound(0,pBuffer->Width()-1,0,pBuffer->Height()-1),bd);
+		pGraphic->DrawImage_Repeat(pBuffer,&bd);
 		pGraphic->DrawTextW(mText.c_str(),bd,*sFontConfig.GetFont(mFontID),CENTER);
 	}
 }

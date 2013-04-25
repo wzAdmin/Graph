@@ -16,6 +16,7 @@ void CEffectFadeto::Effect()
 {
 	unsigned char alpha = unsigned char((mCurFrames<<5) / mTotaolFrames);
 	CBound bound(0 , mSrcBuffer->Width() - 1, 0 ,mSrcBuffer->Height()-1);
-	mGraphics->DrawImage_Repeat(mSrcBuffer,bound , bound);
-	mGraphics->DrawImage_Repeat(mDstBuffer,alpha,NULL,NULL);
+	mGraphics->SetClipBound(bound);
+	mGraphics->DrawImage_Repeat(mSrcBuffer,&bound );
+	mGraphics->DrawImage_Repeat(mDstBuffer,alpha,&bound);
 }

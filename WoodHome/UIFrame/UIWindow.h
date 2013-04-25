@@ -6,6 +6,7 @@ typedef int WindID;
 class CGraphics;
 class CImageBuffer;
 class CSceneManager;
+class CBound;
 class UI_API CUIWindow
 {
 public:
@@ -16,7 +17,7 @@ public:
 	virtual void HideWindow() = 0;
 	virtual void Minimize() = 0;
 	virtual void SetPostion(int x , int y) = 0;
-	virtual void DrawToWindow() = 0;
+	virtual void DrawToWindow(const CBound* drawBound = NULL) = 0;
 	virtual void BufferToWindow(const CImageBuffer* buffer) = 0;
 	virtual void Start() = 0;
 	virtual WindID GetID() = 0;

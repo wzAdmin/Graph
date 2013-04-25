@@ -14,7 +14,7 @@ public:
 	static CUIObject* Create(){return NEW_LEAKCHECK CScene;}
 public:
 	virtual void Draw(CGraphics* pGraphic);
-	virtual void DrawToWindow();
+	virtual void DrawToWindow(const CBound* bd = NULL);
 	virtual void OnShow(void* data = NULL){}
 	virtual void Load(const slim::XmlNode* node);
 

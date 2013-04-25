@@ -35,6 +35,7 @@ void CUIStaticImage::Load( const slim::XmlNode* node )
 	mCenterX = node->readAttributeAsInt("x");
 	mCenterY = node->readAttributeAsInt("y");
 	mImageID = SourceID(node->readAttributeAsInt("image" , Invalid));
+	UpdateBound();
 }
 
 void CUIStaticImage::Draw( CGraphics* pGraphic )
@@ -50,4 +51,24 @@ void CUIStaticImage::Draw( CGraphics* pGraphic )
 	tf.SetScale(float(mScaleX) , float(mScaleY));
 	tf.Update();
 	pGraphic->DrawImage(pbuffer,tf);
+}
+
+void CUIStaticImage::UpdateBound()
+{
+	CImageBuffer* pbuffer = sImageResource.GetImage(mImageID);
+	CBound src(0,pbuffer->Width() - 1, 0 ,pbuffer->Height() -1 );
+	src.Bottom(src.Bottom() + 2);
+	src.Right(src.Right() + 2);
+	src.Left(src.Left() - 2);
+	src.Top(src.Top() - 2);	
+	CTransfrom tf;
+	int x = mCenterX;
+	int y = mCenterY;
+	Parent()->Absolute(x,y);
+	tf.SetAnchorPoint(pbuffer->Width()/2.0f,pbuffer->Height()/2.0f);
+	tf.SetPosition(float(x) , float(y));
+	tf.SetRotation(float(mSkewX) , float(mSkewY));
+	tf.SetScale(float(mScaleX) , float(mScaleY));
+	tf.Update();
+	Bound(tf.Transform(src));
 }

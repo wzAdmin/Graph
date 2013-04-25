@@ -4,7 +4,9 @@
 #else
 #define UI_API
 #endif
-
+#ifndef NULL
+#define NULL 0
+#endif
 enum MessageID{
 	LBtnDown,
 	LBtnUp,

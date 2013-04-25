@@ -69,10 +69,13 @@ void CWind_win32::SetPostion( int x , int y )
 
 }
 
-void CWind_win32::DrawToWindow()
+void CWind_win32::DrawToWindow(const CBound* drawBound /*= NULL*/)
 {
 	if(!mSceneManager->GetCurScene()->Visible())
 		return ;
+	mGraphic->SetClipBound(0,0,mGraphic->Width() - 1,mGraphic->Height() - 1);
+	if(drawBound)
+		mGraphic->SetClipBound(*drawBound);
 	mSceneManager->GetCurScene()->Draw(mGraphic);
 	HDC hdc= GetDC(mhWnd);
 	BITHEADER header;

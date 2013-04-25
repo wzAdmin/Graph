@@ -55,6 +55,6 @@ void CUILayer::DrawSelf( CGraphics* pGraphic )
 		CBound bd = Bound();
 		ParentToSelf(bd);
 		Absolute(bd);
-		pGraphic->DrawImage_Repeat(pImage,CBound(0,pImage->Width() - 1,0 ,pImage->Height() - 1),bd);
+		pGraphic->DrawImage_Repeat(pImage,&bd);
 	}
 }

@@ -4,6 +4,7 @@
 #include "UIObjectFactory.h"
 #include "Trace.h"
 #include "SlimXml.h"
+#include "Graphics.h"
 
 CUIContainer::CUIContainer(void):mFcousedObj(NULL)
 {
@@ -19,11 +20,24 @@ CUIContainer::~CUIContainer(void)
 void CUIContainer::Draw( CGraphics* pGraphic )
 {
 	DrawSelf(pGraphic);
+	CBound bdself = Bound();
+	CBound clip = pGraphic->GetClipBound();
+	ParentToSelf(bdself);
 	for (unsigned int i = mChilds.size(); i ; i--)
 	{
 		if(mChilds[i-1]->Visible())
+		{
+			CBound bdchild = mChilds[i-1]->Bound();
+			CBound::Intersect(bdself,bdchild,bdchild);
+			if (Parent())
+			{
+				Parent()->Absolute(bdchild);
+			}
+			pGraphic->SetClipBound(bdchild);
 			mChilds[i-1]->Draw(pGraphic);
+		}
 	}
+	pGraphic->SetClipBound(clip);
 }
 
 void CUIContainer::AddChild( CUIObject* child )

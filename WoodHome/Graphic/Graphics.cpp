@@ -23,7 +23,7 @@ void CGraphics::Initialize(  CImageBuffer* image)
 	mHeight = image->Height();
 	if(mClip)
 		DELETE_LEAKCHECK(mClip);
-	mClip = NEW_LEAKCHECK CClipUtils(0 , 0 , mWidth - 1, mHeight - 1);
+	mClip = NEW_LEAKCHECK CClipUtils(0 , 0 , mWidth, mHeight);
 	mpFrambuffer = const_cast<unsigned short*>(image->GetPixels());
 	mImagebuffer = image;
 }
@@ -35,10 +35,10 @@ void CGraphics::DrawCirce( CPosition center , int R ,COLORARGB color )
 	int right = center.X() + R + 2;
 	int top = center.Y() - R - 2;
 	int bottom = center.Y() + R + 2;
-	left = left < 0 ? 0 : left;
-	right = right > mWidth  ? mWidth  : right + 1;
-	top = top < 0 ? 0 : top;
-	bottom = bottom > mHeight ? mHeight : bottom + 1;
+	left = left < mClip->mMinX ? mClip->mMinX : left;
+	right = right > mClip->mMaxX  ? mClip->mMaxX  : right + 1;
+	top = top < mClip->mMinY ? mClip->mMinY : top;
+	bottom = bottom > mClip->mMaxY ? mClip->mMaxY : bottom + 1;
 	int stride = Stride();
 	int dis = (top - center.Y()) * (top - center.Y()) + (left - center.X()) * (left - center.X()) - R * R;
 	for (int height = top ; height < bottom  ; height++)
@@ -66,10 +66,10 @@ void CGraphics::Line( CPosition A , CPosition B ,int Width ,COLORARGB color )
 	DrawCirce(A,Width/2,color);
 	DrawCirce(B,Width/2,color);
 	unsigned short Color = RGB888ToRGB565(color);
-	int left = 0;
-	int right = mWidth;
-	int top = 0;
-	int bottom = mHeight;
+	int left = mClip->mMinX;
+	int right = mClip->mMaxX;
+	int top = mClip->mMinY;
+	int bottom = mClip->mMaxY;
 	double AB = (A.X() - B.X()) * (A.X() - B.X()) + (A.Y() - B.Y()) * (A.Y() - B.Y()) ;
 	AB = sqrt(AB);
 	double SArea = AB * Width / 2;
@@ -106,16 +106,20 @@ void CGraphics::LineDDA( CPosition A , CPosition B ,int width ,COLORARGB color )
 	int stride = Stride();
 	int ky = stride;
 	int kx = 1;
-	int maxX = mWidth;
-	int maxY = mHeight;
+	int maxX = mClip->mMaxX;
+	int maxY = mClip->mMaxY;
+	int minX = mClip->mMinX;
+	int minY = mClip->mMinY;
 	if(ABS(A.X() - B.X()) < ABS(A.Y() - B.Y()))
 	{
 		A.TransposeXY();
 		B.TransposeXY();
 		kx = stride;
 		ky = 1;
-		maxX = mHeight;
-		maxY = mWidth;
+		maxX = mClip->mMaxY;
+		maxY = mClip->mMaxX;
+		minX = mClip->mMinY;
+		minY = mClip->mMinX;
 	}
 	if(A.X() > B.X())
 		CPosition::Swap(A,B);
@@ -132,7 +136,7 @@ void CGraphics::LineDDA( CPosition A , CPosition B ,int width ,COLORARGB color )
 	int b2 = a*A.Y() - b*A.X();
 	int b3 = a*B.Y() - b*B.X();
 	int c1 = A.X() * B.Y() - B.X() * A.Y();
-	beginX = beginX < 0 ? 0 : beginX;
+	beginX = beginX < minX ? minX : beginX;
 	endX = endX > maxX ? maxX : endX + 1;
 	int y = 0;
 	if((-c-a*beginX)*b > 0)
@@ -143,7 +147,7 @@ void CGraphics::LineDDA( CPosition A , CPosition B ,int width ,COLORARGB color )
 	for (int x = beginX ; x < endX ; x++)
 	{
 		int beginY = y - r;
-		beginY = beginY < 0?0:beginY;
+		beginY = beginY < minY?minY:beginY;
 		int endY = y + r;
 		endY = endY > maxY ? maxY:endY + 1;
 		for(int yy = beginY   ; yy < endY  ;yy++)
@@ -190,16 +194,20 @@ void CGraphics::LineDDA( CPosition A ,int width1 ,CPosition B , int width2,COLOR
 	int stride = Stride();
 	int ky = stride;
 	int kx = 1;
-	int maxX = mWidth;
-	int maxY = mHeight;
+	int maxX = mClip->mMaxX;
+	int maxY = mClip->mMaxY;
+	int minY = mClip->mMinY;
+	int minX = mClip->mMinX;
 	if(ABS(A.X() - B.X()) < ABS(A.Y() - B.Y()))
 	{
 		A.TransposeXY();
 		B.TransposeXY();
 		kx = stride;
 		ky = 1;
-		maxX = mHeight;
-		maxY = mWidth;
+		maxX = mClip->mMaxY;
+		maxY = mClip->mMaxX;
+		minY = mClip->mMinX;
+		minX = mClip->mMinY;
 	}
 	if(A.X() > B.X())
 	{
@@ -234,7 +242,7 @@ void CGraphics::LineDDA( CPosition A ,int width1 ,CPosition B , int width2,COLOR
 	int b1 = a*Maxpos.Y() - b*Maxpos.X();
 	int b2 = a*A.Y() - b*A.X();
 	int b3 = a*B.Y() - b*B.X();
-	beginX = beginX < 0 ? 0 : beginX;
+	beginX = beginX < minX ? minX : beginX;
 	endX = endX > maxX ? maxX : endX + 1;
 	int y = 0;
 	if((-c-a*beginX)*b > 0)
@@ -246,7 +254,7 @@ void CGraphics::LineDDA( CPosition A ,int width1 ,CPosition B , int width2,COLOR
 	for (int x = beginX ; x < endX ; x++)
 	{		
 		int beginY = y - r;
-		beginY = beginY < 0?0:beginY;
+		beginY = beginY < minY ? minY:beginY;
 		int endY = y +r;
 		endY = endY > maxY ? maxY:endY + 1;
 		for(int yy = beginY   ; yy < endY ;yy++)
@@ -293,24 +301,28 @@ void CGraphics::LineDDA( CPosition A , CPosition B ,COLORARGB color )
 	int stride = Stride();
 	int ky = stride;
 	int kx = 1;
-	int maxX = mWidth;
-	int maxY = mHeight;
+	int maxX = mClip->mMaxX;
+	int maxY = mClip->mMaxY;
+	int minX = mClip->mMinX;
+	int minY = mClip->mMinY;
 	if(ABS(A.X() - B.X()) < ABS(A.Y() - B.Y()))
 	{
 		A.TransposeXY();
 		B.TransposeXY();
 		kx = stride;
 		ky = 1;
-		maxX = mHeight;
-		maxY = mWidth;
+		maxX = mClip->mMaxY;
+		maxY = mClip->mMaxX;
+		minX = mClip->mMinY;
+		minY = mClip->mMinX;
 	}
 	if(A.X() > B.X())
 		CPosition::Swap(A,B);
 	int a = B.Y() - A.Y();
 	int b = A.X() - B.X();
-	int left = A.X() < 0 ? 0 : A.X();
+	int left = A.X() < minX ? minX : A.X();
 	int right = B.X() > maxX ? maxX : B.X() + 1;
-	int top = A.Y() < 0 ? 0 : A.Y();
+	int top = A.Y() < minY ? minY : A.Y();
 	int bottom = B.Y() > maxY ? maxY : B.Y() + 1;
 	int dlta = 1;
 	int y = top;
@@ -346,7 +358,25 @@ void CGraphics::FillBoud( const CBound& bound ,COLORARGB color )
 	CImageBuffer buffer;
 	buffer.Initialize(1,1,false);
 	buffer.ClearColor(color);
-	DrawImage_Repeat(&buffer,CBound(),bound);
+	DrawImage_Repeat(&buffer,&bound,NULL);
+}
+
+CBound CGraphics::GetClipBound()
+{
+	return CBound(mClip->mMinX , mClip->mMaxX - 1 , mClip->mMinY , mClip->mMaxY - 1);
+}
+
+void CGraphics::SetClipBound( const CBound& bd )
+{
+	return SetClipBound(bd.Left() ,bd.Top() , bd.Right(), bd.Bottom());
+}
+
+void CGraphics::SetClipBound( int minx , int miny, int maxx , int maxy )
+{
+	mClip->mMinX = MAX(0 , minx);
+	mClip->mMinY = MAX(0 , miny);
+	mClip->mMaxX = MIN(mWidth ,maxx + 1);
+	mClip->mMaxY = MIN(mHeight , maxy + 1);
 }
 
 

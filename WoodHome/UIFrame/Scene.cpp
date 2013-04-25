@@ -15,9 +15,9 @@ void CScene::Draw( CGraphics* pGraphic )
 	CUILayer::Draw(pGraphic);
 }
 
-void CScene::DrawToWindow()
+void CScene::DrawToWindow(const CBound* bd /*= NULL*/)
 {
-	mWind->DrawToWindow();
+	mWind->DrawToWindow(bd);
 }
 
 void CScene::Goto( SourceID toScene,void* data /*= NULL*/,EffectType effect /*= Effect_Invalid*/ )

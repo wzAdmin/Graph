@@ -10,13 +10,14 @@ public:
 	CUIStaticImage(void);
 	~CUIStaticImage(void);
 public:
-	void SetCenter(int x , int y){mCenterX = x; mCenterY = y;}
-	void SetScale(float scalex , float scaley){mScaleX = scalex ; mScaleY = scaley;}
-	void SetSkew(float skewx , float skewy){mScaleX = skewx ; mSkewY = skewy;}
-	void Rotate(float x , float y){mSkewX += x; mSkewY += y;}
+	void SetCenter(int x , int y){mCenterX = x; mCenterY = y;UpdateBound();}
+	void SetScale(float scalex , float scaley){mScaleX = scalex ; mScaleY = scaley;UpdateBound();}
+	void SetSkew(float skewx , float skewy){mScaleX = skewx ; mSkewY = skewy;UpdateBound();}
+	void Rotate(float x , float y){mSkewX += x; mSkewY += y;UpdateBound();}
 private:
 	virtual void Load(const slim::XmlNode* node);
 	virtual void Draw(CGraphics* pGraphic);
+	void UpdateBound();
 private:
 	int mCenterX;
 	int mCenterY;

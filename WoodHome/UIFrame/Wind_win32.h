@@ -14,7 +14,7 @@ private:
 	virtual void HideWindow();
 	virtual void Minimize();
 	virtual void SetPostion(int x , int y);
-	virtual void DrawToWindow();
+	virtual void DrawToWindow(const CBound* drawBound = NULL);
 	virtual void BufferToWindow(const CImageBuffer* buffer);
 	virtual void Start();
 	virtual WindID GetID(){return int(mhWnd);}
