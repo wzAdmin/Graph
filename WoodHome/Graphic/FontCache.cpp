@@ -90,7 +90,7 @@ FontImage CFontCache::AddFontImage( const FT_GlyphSlot slot,unsigned short charC
 	FontImage ftImage;
 	ftImage.advanceX = slot->advance.x>>6;
 	ftImage.advanceY = slot->advance.y>>6;
-	ftImage.boud = dest;
+	ftImage.bound = dest;
 	ftImage.left = slot->bitmap_left;
 	ftImage.top  = slot->bitmap_top;
 	ftImage.pGrayImage = mCache;
@@ -121,7 +121,7 @@ FontImage CFontCache::GetBigFont( const FT_GlyphSlot slot)
 	FontImage ftImage;
 	ftImage.advanceX = slot->advance.x>>6;
 	ftImage.advanceY = slot->advance.y>>6;
-	ftImage.boud = CBound(0 ,slot->bitmap.width-1 ,0 ,slot->bitmap.rows-1);
+	ftImage.bound = CBound(0 ,slot->bitmap.width-1 ,0 ,slot->bitmap.rows-1);
 	ftImage.left = slot->bitmap_left;
 	ftImage.top  = slot->bitmap_top;
 	ftImage.pGrayImage = mBigFont;

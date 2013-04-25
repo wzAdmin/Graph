@@ -9,7 +9,7 @@ class CGrayImage;
 typedef struct _FontImage
 {
 	const CGrayImage* pGrayImage;
-	CBound boud;
+	CBound bound;
 	int advanceX;
 	int advanceY;
 	int left;

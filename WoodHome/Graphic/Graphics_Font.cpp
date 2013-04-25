@@ -15,16 +15,16 @@ void CGraphics::DrawTextW(const wchar_t* str ,int left , int bottom,const Font& 
 		FontImage ftImage = CFontEngine::Instance().GetFont(*str, ft.width,ft.height);
 		dest.Top(bottom - ftImage.top);
 		dest.Left(left+ftImage.left);
-		dest.Right(dest.Left() + ftImage.boud.Width() - 1);
-		dest.Bottom(dest.Top() + ftImage.boud.Height() -1);
-		tf.SetAnchorPoint(float(ftImage.boud.Left() + orgleft - dest.Left()),
-			float(ftImage.boud.Bottom() + orgbottom - dest.Bottom()) );
+		dest.Right(dest.Left() + ftImage.bound.Width() - 1);
+		dest.Bottom(dest.Top() + ftImage.bound.Height() -1);
+		tf.SetAnchorPoint(float(ftImage.bound.Left() + orgleft - dest.Left()),
+			float(ftImage.bound.Bottom() + orgbottom - dest.Bottom()) );
 		tf.SetPosition(float(orgleft) , float(orgbottom));
 		tf.Update();
 		if(!clipBuond)
-			DrawImage(ftImage.pGrayImage,tf,ft.color,&ftImage.boud);
+			DrawImage(ftImage.pGrayImage,tf,ft.color,&ftImage.bound);
 		else
-			DrawImage(ftImage.pGrayImage,tf,ft.color,&ftImage.boud,clipBuond);
+			DrawImage(ftImage.pGrayImage,tf,ft.color,&ftImage.bound,clipBuond);
 		left += ftImage.advanceX;
 		bottom += ftImage.advanceY;
 		str++;
@@ -40,12 +40,12 @@ void CGraphics::DrawTextW(const wchar_t* str,int left , int bottom,const Font& f
 		FontImage ftImage = CFontEngine::Instance().GetFont(*str, ft.width,ft.height);
 		dest.Top(bottom - ftImage.top);
 		dest.Left(left+ftImage.left);
-		dest.Right(dest.Left() + ftImage.boud.Width() - 1);
-		dest.Bottom(dest.Top() + ftImage.boud.Height() -1);
+		dest.Right(dest.Left() + ftImage.bound.Width() - 1);
+		dest.Bottom(dest.Top() + ftImage.bound.Height() -1);
 		if(!clipBuond)
-			DrawGrayImage(ftImage.pGrayImage,ftImage.boud,dest,ft.color);
+			DrawGrayImage(ftImage.pGrayImage,ftImage.bound,dest,ft.color);
 		else if(CBound::Intersect(dest,*clipBuond,bound))
-			DrawGrayImage(ftImage.pGrayImage,ftImage.boud,bound,ft.color);
+			DrawGrayImage(ftImage.pGrayImage,ftImage.bound,bound,ft.color);
 		left += ftImage.advanceX;
 		bottom += ftImage.advanceY;
 		str++;
@@ -63,7 +63,7 @@ void CGraphics::DrawTextW( const wchar_t* str ,const CBound& dest, const Font& f
 		FontImage ftImage = CFontEngine::Instance().GetFont(*str, ft.width,ft.height);
 		src.Right(src.Right() + ftImage.advanceX);
 		src.Top(bottom - ftImage.top);
-		src.Bottom(src.Top() + ftImage.boud.Height() - 1);
+		src.Bottom(src.Top() + ftImage.bound.Height() - 1);
 		bottom += ftImage.advanceY;
 		str++;
 	}
@@ -72,7 +72,7 @@ void CGraphics::DrawTextW( const wchar_t* str ,const CBound& dest, const Font& f
 		FontImage ftImage = CFontEngine::Instance().GetFont(*str, ft.width,ft.height);
 		src.Right(src.Right() + ftImage.advanceX);
 		src.Top(MIN(src.Top(),bottom - ftImage.top));
-		src.Bottom(MAX(src.Bottom(),bottom - ftImage.top + ftImage.boud.Height() - 1));
+		src.Bottom(MAX(src.Bottom(),bottom - ftImage.top + ftImage.bound.Height() - 1));
 		bottom += ftImage.advanceY;
 		str++;
 	}
@@ -147,4 +147,10 @@ CPosition CGraphics::GetAlignPostion(const CBound& dest, const CBound& src,ALIGN
 		postion.Y((dest.Top() + dest .Bottom() - src.Top() - src.Bottom()) / 2);
 	}
 	return postion;
+}
+
+unsigned int CGraphics::GetCharWidth( wchar_t ch, const Font& ft )
+{
+	FontImage fim = sFontEngine.GetFont(ch,ft.width,ft.height);
+	return fim.left + fim.advanceX + fim.bound.Width();
 }

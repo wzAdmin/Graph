@@ -36,6 +36,7 @@ public:
 	void DrawTextW(const wchar_t* str ,const CPosition* pts,int ptsCount,const Font& ft, float space, float firstDis = .0f,bool loop = false);
 	void DrawBound(const CBound& bound , COLORARGB color);
 	void FillBoud(const CBound& bound ,COLORARGB color);
+	unsigned int GetCharWidth(wchar_t ch, const Font& ft);
 private:
 	CPosition GetAlignPostion(const CBound& dest, const CBound& src,ALIGN align);
 	void DrawGrayImage(const CGrayImage* pImage,const CBound& srcBound , const CBound& destBound,COLORARGB color);
