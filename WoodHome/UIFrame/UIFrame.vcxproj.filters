@@ -99,6 +99,9 @@
     <ClInclude Include="UITextView.h">
       <Filter>UIController</Filter>
     </ClInclude>
+    <ClInclude Include="UIRollingText.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageResouceMgr.cpp">
@@ -165,6 +168,9 @@
       <Filter>UIController</Filter>
     </ClCompile>
     <ClCompile Include="UITextView.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UIRollingText.cpp">
       <Filter>UIController</Filter>
     </ClCompile>
   </ItemGroup>
