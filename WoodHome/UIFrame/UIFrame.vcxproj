@@ -98,6 +98,8 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneEffect.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="UIDataAdapter.h" />
+    <ClInclude Include="UIList.h" />
     <ClInclude Include="UITextView.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="UIButton.h" />
@@ -124,6 +126,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneEffect.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="UIList.cpp" />
     <ClCompile Include="UITextView.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="UIButton.cpp" />
