@@ -34,6 +34,15 @@ void CGraphics::DrawTextW(const wchar_t* str,int left , int bottom,const Font& f
 {
 	if(!str)
 		return;
+	CBound oldclip = GetClipBound();
+	if(clipBuond)
+	{
+		CBound newclip = oldclip;
+		if(CBound::Intersect(newclip , *clipBuond ,newclip))
+			SetClipBound(newclip);
+		else
+			return ;
+	}
 	CBound dest,bound;
 	while (L'\0' !=*str)
 	{
@@ -45,11 +54,12 @@ void CGraphics::DrawTextW(const wchar_t* str,int left , int bottom,const Font& f
 		if(!clipBuond)
 			DrawGrayImage(ftImage.pGrayImage,ftImage.bound,dest,ft.color);
 		else if(CBound::Intersect(dest,*clipBuond,bound))
-			DrawGrayImage(ftImage.pGrayImage,ftImage.bound,bound,ft.color);
+			DrawGrayImage(ftImage.pGrayImage,ftImage.bound,dest,ft.color);
 		left += ftImage.advanceX;
 		bottom += ftImage.advanceY;
 		str++;
 	}
+	SetClipBound(oldclip);
 }
 void CGraphics::DrawTextW( const wchar_t* str ,const CBound& dest, const Font& ft ,ALIGN align)
 {

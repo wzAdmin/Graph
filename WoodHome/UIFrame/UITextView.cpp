@@ -58,8 +58,9 @@ void CUITextView::Init( CGraphics* pGraphic)
 		{
 			mIndex = 0;
 			mOffset = Bound().Right();
-			mAutoRolling = true;
-			mTimerid = sUIFrame.GetTimerMgr()->CreateTimer(this , mRollFrequency);
+			mAutoRolling &= true;
+			if(mAutoRolling)
+				mTimerid = sUIFrame.GetTimerMgr()->CreateTimer(this , mRollFrequency);
 			break;
 		}
 	}
@@ -69,6 +70,9 @@ void CUITextView::Load( const slim::XmlNode* node )
 {	
 	CUIObject::Load(node);
 	mText = AnsiToWstring(node->readAttributeAsString("text"));
+	mRowSpace = node->readAttributeAsFloat("space");
+	mIsWrap = node->readAttributeAsBool("wrap");
+	mAutoRolling = node->readAttributeAsBool("autoroll");
 	mFontID = node->readAttributeAsInt("font");
 }
 
@@ -101,10 +105,11 @@ void CUITextView::Wrap(CGraphics* pGraphic ,int index/* = 0*/)
 	mWrapIndex.push_back(0);
 	for(unsigned int i = index ; i <  mText.size();i++)
 	{
-		TextWidth += pGraphic->GetCharWidthW(mText[i] , ft);
+		int chwidth = pGraphic->GetCharWidthW(mText[i] , ft);
+		TextWidth += chwidth;
 		if(TextWidth > Bound().Width())
 		{
-			TextWidth -=  Bound().Width();
+			TextWidth =  chwidth;
 			mWrapIndex.push_back(i);
 		}
 	}
@@ -127,8 +132,9 @@ void CUITextView::Wrap(CGraphics* pGraphic ,int index/* = 0*/)
 	}
 	else
 	{
-		mAutoRolling = true;
-		mTimerid = sUIFrame.GetTimerMgr()->CreateTimer(this , mRollFrequency);
+		mAutoRolling &= true;
+		if(mAutoRolling)
+			mTimerid = sUIFrame.GetTimerMgr()->CreateTimer(this , mRollFrequency);
 	}
 }
 
@@ -168,17 +174,23 @@ void CUITextView::WrapRoll()
 
 void CUITextView::SingleLineDraw( CGraphics* pGraphic )
 {
+	const Font& ft = *sFontConfig.GetFont(mFontID);
  	if(mAutoRolling)
  	{
- 		const Font& ft = *sFontConfig.GetFont(mFontID);
  		mCurCharSize = pGraphic->GetCharWidthW(mText[mIndex] , ft);
 		CBound bd = Bound();
 		bd.Left(mOffset);
- 		Parent()->Absolute(bd);
+		if(Parent())
+ 			Parent()->Absolute(bd);
  		pGraphic->DrawTextW(mText.c_str() + mIndex ,bd,ft,LEFT);
  	}
  	else
- 		CUITextView::Draw(pGraphic);
+	{
+		CBound bd =Bound();
+		if(Parent())
+			Parent()->Absolute(bd);
+		pGraphic->DrawTextW(mText.c_str(),bd,ft,CENTER);
+	}
 }
 
 void CUITextView::SingleLineRoll()

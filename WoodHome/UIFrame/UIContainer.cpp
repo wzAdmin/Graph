@@ -224,7 +224,16 @@ CUIObject* CUIContainer::get( const std::string& name )
 	for (unsigned int i = 0 ; i < mChilds.size() ; i++)
 	{
 		if(name == mChilds[i]->Name())
+		{
+#if defined(DEBUG) || defined(_DEBUG)
+			for(unsigned int j = i + 1 ; j < mChilds.size() ; j++)
+			{
+				if(name == mChilds[j]->Name())
+					DebugTrace(Trace_Error,"the name %s has repeated in %s\n",name.c_str(),Name().c_str());
+			}
+#endif
 			return mChilds[i];
+		}
 	}
 	DebugTrace(Trace_Warning,"%s Cant not find %s \n",Name().c_str(),name.c_str());
 	return NULL;
