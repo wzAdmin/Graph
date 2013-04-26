@@ -70,7 +70,7 @@ void CUITextView::Load( const slim::XmlNode* node )
 {	
 	CUIObject::Load(node);
 	mText = AnsiToWstring(node->readAttributeAsString("text"));
-	mRowSpace = node->readAttributeAsFloat("space");
+	mRowSpace = node->readAttributeAsFloat("space",0.2f);
 	mIsWrap = node->readAttributeAsBool("wrap");
 	mAutoRolling = node->readAttributeAsBool("autoroll");
 	mFontID = node->readAttributeAsInt("font");
