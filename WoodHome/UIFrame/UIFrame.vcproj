@@ -379,14 +379,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\UIRollingText.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\UIRollingText.h"
-				>
-			</File>
-			<File
 				RelativePath=".\UIStaticImage.cpp"
 				>
 			</File>

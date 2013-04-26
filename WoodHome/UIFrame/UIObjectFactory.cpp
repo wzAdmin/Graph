@@ -4,7 +4,6 @@
 #include "UIButton.h"
 #include "UIStaticImage.h"
 #include "UITextView.h"
-#include "UIRollingText.h"
 
 CUIObjectFactory::CUIObjectFactory(void)
 {
@@ -13,7 +12,6 @@ CUIObjectFactory::CUIObjectFactory(void)
 	Register("Button",CUIButton::Create);
 	Register("StaticImage",CUIStaticImage::Create);
 	Register("TextView",CUITextView::Create);
-	Register("RollText",CUIRollingText::Create);
 }
 
 

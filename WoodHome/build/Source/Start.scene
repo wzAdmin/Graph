@@ -4,5 +4,5 @@
 	<Button name = "btn3" x="100" y = "300" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "创建一个新窗口" font = "1"/>
 	<Button name = "btn5" x="100" y = "400" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "切换效果测试" font = "1"/>
 	<Button name = "btn4" x="100" y = "500" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "退出程序" font = "2"/>
-	<RollText name = "btn4" x="300" y = "200" width = "250" height = "50" visible = "true" order = "0" text = "这里是显示文字自动滚动的测试，你看效果如何！" font = "2"/>
+	<TextView name = "btn4" x="300" y = "200" width = "250" height = "50" visible = "true" order = "0" text = "这里是显示文字自动滚动的测试，你看效果如何！" font = "2"/>
 </StartScene>

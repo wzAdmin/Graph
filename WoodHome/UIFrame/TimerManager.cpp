@@ -2,7 +2,7 @@
 #include "Trace.h"
 #include <Windows.h>
 
-CTimerManager::CTimerManager(void):mCurValiadID(1),mCurTime(0)
+CTimerManager::CTimerManager(void):mCurValiadID(InvalidTimer + 1),mCurTime(0)
 {
 }
 

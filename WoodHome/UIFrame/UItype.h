@@ -7,6 +7,7 @@
 #ifndef NULL
 #define NULL 0
 #endif
+#include "Memory_Check.h"
 enum MessageID{
 	LBtnDown,
 	LBtnUp,
