@@ -363,11 +363,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\UIDataAdapter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\UILayer.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\UILayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UIList.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UIList.h"
 				>
 			</File>
 			<File
