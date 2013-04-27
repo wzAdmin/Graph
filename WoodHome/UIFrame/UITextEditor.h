@@ -15,6 +15,7 @@ private:
 	virtual bool OnMouseMove(int x ,int y);
 	virtual void OnFocusOut(CUIObject* newFocus);
 	virtual void OnTimer(TimerID timerid);
+	void LoseFucos();
 private:
 	TimerID mCurosTimer;
 	bool mIsCurosShowing;

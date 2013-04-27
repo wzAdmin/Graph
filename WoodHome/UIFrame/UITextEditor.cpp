@@ -27,7 +27,9 @@ bool CUITextEditor::OnMouseMove( int x ,int y )
 void CUITextEditor::OnFocusOut(CUIObject* newFocus)
 {
 	if(newFocus && newFocus->InputMode())
-		mIsInputMode = false;
+	{
+		LoseFucos();
+	}
 }
 
 bool CUITextEditor::OnLBtnDown( int x ,int y )
@@ -48,9 +50,8 @@ void CUITextEditor::OnTimer( TimerID timerid )
 		return;
 	if(!IsRealVisible())
 	{
-		mIsInputMode = false;
-		sUIFrame.GetTimerMgr()->RemoveTimer(mCurosTimer);
-		mCurosTimer = InvalidTimer;
+		LoseFucos();
+		return;
 	}
 	mIsCurosShowing = !mIsCurosShowing;
 	DrawToWindow();
@@ -60,4 +61,11 @@ void CUITextEditor::Draw( CGraphics* pGraphic )
 {
 	if(mIsCurosShowing)
 		CUITextView::Draw(pGraphic);
+}
+
+void CUITextEditor::LoseFucos()
+{
+	mIsInputMode = false;
+	sUIFrame.GetTimerMgr()->RemoveTimer(mCurosTimer);
+	mCurosTimer = InvalidTimer;
 }
