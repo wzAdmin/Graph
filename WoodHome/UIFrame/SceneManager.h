@@ -6,7 +6,9 @@
 #include <map>
 #include <list>
 
+class CBound;
 class CScene;
+class CGraphics;
 class CUIWindow;
 class UI_API CSceneManager : public IEffectListner
 {
@@ -15,8 +17,11 @@ public:
 	~CSceneManager(void);
 public:
 	CScene* GetCurScene();
+	CScene* GetCurMsgScene();
+	void GotoAsDialog(SourceID sceneid , void* data = NULL);
 	void GoTo(SourceID toid ,CScene* from = 0,void* data = NULL , EffectType effect = Effect_Invalid);
 	void Back(void* data = NULL, EffectType effect = Effect_Invalid);
+	bool DrawScene(CGraphics* pGraphic ,const CBound* drawBound = NULL);
 	void OnDestroy();
 private:
 	virtual void OnEffect();
@@ -28,6 +33,7 @@ private:
 	typedef std::list<CScene*>::iterator SceneListItor;
 	std::map<SourceID , CScene*> mScenes;
 	std::list<CScene*> mSceneStack;
+	CScene* mCurDialog;
 	CSceneEffect* mEffect;
 	void* mParam_Onshow;
 };

@@ -5,6 +5,7 @@
 #include "UIStaticImage.h"
 #include "UITextView.h"
 #include "UIList.h"
+#include "UIMsgBox.h"
 
 CUIObjectFactory::CUIObjectFactory(void)
 {
@@ -14,6 +15,7 @@ CUIObjectFactory::CUIObjectFactory(void)
 	Register("StaticImage",CUIStaticImage::Create);
 	Register("TextView",CUITextView::Create);
 	Register("List",CUIList::Create);
+	Register("MsgBox",CUIMsgBox::Create);
 }
 
 

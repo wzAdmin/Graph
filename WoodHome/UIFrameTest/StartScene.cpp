@@ -2,6 +2,7 @@
 #include "Trace.h"
 #include "UIButton.h"
 #include "UIFrame.h"
+#include "SceneManager.h"
 
 CStartScene::CStartScene(void)
 {
@@ -30,7 +31,10 @@ void CStartScene::OnBtn2Click()
 
 void CStartScene::OnBtn4Click()
 {
-	sUIFrame.Exit();
+	MsgBoxParam arg;
+	arg.listner = this;
+	arg.msg = L"确定退出程序？你真的确定吗？还要多搞点才会换行 擦";
+	mWind->GetSceneMgr()->GotoAsDialog(SCENE_MsgBox,&arg);
 }
 
 void CStartScene::OnTimer( TimerID timerid )
@@ -63,4 +67,14 @@ void CStartScene::OnLoad()
 void CStartScene::OnBtnListClick()
 {
 	Goto(SCENE_ListTest);
+}
+
+void CStartScene::OnOK()
+{
+	sUIFrame.Exit();
+}
+
+void CStartScene::OnCancel()
+{
+
 }

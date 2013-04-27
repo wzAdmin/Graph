@@ -1,0 +1,5 @@
+<MsgBox name = "msgbox" x="0" y ="0" width = "300" height = "150" visible = "true" order = "0" bgImage ="12">
+	<Button name = "ok" x="25" y = "100" width = "100" height = "40" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "确定" font = "3"/>
+	<Button name = "cancel" x="175" y = "100" width = "100" height = "40" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "取消" font = "2"/>
+	<TextView name = "msg" x="25" y = "10" width = "250" height = "80" visible = "true" order = "0"  text = "这是提示框，你想干点什么呢，what do you want？" font = "2" wrap = "true"/>
+</MsgBox>

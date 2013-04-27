@@ -19,7 +19,7 @@ private:
 	virtual void Start();
 	virtual WindID GetID(){return int(mhWnd);}
 	virtual void Quit();
-	void DrawWin32(HDC hdc);
+	void DrawWin32(HDC hdc , const CBound* drawBound = NULL);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 private:
 	HWND mhWnd;

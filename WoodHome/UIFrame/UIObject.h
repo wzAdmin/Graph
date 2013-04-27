@@ -35,6 +35,7 @@ public:
 	//or parent's parent and so on is hidden.
 	//so IsRealVisible returns the object is showing or hiding indeed.
 	bool IsRealVisible();
+
 	bool Visible()const{return mIsVisible;}
 	void Visible(bool val){mIsVisible = val;}
 

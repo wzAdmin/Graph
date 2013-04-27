@@ -31,26 +31,41 @@ CUIWindow::~CUIWindow(void)
 void CUIWindow::DispatchSysMessage( const SystemMessage& msg )
 {
 	assert(this);
-	CScene* pScene = mSceneManager->GetCurScene();
+	CScene* pScene = mSceneManager->GetCurMsgScene();
 	if(pScene && pScene->Visible())
 	{
 		switch (msg.msg)
 		{
 		case LBtnDown:
-			pScene->OnLBtnDown(msg.lParam , msg.wParam);
-			break;
+			{
+				CPosition pt = pScene->ParentToSelf(msg.lParam , msg.wParam);
+				pScene->OnLBtnDown(pt.X() , pt.Y());
+				break;
+			}
 		case LBtnUp:
-			pScene->OnLBtnUp(msg.lParam , msg.wParam);
-			break;
+			{
+				CPosition pt = pScene->ParentToSelf(msg.lParam , msg.wParam);
+				pScene->OnLBtnUp(pt.X() , pt.Y());
+				break;
+			}
 		case RBtnDown:
-			pScene->OnRBtnDown(msg.lParam , msg.wParam);
-			break;
+			{
+				CPosition pt = pScene->ParentToSelf(msg.lParam , msg.wParam);
+				pScene->OnRBtnDown(pt.X() , pt.Y());
+				break;
+			}
 		case RBtnUp:
-			pScene->OnRBtnUp(msg.lParam , msg.wParam);
-			break;
+			{
+				CPosition pt = pScene->ParentToSelf(msg.lParam , msg.wParam);
+				pScene->OnRBtnUp(pt.X() , pt.Y());
+				break;
+			}
 		case MouseMove:
-			pScene->OnMouseMove(msg.lParam , msg.wParam);
-			break;
+			{
+				CPosition pt = pScene->ParentToSelf(msg.lParam , msg.wParam);
+				pScene->OnMouseMove(pt.X() , pt.Y());
+				break;
+			}
 		case CharInput:
 			pScene->OnInputChar((const wchar_t*)msg.lParam , msg.wParam);
 			break;

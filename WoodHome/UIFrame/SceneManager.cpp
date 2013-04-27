@@ -8,7 +8,7 @@
 #include "Graphics.h"
 #include "EffectFactory.h"
 
-CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd),mEffect(NULL)
+CSceneManager::CSceneManager(CUIWindow* wnd):mWind(wnd),mEffect(NULL),mCurDialog(NULL)
 {
 }
 
@@ -139,4 +139,62 @@ void CSceneManager::OnEffectEnd( CScene* src , CScene* dest )
 	dest->DrawToWindow();
 	DELETE_LEAKCHECK(mEffect);
 	mEffect = NULL;
+}
+
+bool CSceneManager::DrawScene( CGraphics* pGraphic , const CBound* drawBound /*= NULL*/ )
+{
+	if(!GetCurScene()->Visible())
+		return false;
+	pGraphic->SetClipBound(0,0,pGraphic->Width() - 1,pGraphic->Height() - 1);
+	if(drawBound)
+		pGraphic->SetClipBound(*drawBound);
+	GetCurScene()->Draw(pGraphic);
+
+	//
+	//if have a dialog darken current scene and draw dialog
+	//
+	if(mCurDialog && mCurDialog->Visible())
+	{
+		CImageBuffer buffer;
+		buffer.Initialize(1,1,false);
+		buffer.ClearColor(CRGB(0,0,0));
+		CBound bd = pGraphic->GetClipBound();
+		pGraphic->DrawImage_Repeat(&buffer,unsigned char(15),&bd);
+		mCurDialog->Draw(pGraphic);
+	}
+	return true;
+}
+
+void CSceneManager::GotoAsDialog( SourceID sceneid , void* data /*= NULL*/ )
+{
+	SceneMapItor it = mScenes.find(sceneid);
+	if(mScenes.end() == it)
+	{
+		mCurDialog = CreatScene(sceneid);
+		mScenes.insert(std::pair<SourceID,CScene*>(sceneid,mCurDialog));
+	}
+	else
+		mCurDialog = it->second;
+	mCurDialog->Visible(true);
+	mCurDialog->OnShow(data);
+
+	//Set dialog's position to the center
+	CScene* pcur = GetCurScene();
+	const CBound& bd = pcur->Bound();
+	int centerX = (bd.Left() + bd.Right()) / 2;
+	int centerY = (bd.Top() + bd.Bottom()) / 2;
+	CBound dstbd = mCurDialog->Bound();
+	int cx = (dstbd.Left() + dstbd.Right()) / 2;
+	int cy = (dstbd.Top() + dstbd.Bottom()) / 2;
+	dstbd.Move(centerX - cx , centerY -cy);
+	mCurDialog->Bound(dstbd);
+
+	mWind->DrawToWindow();
+}
+
+CScene* CSceneManager::GetCurMsgScene()
+{
+	if(mCurDialog && mCurDialog->Visible())
+		return mCurDialog;
+	return GetCurScene();
 }

@@ -71,29 +71,8 @@ void CWind_win32::SetPostion( int x , int y )
 
 void CWind_win32::DrawToWindow(const CBound* drawBound /*= NULL*/)
 {
-	if(!mSceneManager->GetCurScene()->Visible())
-		return ;
-	mGraphic->SetClipBound(0,0,mGraphic->Width() - 1,mGraphic->Height() - 1);
-	if(drawBound)
-		mGraphic->SetClipBound(*drawBound);
-	mSceneManager->GetCurScene()->Draw(mGraphic);
-	HDC hdc= GetDC(mhWnd);
-	BITHEADER header;
-	header.mask[0] = 0xf800;
-	header.mask[1] = 0x07e0;
-	header.mask[2] = 0x001f;
-	header.biBitCount = 16;
-	header.biWidth = mFramebuffer->Width();
-	header.biSize = sizeof(BITMAPINFOHEADER);
-	header.biHeight = -mFramebuffer->Height();
-	header.biPlanes = 1;
-	header.biCompression = BI_BITFIELDS;
-	header.biClrUsed = 0;
-	header.biClrImportant = 0;
-	header.biXPelsPerMeter = 0;
-	header.biYPelsPerMeter = 0;
-	StretchDIBits(hdc, 0, 0, mFramebuffer->Width(),mFramebuffer->Height(), 0, 0,mFramebuffer->Width(),
-		mFramebuffer->Height(),mFramebuffer->GetPixels(),(BITMAPINFO*)&header,0,SRCCOPY);
+	HDC hdc = GetDC(mhWnd);
+	DrawWin32(hdc,drawBound);
 	DeleteDC(hdc);
 }
 
@@ -167,25 +146,10 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 	return 0;
 }
 
-void CWind_win32::DrawWin32( HDC hdc )
+void CWind_win32::DrawWin32( HDC hdc , const CBound* drawBound /*= NULL*/)
 {
-	mSceneManager->GetCurScene()->Draw(mGraphic);
-	BITHEADER header;
-	header.mask[0] = 0xf800;
-	header.mask[1] = 0x07e0;
-	header.mask[2] = 0x001f;
-	header.biBitCount = 16;
-	header.biWidth = mFramebuffer->Width();
-	header.biSize = sizeof(BITMAPINFOHEADER);
-	header.biHeight = -mFramebuffer->Height();
-	header.biPlanes = 1;
-	header.biCompression = BI_BITFIELDS;
-	header.biClrUsed = 0;
-	header.biClrImportant = 0;
-	header.biXPelsPerMeter = 0;
-	header.biYPelsPerMeter = 0;
-	StretchDIBits(hdc, 0, 0, mFramebuffer->Width(),mFramebuffer->Height(), 0, 0,mFramebuffer->Width(),
-		mFramebuffer->Height(),mFramebuffer->GetPixels(),(BITMAPINFO*)&header,0,SRCCOPY);
+	if(mSceneManager->DrawScene(mGraphic , drawBound))
+		BufferToWindow(mGraphic->GetImage());
 }
 
 void CWind_win32::Quit()

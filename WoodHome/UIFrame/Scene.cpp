@@ -17,7 +17,11 @@ void CScene::Draw( CGraphics* pGraphic )
 
 void CScene::DrawToWindow(const CBound* bd /*= NULL*/)
 {
-	mWind->DrawToWindow(bd);
+	CBound dstbd = Bound();
+	if(bd)
+		dstbd = *bd;
+	SelfToParent(dstbd);
+	mWind->DrawToWindow(&dstbd);
 }
 
 void CScene::Goto( SourceID toScene,void* data /*= NULL*/,EffectType effect /*= Effect_Invalid*/ )

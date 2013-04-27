@@ -383,6 +383,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\UIMsgBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UIMsgBox.h"
+				>
+			</File>
+			<File
 				RelativePath=".\UIObject.cpp"
 				>
 			</File>
