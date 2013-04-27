@@ -78,12 +78,17 @@ CScene* CSceneManager::GetCurScene()
 
 CScene* CSceneManager::CreatScene( SourceID sceneid )
 {
+	//load data
 	Sourceitem item = sFilesystem.GetSource(sceneid);
 	char* pdata = NEW_LEAKCHECK char[item.length];
 	sFilesystem.LoadSource(item,pdata);
+
+	//load xml
 	slim::XmlDocument doc;
 	doc.loadFromMemory(pdata,item.length);
 	DELETEARR_LEAKCHECK(pdata);
+
+	// parse the scene
 	slim::NodeIterator nodeit ;
 	slim::XmlNode* child = doc.getFirstChild(nodeit);
 	CScene* pScene = (CScene*)sUIFrame.GetObjFactory()->CreateObject(child->getName());
