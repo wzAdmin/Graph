@@ -105,6 +105,9 @@
     <ClInclude Include="UIDataAdapter.h">
       <Filter>UIController</Filter>
     </ClInclude>
+    <ClInclude Include="UIMsgBox.h">
+      <Filter>UIController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageResouceMgr.cpp">
@@ -174,6 +177,9 @@
       <Filter>UIController</Filter>
     </ClCompile>
     <ClCompile Include="UIList.cpp">
+      <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMsgBox.cpp">
       <Filter>UIController</Filter>
     </ClCompile>
   </ItemGroup>

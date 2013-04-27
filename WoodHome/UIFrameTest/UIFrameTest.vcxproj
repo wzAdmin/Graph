@@ -95,14 +95,18 @@
     <ClCompile Include="DrawTextTextScene.cpp" />
     <ClCompile Include="EffectTest.cpp" />
     <ClCompile Include="ImageTestScene.cpp" />
+    <ClCompile Include="ListScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StartScene.cpp" />
+    <ClCompile Include="TestAdapter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawTextTextScene.h" />
     <ClInclude Include="EffectTest.h" />
     <ClInclude Include="ImageTestScene.h" />
+    <ClInclude Include="ListScene.h" />
     <ClInclude Include="StartScene.h" />
+    <ClInclude Include="TestAdapter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
