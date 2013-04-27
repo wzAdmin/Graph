@@ -23,7 +23,7 @@ void CUIList::SetData( const CUIDataAdapter* data )
 
 void CUIList::Prev()
 {
-	if(0 == mCurIndex)
+	if(!CanPrev())
 		return;
 	mCurIndex -= mCountPerPage; 
 	UpdateList();
@@ -31,7 +31,7 @@ void CUIList::Prev()
 
 void CUIList::Next()
 {
-	if(mCountPerPage + mCurIndex >= mAdaper->Count())
+	if(!CanNext())
 		return ;
 	mCurIndex += mCountPerPage;
 	UpdateList();
@@ -51,4 +51,19 @@ void CUIList::UpdateList()
 		mChilds[i]->Visible(false);
 	}
 	DrawToWindow();
+}
+
+bool CUIList::CanPrev()
+{
+	return 0 != mCurIndex;
+}
+
+bool CUIList::CanNext()
+{
+	return mCountPerPage + mCurIndex < mAdaper->Count();
+}
+
+void CUIList::LoadSelf( const slim::XmlNode* node )
+{
+	CUIObject::Load(node);
 }

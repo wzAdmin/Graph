@@ -46,19 +46,25 @@ void CUIButton::Draw( CGraphics* pGraphic )
 
 bool CUIButton::OnLBtnDown( int x ,int y )
 {
-	mBtnStatus = BS_Focus;
-	DrawToWindow();
+	if(BS_Disable != mBtnStatus)
+	{
+		mBtnStatus = BS_Focus;
+		DrawToWindow();
+	}
 	return true;
 }
 
 bool CUIButton::OnLBtnUp( int x ,int y )
 {
-	if(BS_Focus == mBtnStatus)
+	if(BS_Disable != mBtnStatus)
 	{
-		mBtnStatus = BS_Normal;
-		DrawToWindow();
-		if(mListener && mOnClickFunc)
-			(mListener->*mOnClickFunc)();
+		if(BS_Focus == mBtnStatus)
+		{
+			mBtnStatus = BS_Normal;
+			DrawToWindow();
+			if(mListener && mOnClickFunc)
+				(mListener->*mOnClickFunc)();
+		}
 	}
 	return true;
 }
@@ -67,7 +73,7 @@ void CUIButton::Load( const slim::XmlNode* node )
 {
 	CUIObject::Load(node);
 	mBtnStatus = BS_Normal;
-	mDisableImage = SourceID(node->readAttributeAsInt("disale",Invalid));
+	mDisableImage = SourceID(node->readAttributeAsInt("disable",Invalid));
 	mFocusImage = SourceID(node->readAttributeAsInt("focus",Invalid));
 	mNormalImage = SourceID(node->readAttributeAsInt("normal",Invalid));
 	mText = AnsiToWstring(node->readAttributeAsString("text",""));

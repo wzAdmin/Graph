@@ -13,9 +13,11 @@ public:
 	void SetData(const CUIDataAdapter* data);
 	void Prev();
 	void Next();
+	bool CanPrev();
+	bool CanNext();
 private:
 	virtual void DrawSelf(CGraphics* pGraphic){}
-	virtual void LoadSelf(const slim::XmlNode* node){}
+	virtual void LoadSelf(const slim::XmlNode* node);
 	void UpdateList() ;
 private:
 	unsigned int mCountPerPage;

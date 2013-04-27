@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Image Count="18">
+<Image Count="19">
 	<Item Format="jpg" name="Dirt" SourceType="0"/>
 	<Item Format="jpg" name="fight038" SourceType="0"/>
 	<Item Format="jpg" name="fight042" SourceType="0"/>
@@ -18,4 +18,5 @@
 	<Item Format="scene" name="ImageTest" SourceType="1"/>
 	<Item Format="xml" name="WindowStyle" SourceType="3"/>
 	<Item Format="scene" name="EffectTest" SourceType="1"/>
+	<Item Format="scene" name="ListTest" SourceType="1"/>
 </Image>

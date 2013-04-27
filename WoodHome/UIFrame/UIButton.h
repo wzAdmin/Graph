@@ -9,13 +9,15 @@ enum ButtonStaus
 	BS_Disable
 };
 typedef void (CUIObject::*OnBtnClick)();
-class CUIButton :
+class UI_API CUIButton :
 	public CUIObject
 {
 public:
 	static CUIObject* Create(){return NEW_LEAKCHECK CUIButton;}
 	CUIButton(void);
 	~CUIButton(void);
+public:
+	void SetStatus(ButtonStaus bs){mBtnStatus = bs;}
 	void AddClickListen(CUIObject* pobj,OnBtnClick func){mListener = pobj ; mOnClickFunc=func;}
 private:
 	virtual void Draw(CGraphics* pGraphic);

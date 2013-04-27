@@ -55,5 +55,12 @@ void CStartScene::OnLoad()
 	pbtn4->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn4Click);
 	CUIButton* pbtn5 = (CUIButton*)get("btn5");
 	pbtn5->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn5Click);
+	CUIButton* pbtnlist = (CUIButton*)get("list");
+	pbtnlist->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtnListClick);
 	mtimerid = sUIFrame.GetTimerMgr()->CreateTimer(this,100);
+}
+
+void CStartScene::OnBtnListClick()
+{
+	Goto(SCENE_ListTest);
 }

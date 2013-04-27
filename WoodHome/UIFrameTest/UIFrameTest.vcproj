@@ -199,11 +199,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ListScene.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Main.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\StartScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TestAdapter.cpp"
 				>
 			</File>
 		</Filter>
@@ -225,7 +233,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ListScene.h"
+				>
+			</File>
+			<File
 				RelativePath=".\StartScene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestAdapter.h"
 				>
 			</File>
 		</Filter>

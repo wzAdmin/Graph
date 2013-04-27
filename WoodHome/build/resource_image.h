@@ -21,4 +21,5 @@ enum SourceID
 	SCENE_ImageTest = 16,
 	USER_WindowStyle = 17,
 	SCENE_EffectTest = 18,
+	SCENE_ListTest = 19,
 };

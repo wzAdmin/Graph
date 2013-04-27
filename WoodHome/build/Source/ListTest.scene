@@ -1,0 +1,13 @@
+<ListScene name = "listtest" x="0" y ="0" width = "1024" height = "700" visible = "true" order = "0" bgImage ="12">
+	<Button name = "back" x="10" y = "10" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "返回" font = "3"/>
+	<List name = "list" x = "100" y = "100" width = "150" height = "250" visible = "true" order = "0" >
+		<TextView name = "btn1" x="0" y = "0" width = "150" height = "50" visible = "true" order = "0"  text = "DrawText试例" font = "3"/>
+		<TextView name = "btn2" x="0" y = "100" width = "150" height = "50" visible = "true" order = "0"  text = "图片测试" font = "2"/>
+		<TextView name = "btn3" x="0" y = "200" width = "150" height = "50" visible = "true" order = "0"  text = "创建一个新窗口" font = "1"/>
+	</List>
+	<Button name = "btn5" x="100" y = "400" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "上页" font = "1"/>
+	<Button name = "btn4" x="100" y = "500" width = "150" height = "50" visible = "true" order = "0" focus = "1" normal = "2" disable = "3" text = "下页" font = "2"/>
+	<TextView name = "text1" x="300" y = "200" width = "250" height = "50" visible = "true" order = "0" text = "这里是显示文字自动滚动的测试，你看效果如何！" font = "2" autoroll = "true"/>
+	
+	<TextView name = "text1" x="700" y = "200" width = "80" height = "150" visible = "true" order = "0" text = "这里是显示文字自动滚动的测试，你看效果如何!但是这里的是自动换行，向上自动滚动的，你发现了没，only shit！！" font = "2" autoroll = "true" wrap = "true"/>
+</ListScene>
