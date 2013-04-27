@@ -17,7 +17,6 @@ public:
 	virtual void Load(const slim::XmlNode* node) ;
 	virtual void Draw(CGraphics* pGraphic) = 0;
 	virtual void DrawToWindow(const CBound* bd = NULL);
-	virtual void OnFocusOut(){}
 	CUIObject* operator [] (const std::string& name){return get(name);}
 	void Bound(const CBound& bd){mBound =bd;}
 	const CBound& Bound() const {return mBound;}
@@ -47,9 +46,9 @@ public:
 	CPosition SelfToParent(int x ,int y);
 	CPosition Absolute(int x ,int y);
 	const std::string& Name() const {return mName;}
-protected:
 	virtual CUIObject* get(const std::string& name){return NULL;}
-private:
+	virtual void OnFocusOut(CUIObject* newFocus){}
+protected:
 	std::string mName;
 	int mOrder;
 	CUIObject* mParent;

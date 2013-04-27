@@ -80,7 +80,7 @@ void CUIButton::Load( const slim::XmlNode* node )
 	mFontID = node->readAttributeAsInt("font");
 }
 
-void CUIButton::OnFocusOut()
+void CUIButton::OnFocusOut(CUIObject* newFocus)
 {
 	if(BS_Focus == mBtnStatus)
 	{

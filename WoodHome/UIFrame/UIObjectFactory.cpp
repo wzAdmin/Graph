@@ -6,6 +6,7 @@
 #include "UITextView.h"
 #include "UIList.h"
 #include "UIMsgBox.h"
+#include "UITextEditor.h"
 
 CUIObjectFactory::CUIObjectFactory(void)
 {
@@ -16,6 +17,7 @@ CUIObjectFactory::CUIObjectFactory(void)
 	Register("TextView",CUITextView::Create);
 	Register("List",CUIList::Create);
 	Register("MsgBox",CUIMsgBox::Create);
+	Register("TextEditor",CUITextEditor::Create);
 }
 
 

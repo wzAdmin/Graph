@@ -12,9 +12,10 @@ public:
 	~CUITextView(void);
 public:
 	void Text(const std::wstring& wcs);
-private:
+protected:
 	virtual void Load(const slim::XmlNode* node);
 	virtual void Draw(CGraphics* pGraphic);
+private:
 	virtual void OnTimer(TimerID timerid);
 	void Init( CGraphics* pGraphic);
 	void Wrap(CGraphics* pGraphic ,int index = 0);
@@ -22,9 +23,10 @@ private:
 	void WrapRoll();
 	void SingleLineDraw(CGraphics* pGraphic);
 	void SingleLineRoll();
-private:
+protected:
 	std::wstring mText;
 	int mFontID;
+private:
 	TimerID mTimerid;
 	int mRollFrequency;
 	int mIndex;

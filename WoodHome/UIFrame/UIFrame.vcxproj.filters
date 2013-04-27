@@ -108,6 +108,9 @@
     <ClInclude Include="UIMsgBox.h">
       <Filter>UIController</Filter>
     </ClInclude>
+    <ClInclude Include="UITextEditor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageResouceMgr.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="UIMsgBox.cpp">
       <Filter>UIController</Filter>
+    </ClCompile>
+    <ClCompile Include="UITextEditor.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

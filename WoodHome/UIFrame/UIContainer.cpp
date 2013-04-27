@@ -85,18 +85,8 @@ bool CUIContainer::OnInputChar( const wchar_t* wcs,int len )
 	{
 		if(mChilds[i]->OnInputChar(wcs,len))
 		{
-			if(mFcousedObj && mFcousedObj != mChilds[i])
-			{
-				mFcousedObj->OnFocusOut();
-			}
-			mFcousedObj = mChilds[i];
 			return true;
 		}
-	}
-	if(mFcousedObj)
-	{
-		mFcousedObj->OnFocusOut();
-		mFcousedObj = NULL;
 	}
 	return false;
 }
@@ -110,7 +100,7 @@ bool CUIContainer::OnLBtnDown( int x ,int y )
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
-				mFcousedObj->OnFocusOut();
+				mFcousedObj->OnFocusOut(mChilds[i]);
 			}
 			mFcousedObj = mChilds[i];
 			return true;
@@ -118,7 +108,7 @@ bool CUIContainer::OnLBtnDown( int x ,int y )
 	}
 	if(mFcousedObj)
 	{
-		mFcousedObj->OnFocusOut();
+		mFcousedObj->OnFocusOut(NULL);
 		mFcousedObj = NULL;
 	}
 	return false;
@@ -133,7 +123,7 @@ bool CUIContainer::OnLBtnUp( int x ,int y )
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
-				mFcousedObj->OnFocusOut();
+				mFcousedObj->OnFocusOut(mChilds[i]);
 			}
 			mFcousedObj = mChilds[i];
 			return true;
@@ -141,7 +131,7 @@ bool CUIContainer::OnLBtnUp( int x ,int y )
 	}
 	if(mFcousedObj)
 	{
-		mFcousedObj->OnFocusOut();
+		mFcousedObj->OnFocusOut(NULL);
 		mFcousedObj = NULL;
 	}
 	return false;
@@ -156,7 +146,7 @@ bool CUIContainer::OnMouseMove( int x ,int y )
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
-				mFcousedObj->OnFocusOut();
+				mFcousedObj->OnFocusOut(mChilds[i]);
 			}
 			mFcousedObj = mChilds[i];
 			return true;
@@ -164,7 +154,7 @@ bool CUIContainer::OnMouseMove( int x ,int y )
 	}
 	if(mFcousedObj)
 	{
-		mFcousedObj->OnFocusOut();
+		mFcousedObj->OnFocusOut(NULL);
 		mFcousedObj = NULL;
 	}
 	return false;
@@ -179,7 +169,7 @@ bool CUIContainer::OnRBtnDown( int x ,int y )
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
-				mFcousedObj->OnFocusOut();
+				mFcousedObj->OnFocusOut(mChilds[i]);
 			}
 			mFcousedObj = mChilds[i];
 			return true;
@@ -187,7 +177,7 @@ bool CUIContainer::OnRBtnDown( int x ,int y )
 	}
 	if(mFcousedObj)
 	{
-		mFcousedObj->OnFocusOut();
+		mFcousedObj->OnFocusOut(NULL);
 		mFcousedObj = NULL;
 	}
 	return false;
@@ -202,7 +192,7 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 		{
 			if(mFcousedObj && mFcousedObj != mChilds[i])
 			{
-				mFcousedObj->OnFocusOut();
+				mFcousedObj->OnFocusOut(mChilds[i]);
 			}
 			mFcousedObj = mChilds[i];
 			return true;
@@ -210,7 +200,7 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 	}
 	if(mFcousedObj)
 	{
-		mFcousedObj->OnFocusOut();
+		mFcousedObj->OnFocusOut(NULL);
 		mFcousedObj = NULL;
 	}
 	return false;

@@ -101,6 +101,7 @@
     <ClInclude Include="UIDataAdapter.h" />
     <ClInclude Include="UIList.h" />
     <ClInclude Include="UIMsgBox.h" />
+    <ClInclude Include="UITextEditor.h" />
     <ClInclude Include="UITextView.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="UIButton.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="UIList.cpp" />
     <ClCompile Include="UIMsgBox.cpp" />
+    <ClCompile Include="UITextEditor.cpp" />
     <ClCompile Include="UITextView.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="UIButton.cpp" />
