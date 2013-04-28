@@ -131,6 +131,8 @@ bool CUITextEditor::DealSpecialChar( wchar_t ch )
 {
 	switch (ch)
 	{
+		// 27 Esc
+	case 27:
 	case L'\n':
 	case L'\r':
 	case L'\t':
