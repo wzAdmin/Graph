@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Tetris">
+      <UniqueIdentifier>{45adb758-ce81-442d-8c69-284775fd18a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -35,6 +38,24 @@
     <ClCompile Include="TestAdapter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="tetris\TetrisScene.cpp">
+      <Filter>Tetris</Filter>
+    </ClCompile>
+    <ClCompile Include="tetris\BaseItem.cpp">
+      <Filter>Tetris</Filter>
+    </ClCompile>
+    <ClCompile Include="tetris\Item_2X1.cpp">
+      <Filter>Tetris</Filter>
+    </ClCompile>
+    <ClCompile Include="tetris\ItemFactroy.cpp">
+      <Filter>Tetris</Filter>
+    </ClCompile>
+    <ClCompile Include="tetris\ScoreCalculater.cpp">
+      <Filter>Tetris</Filter>
+    </ClCompile>
+    <ClCompile Include="tetris\Game.cpp">
+      <Filter>Tetris</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StartScene.h">
@@ -54,6 +75,27 @@
     </ClInclude>
     <ClInclude Include="TestAdapter.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\TetrisScene.h">
+      <Filter>Tetris</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\BaseItem.h">
+      <Filter>Tetris</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\gamedef.h">
+      <Filter>Tetris</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\Item_2X1.h">
+      <Filter>Tetris</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\ItemFactroy.h">
+      <Filter>Tetris</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\ScoreCalculater.h">
+      <Filter>Tetris</Filter>
+    </ClInclude>
+    <ClInclude Include="tetris\Game.h">
+      <Filter>Tetris</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

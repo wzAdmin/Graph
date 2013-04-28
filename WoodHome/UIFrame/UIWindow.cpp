@@ -69,6 +69,16 @@ void CUIWindow::DispatchSysMessage( const SystemMessage& msg )
 		case CharInput:
 			pScene->OnInputChar((const wchar_t*)msg.lParam , msg.wParam);
 			break;
+		case Key:
+			{
+				KeyEvent e;
+				e.key = (KeyCode)msg.wParam;
+				e.isDown  = 0x4 == (msg.lParam & 0x4);
+				e.isShift = 0x2 == (msg.lParam & 0x2);
+				e.isCtrl  = 0x1 == (msg.lParam & 0x1);
+				pScene->OnKey(e);
+			}
+			break;
 		default:
 			break;
 		}

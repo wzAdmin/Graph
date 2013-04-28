@@ -20,6 +20,7 @@ private:
 	void OnBtn4Click();
 	void OnBtn5Click();
 	void OnBtnListClick();
+	void OnTetrisClick();
 	void OnTimer(TimerID timerid);
 private:
 	TimerID mtimerid;

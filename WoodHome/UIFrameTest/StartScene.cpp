@@ -61,6 +61,8 @@ void CStartScene::OnLoad()
 	pbtn5->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtn5Click);
 	CUIButton* pbtnlist = (CUIButton*)get("list");
 	pbtnlist->AddClickListen(this,(OnBtnClick)&CStartScene::OnBtnListClick);
+	CUIButton* pbtntetris = (CUIButton*)get("tetris");
+	pbtntetris->AddClickListen(this,(OnBtnClick)&CStartScene::OnTetrisClick);
 	mtimerid = sUIFrame.GetTimerMgr()->CreateTimer(this,100);
 }
 
@@ -77,4 +79,9 @@ void CStartScene::OnOK()
 void CStartScene::OnCancel()
 {
 
+}
+
+void CStartScene::OnTetrisClick()
+{
+	Goto(SCENE_Tetris);
 }

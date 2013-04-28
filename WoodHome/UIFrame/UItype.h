@@ -14,9 +14,8 @@ enum MessageID{
 	RBtnDown,
 	RBtnUp,
 	MouseMove,
-	KeyDown,
-	KeyUp,
-	CharInput,
+	Key,
+	CharInput
 };
 typedef struct _SystemMessage
 {

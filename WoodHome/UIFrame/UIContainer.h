@@ -18,6 +18,7 @@ public:
 	virtual bool OnMouseMove(int x ,int y);
 	virtual bool OnRBtnDown(int x ,int y);
 	virtual bool OnRBtnUp(int x ,int y);
+	virtual bool OnKey(const KeyEvent& e);
 protected:
 	virtual void Draw(CGraphics* pGraphic);
 	virtual void DrawSelf(CGraphics* pGraphic) = 0;

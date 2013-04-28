@@ -99,6 +99,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="TestAdapter.cpp" />
+    <ClCompile Include="tetris\BaseItem.cpp" />
+    <ClCompile Include="tetris\Game.cpp" />
+    <ClCompile Include="tetris\ItemFactroy.cpp" />
+    <ClCompile Include="tetris\Item_2X1.cpp" />
+    <ClCompile Include="tetris\ScoreCalculater.cpp" />
+    <ClCompile Include="tetris\TetrisScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawTextTextScene.h" />
@@ -107,6 +113,13 @@
     <ClInclude Include="ListScene.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="TestAdapter.h" />
+    <ClInclude Include="tetris\BaseItem.h" />
+    <ClInclude Include="tetris\Game.h" />
+    <ClInclude Include="tetris\gamedef.h" />
+    <ClInclude Include="tetris\ItemFactroy.h" />
+    <ClInclude Include="tetris\Item_2X1.h" />
+    <ClInclude Include="tetris\ScoreCalculater.h" />
+    <ClInclude Include="tetris\TetrisScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

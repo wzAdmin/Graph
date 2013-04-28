@@ -25,6 +25,7 @@ private:
 private:
 	HWND mhWnd;
 	wchar_t mInputChar[MAX_INPUT_WORDS];
+	unsigned char mAllkeystatus[256];
 	int mInputCount;
 };
 

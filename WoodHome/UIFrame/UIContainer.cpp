@@ -206,6 +206,19 @@ bool CUIContainer::OnRBtnUp( int x ,int y )
 	return false;
 }
 
+
+bool CUIContainer::OnKey( const KeyEvent& e )
+{
+	for (unsigned int i = 0;i < mChilds.size() ; i ++)
+	{
+		if(mChilds[i]->OnKey(e))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 CUIObject* CUIContainer::get( const std::string& name )
 {
 	for (unsigned int i = 0 ; i < mChilds.size() ; i++)

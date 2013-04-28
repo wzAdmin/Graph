@@ -1,0 +1,19 @@
+#pragma once
+enum GameState
+{
+	BEGIN,
+	CONSTRUCT,
+	FALLING,
+	SIGLEFALLING,
+	FALLED,
+	END
+};
+enum ITEM
+{
+	NOTHING,
+	BLACK,
+	WHITE,
+	RED,
+	YELLOW,
+	GREEN
+};

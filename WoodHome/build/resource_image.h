@@ -23,4 +23,6 @@ enum SourceID
 	SCENE_EffectTest = 18,
 	SCENE_ListTest = 19,
 	SCENE_MsgBox = 20,
+	SCENE_Tetris = 21,
+	IMG_white = 22,
 };
