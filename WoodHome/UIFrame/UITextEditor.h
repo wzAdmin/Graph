@@ -7,6 +7,9 @@ public:
 	static CUIObject* Create(){return NEW_LEAKCHECK CUITextEditor;}
 	CUITextEditor(void);
 	~CUITextEditor(void);
+public:
+	unsigned int MaxInputCount()const {return mMaxInputCount;}
+	void MaxInputCount( unsigned int count){mMaxInputCount = count;}
 private:
 	virtual void Draw(CGraphics* pGraphic);
 	virtual bool OnInputChar(const wchar_t* wcs,int len);
@@ -18,7 +21,10 @@ private:
 	void LoseFucos();
 	void DrawCuros(CGraphics* pGraphic);
 	void SetIMEPos();
+	void SetCurosPosition(CGraphics* pGraphic);
 private:
+	static const unsigned int sDefaultCount = 256;
+	unsigned int mMaxInputCount;
 	TimerID mCurosTimer;
 	int mCurosIndex;
 	CPosition mCurosPosition;

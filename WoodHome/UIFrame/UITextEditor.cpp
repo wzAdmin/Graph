@@ -7,7 +7,8 @@
 CUITextEditor::CUITextEditor(void) :
 mCurosTimer(InvalidTimer),
 mCurosIndex(0),
-mIsCurosShowing(false)
+mIsCurosShowing(false),
+mMaxInputCount(sDefaultCount)
 {
 	malign = LEFT;
 }
@@ -21,6 +22,9 @@ bool CUITextEditor::OnInputChar( const wchar_t* wcs,int len )
 {
 	if(!mIsInputMode)
 		return false;
+	if(mText.size() == mMaxInputCount)
+		return true;
+	len = MIN(len , int(mMaxInputCount - mText.size()));
 	mText.append(wcs,len);
 	mCurosIndex += len;
 	DrawToWindow();
@@ -68,6 +72,7 @@ void CUITextEditor::OnTimer( TimerID timerid )
 
 void CUITextEditor::Draw( CGraphics* pGraphic )
 {
+	SetCurosPosition(pGraphic);
 	CBound bd = Bound();
 	if(mParent)
 		mParent->Absolute(bd);
@@ -87,24 +92,36 @@ void CUITextEditor::LoseFucos()
 
 void CUITextEditor::DrawCuros( CGraphics* pGraphic )
 {
-	int left = 0;
 	const Font& ft = *sFontConfig.GetFont(mFontID);
-	for (int i = 0 ; i < mCurosIndex ; i ++)
-	{
-		left += pGraphic->GetCharWidthW(mText[i] , ft);
-	}
-	int top = (Bound().Height()  - ft.height) / 2;
-	CBound bd(left,left,top,top+ft.height);
+	CBound bd(mCurosPosition.X(),mCurosPosition.X(),
+		mCurosPosition.Y() - ft.height ,mCurosPosition.Y());
 	Absolute(bd);
 	pGraphic->FillBoud(bd , CRGB(0,0,0));
-	mCurosPosition.X(left);
-	mCurosPosition.Y(top + ft.height);
-	SetIMEPos();
 }
 
 void CUITextEditor::SetIMEPos()
 {
 	CPosition pt = Absolute(mCurosPosition.X() , mCurosPosition.Y());
 	((CScene*)Root())->SetIMEPos(pt.X() , pt.Y());
+}
+
+void CUITextEditor::SetCurosPosition(CGraphics* pGraphic)
+{
+	malign = LEFT;
+	int left = 0;
+	const Font& ft = *sFontConfig.GetFont(mFontID);
+	for (int i = 0 ; i < mCurosIndex ; i ++)
+	{
+		left += pGraphic->GetCharWidthW(mText[i] , ft);
+	}
+	if(left > Bound().Width())
+	{
+		left = Bound().Width() - 1;
+		malign = RIGHT;
+	}
+	int top = (Bound().Height()  - ft.height) / 2;
+	mCurosPosition.X(left);
+	mCurosPosition.Y(top + ft.height);
+	SetIMEPos();
 }
 
