@@ -140,6 +140,15 @@ LRESULT CALLBACK CWind_win32::WndProc( HWND hWnd, UINT message, WPARAM wParam, L
 			pwnd->mInputCount = 0;
 		}
 		break;
+	case WM_CHAR:
+		pwnd->mInputCount = 1;
+		pwnd->mInputChar[0] = wchar_t(wParam & 0xffff);
+		mss.msg = CharInput;
+		mss.wParam = pwnd->mInputCount;
+		mss.lParam = int(pwnd->mInputChar);
+		pwnd->DispatchSysMessage(mss);
+		pwnd->mInputCount = 0;
+		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}

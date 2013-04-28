@@ -22,6 +22,8 @@ private:
 	void DrawCuros(CGraphics* pGraphic);
 	void SetIMEPos();
 	void SetCurosPosition(CGraphics* pGraphic);
+	bool DealSpecialChar(wchar_t ch);
+	void Backspace();
 private:
 	static const unsigned int sDefaultCount = 256;
 	unsigned int mMaxInputCount;

@@ -22,6 +22,8 @@ bool CUITextEditor::OnInputChar( const wchar_t* wcs,int len )
 {
 	if(!mIsInputMode)
 		return false;
+	if(DealSpecialChar(wcs[0]))
+		return true;
 	if(mText.size() == mMaxInputCount)
 		return true;
 	len = MIN(len , int(mMaxInputCount - mText.size()));
@@ -123,5 +125,32 @@ void CUITextEditor::SetCurosPosition(CGraphics* pGraphic)
 	mCurosPosition.X(left);
 	mCurosPosition.Y(top + ft.height);
 	SetIMEPos();
+}
+
+bool CUITextEditor::DealSpecialChar( wchar_t ch )
+{
+	switch (ch)
+	{
+	case L'\n':
+	case L'\r':
+	case L'\t':
+	case L'\a':
+	case L'\f':
+	case L'\v':
+		return true;
+	case L'\b':
+		Backspace();
+		return true;
+	}
+	return false;
+}
+
+void CUITextEditor::Backspace()
+{
+	if(!mText.empty())
+	{
+		mText.erase(--mCurosIndex);
+		DrawToWindow();
+	}
 }
 
