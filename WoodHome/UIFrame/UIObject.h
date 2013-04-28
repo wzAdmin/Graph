@@ -17,6 +17,7 @@ public:
 	virtual void Load(const slim::XmlNode* node) ;
 	virtual void Draw(CGraphics* pGraphic) = 0;
 	virtual void DrawToWindow(const CBound* bd = NULL);
+	CUIObject* Root();
 	CUIObject* operator [] (const std::string& name){return get(name);}
 	void Bound(const CBound& bd){mBound =bd;}
 	const CBound& Bound() const {return mBound;}

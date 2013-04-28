@@ -2,8 +2,12 @@
 #include "UIFrame.h"
 #include "Graphics.h"
 #include "FontConfig.h"
+#include "Scene.h"
 
-CUITextEditor::CUITextEditor(void) : mCurosTimer(InvalidTimer),mCurosPositoin(0),mIsCurosShowing(false)
+CUITextEditor::CUITextEditor(void) :
+mCurosTimer(InvalidTimer),
+mCurosIndex(0),
+mIsCurosShowing(false)
 {
 	malign = LEFT;
 }
@@ -18,7 +22,7 @@ bool CUITextEditor::OnInputChar( const wchar_t* wcs,int len )
 	if(!mIsInputMode)
 		return false;
 	mText.append(wcs,len);
-	mCurosPositoin += len;
+	mCurosIndex += len;
 	DrawToWindow();
 	return true;
 }
@@ -40,6 +44,7 @@ bool CUITextEditor::OnLBtnDown( int x ,int y )
 {
 	mIsInputMode = true;
 	mCurosTimer = sUIFrame.GetTimerMgr()->CreateTimer(this,500);
+	CScene* root = (CScene*)Root();
 	return true;
 }
 
@@ -84,7 +89,7 @@ void CUITextEditor::DrawCuros( CGraphics* pGraphic )
 {
 	int left = 0;
 	const Font& ft = *sFontConfig.GetFont(mFontID);
-	for (int i = 0 ; i < mCurosPositoin ; i ++)
+	for (int i = 0 ; i < mCurosIndex ; i ++)
 	{
 		left += pGraphic->GetCharWidthW(mText[i] , ft);
 	}
@@ -92,4 +97,14 @@ void CUITextEditor::DrawCuros( CGraphics* pGraphic )
 	CBound bd(left,left,top,top+ft.height);
 	Absolute(bd);
 	pGraphic->FillBoud(bd , CRGB(0,0,0));
+	mCurosPosition.X(left);
+	mCurosPosition.Y(top + ft.height);
+	SetIMEPos();
 }
+
+void CUITextEditor::SetIMEPos()
+{
+	CPosition pt = Absolute(mCurosPosition.X() , mCurosPosition.Y());
+	((CScene*)Root())->SetIMEPos(pt.X() , pt.Y());
+}
+

@@ -23,6 +23,7 @@ public:
 	virtual WindID GetID() = 0;
 	virtual void Quit() = 0;
 	virtual void OnDestroy();
+	virtual void SetIMEPos(int x , int y) = 0;
 	void DispatchSysMessage(const SystemMessage& msg);
 	CGraphics* Graphic() {return mGraphic;}
 public:

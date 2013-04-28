@@ -92,3 +92,10 @@ bool CUIObject::IsRealVisible()
 		return mParent->IsRealVisible();
 	return mIsVisible;
 }
+
+CUIObject* CUIObject::Root()
+{
+	if(mParent)
+		return mParent->Root();
+	return this;
+}

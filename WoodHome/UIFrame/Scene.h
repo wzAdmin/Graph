@@ -33,6 +33,8 @@ public:
 	void SetWind(CUIWindow* Wnd){mWind = Wnd;}
 	void Goto(SourceID toScene,void* data = NULL,EffectType effect = Effect_Invalid);
 	void Back(void* data = NULL,EffectType effect = Effect_Invalid);
+
+	void SetIMEPos(int x , int y) ;
 protected:
 	NotifyFormerOnHide mNotifyFunc;
 protected:

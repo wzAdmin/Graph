@@ -39,3 +39,8 @@ void CScene::Load( const slim::XmlNode* node )
 	CUILayer::Load(node);
 	OnLoad();
 }
+
+void CScene::SetIMEPos( int x , int y )
+{
+	mWind->SetIMEPos(x , y);
+}

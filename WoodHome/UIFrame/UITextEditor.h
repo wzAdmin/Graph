@@ -17,9 +17,11 @@ private:
 	virtual void OnTimer(TimerID timerid);
 	void LoseFucos();
 	void DrawCuros(CGraphics* pGraphic);
+	void SetIMEPos();
 private:
 	TimerID mCurosTimer;
-	int mCurosPositoin;
+	int mCurosIndex;
+	CPosition mCurosPosition;
 	bool mIsCurosShowing;
 };
 

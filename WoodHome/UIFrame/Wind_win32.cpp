@@ -184,3 +184,14 @@ void CWind_win32::BufferToWindow( const CImageBuffer* buffer )
 		mFramebuffer->Height(),buffer->GetPixels(),(BITMAPINFO*)&header,0,SRCCOPY);
 	DeleteDC(hdc);
 }
+
+void CWind_win32::SetIMEPos( int x , int y )
+{
+	HIMC imc = ImmGetContext(mhWnd);
+	COMPOSITIONFORM cddf;
+	ImmGetCompositionWindow(imc ,&cddf);
+	cddf.dwStyle = CFS_CANDIDATEPOS;
+	cddf.ptCurrentPos.x = x;
+	cddf.ptCurrentPos.y = y;
+	ImmSetCompositionWindow(imc,&cddf);
+}
