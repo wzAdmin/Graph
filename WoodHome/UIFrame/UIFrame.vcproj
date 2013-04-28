@@ -407,6 +407,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\UITextEditor.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UITextEditor.h"
+				>
+			</File>
+			<File
 				RelativePath=".\UITextView.cpp"
 				>
 			</File>

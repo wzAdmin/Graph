@@ -26,6 +26,7 @@ private:
 protected:
 	std::wstring mText;
 	int mFontID;
+	ALIGN malign;
 private:
 	TimerID mTimerid;
 	int mRollFrequency;

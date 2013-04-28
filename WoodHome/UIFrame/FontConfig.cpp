@@ -44,7 +44,7 @@ void CFontConfig::Load(SourceID id)
 		const char * color = child->readAttributeAsString("Color");
 		mFonts[id-1].color = strtol(color,NULL,16);
 		mFonts[id-1].height = child->readAttributeAsInt("Height");
-		mFonts[id-1].width = child->readAttributeAsBool("Width");
+		mFonts[id-1].width = child->readAttributeAsInt("Width");
 		child = root->getNextChild(nodeit);
 	}
 }

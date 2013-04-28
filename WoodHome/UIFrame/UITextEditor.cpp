@@ -1,8 +1,11 @@
 #include "UITextEditor.h"
 #include "UIFrame.h"
+#include "Graphics.h"
+#include "FontConfig.h"
 
-CUITextEditor::CUITextEditor(void) : mCurosTimer(InvalidTimer)
+CUITextEditor::CUITextEditor(void) : mCurosTimer(InvalidTimer),mCurosPositoin(0),mIsCurosShowing(false)
 {
+	malign = LEFT;
 }
 
 
@@ -15,6 +18,7 @@ bool CUITextEditor::OnInputChar( const wchar_t* wcs,int len )
 	if(!mIsInputMode)
 		return false;
 	mText.append(wcs,len);
+	mCurosPositoin += len;
 	DrawToWindow();
 	return true;
 }
@@ -35,7 +39,7 @@ void CUITextEditor::OnFocusOut(CUIObject* newFocus)
 bool CUITextEditor::OnLBtnDown( int x ,int y )
 {
 	mIsInputMode = true;
-	mCurosTimer = sUIFrame.GetTimerMgr()->CreateTimer(this,100);
+	mCurosTimer = sUIFrame.GetTimerMgr()->CreateTimer(this,500);
 	return true;
 }
 
@@ -59,8 +63,13 @@ void CUITextEditor::OnTimer( TimerID timerid )
 
 void CUITextEditor::Draw( CGraphics* pGraphic )
 {
+	CBound bd = Bound();
+	if(mParent)
+		mParent->Absolute(bd);
+	pGraphic->FillBoud(bd , CRGB(255,255,255));
+	CUITextView::Draw(pGraphic);
 	if(mIsCurosShowing)
-		CUITextView::Draw(pGraphic);
+		DrawCuros(pGraphic);
 }
 
 void CUITextEditor::LoseFucos()
@@ -68,4 +77,19 @@ void CUITextEditor::LoseFucos()
 	mIsInputMode = false;
 	sUIFrame.GetTimerMgr()->RemoveTimer(mCurosTimer);
 	mCurosTimer = InvalidTimer;
+	mIsCurosShowing = false;
+}
+
+void CUITextEditor::DrawCuros( CGraphics* pGraphic )
+{
+	int left = 0;
+	const Font& ft = *sFontConfig.GetFont(mFontID);
+	for (int i = 0 ; i < mCurosPositoin ; i ++)
+	{
+		left += pGraphic->GetCharWidthW(mText[i] , ft);
+	}
+	int top = (Bound().Height()  - ft.height) / 2;
+	CBound bd(left,left,top,top+ft.height);
+	Absolute(bd);
+	pGraphic->FillBoud(bd , CRGB(0,0,0));
 }

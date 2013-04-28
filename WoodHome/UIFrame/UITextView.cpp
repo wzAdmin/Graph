@@ -14,7 +14,8 @@ mInited(false),
 mRollFrequency(100),
 mIsWrap(true),
 mRowSpace(0.2f),
-mFontID(0)
+mFontID(0),
+malign(CENTER)
 {
 }
 
@@ -189,7 +190,7 @@ void CUITextView::SingleLineDraw( CGraphics* pGraphic )
 		CBound bd =Bound();
 		if(Parent())
 			Parent()->Absolute(bd);
-		pGraphic->DrawTextW(mText.c_str(),bd,ft,CENTER);
+		pGraphic->DrawTextW(mText.c_str(),bd,ft,malign);
 	}
 }
 

@@ -16,8 +16,10 @@ private:
 	virtual void OnFocusOut(CUIObject* newFocus);
 	virtual void OnTimer(TimerID timerid);
 	void LoseFucos();
+	void DrawCuros(CGraphics* pGraphic);
 private:
 	TimerID mCurosTimer;
+	int mCurosPositoin;
 	bool mIsCurosShowing;
 };
 
