@@ -19,13 +19,14 @@ CGame::CGame(void)
 	memset(m_Items,0,sizeof(m_Items));
 	m_lastTime = 0;
 	m_CurrentFallItem = 0;
-	m_Calculater = new CScoreCalculater(this);
+	m_Calculater = NEW_LEAKCHECK CScoreCalculater(this);
 }
 
 
 CGame::~CGame(void)
 {
-	delete m_Calculater;
+	DELETE_LEAKCHECK( m_Calculater);
+	DELETE_LEAKCHECK(m_CurrentFallItem);
 	m_Calculater = 0;
 }
 
@@ -126,6 +127,8 @@ void CGame::OnTimer(TimerID timeid)
 		break;
 	case FALLED:
 		m_CurrentState = SIGLEFALLING;
+		DELETE_LEAKCHECK(m_CurrentFallItem);
+		m_CurrentFallItem = NULL;
 		break;
 	case END:
 		m_IsRunning = false;
